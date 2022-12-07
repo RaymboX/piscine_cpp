@@ -2,33 +2,38 @@
 #include <cctype>
 #include <cstring>
 
+void	cout_str_toupper(char *str);
+int		nb_char_in_args(int argc, char **argv);
+
 int	main(int argc, char **argv)
 {	
-	if (argc != 2)
-		cout_err(1);
-	else if (strlen(argv[1]) == 0)
-		cout_err(2);
+	int	i = 0;
+	
+	if (argc == 1 || nb_char_in_args(argc, argv) == 0)
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
-		cout_toupper(argv[1]);
+	{
+		while (++i < argc)
+			cout_str_toupper(argv[i]);
+		std::cout << std::endl;
+	}
 	return (0);
 }
 
-void	cout_toupper(char *str)
+int	nb_char_in_args(int argc, char **argv)
+{
+	int	i = 0;
+	int nb_char = 0;
+
+	while (++i < argc)
+		nb_char += strlen(argv[i]);
+	return (nb_char);
+}
+
+void	cout_str_toupper(char *str)
 {
 	int	i = -1;
 
 	while (str[++i] != '\0')
-		std::cout << toupper(str[i]);
-	std::cout << std::endl;
-}
-
-void	cout_err(int error)
-{
-	if (error == 1)
-	{
-		std::cout << "Error: You must use this format:" << std::endl;
-		std::cout << "./megaphone \"text to change to upper case\"" << std::endl;
-	}
-	if (error == 2)
-		std::cout << "You must right something dammit!" << std::endl;
+		std::cout << (char)toupper(str[i]);
 }
