@@ -25,6 +25,7 @@ HEADERS			=
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
+MODULE 00 _ EX00 _ MEGAPHONE
 Le but du programme est de changer les arguments passes en majuscule
 S'il n'y a pas d'argument (ou vide), le programme retourne une phrase imposee
 

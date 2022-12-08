@@ -25,18 +25,8 @@ HEADERS			=
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-Le but du programme est de changer les arguments passes en majuscule
-S'il n'y a pas d'argument (ou vide), le programme retourne une phrase imposee
+MODULE 00 _ EX01 _ MY AWESOME_PHONEBOOK
 
-Exemple du pdf:
-./megaphone "shhhhh... I think the students are asleep..."
-SHHHHH... I THINK THE STUDENTS ARE ASLEEP...
-
-./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-DAMNIT ! SORRY STUDENTS, I THOUGHT THIS THING WAS OFF.
-
-./megaphone
-* LOUD AND UNBEARABLE FEEDBACK NOISE *
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
