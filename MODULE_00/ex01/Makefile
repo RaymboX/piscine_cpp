@@ -15,12 +15,15 @@ NAME 			= 	palm_pilot
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
-SRCS			= palm.cpp
+SRCS			= 	Contact.cpp \
+					PhoneBook.cpp \
+					main.cpp 
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			= 
+HEADERS			= 	Contact.hpp \
+					PhoneBook.hpp 
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
