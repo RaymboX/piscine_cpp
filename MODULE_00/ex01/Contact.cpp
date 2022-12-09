@@ -19,7 +19,7 @@ std::string	Contact::_get_input(std::string const attr) const
 	std::getline(std::cin, input);
 	while (input.size() == 0)
 	{
-		std::cout << "You press enter. I know you probably didn't want to. Welcome to palm_pilot B quality product!" << std::endl;
+		std::cout << "You press enter. I know you probably didn't want to. Welcome to palm tungsten e2 B quality product!" << std::endl;
 		std::cout << "Retry!" << std::endl;
 		std::cout << attr;
 		std::getline(std::cin, input);

@@ -49,11 +49,11 @@ std::string	PhoneBook::_menu(void) const
 	{
 		if (input != "")
 			PhoneBook::_rand_answer();
-		std::cout << "\n@PALM PILOT -2002-\nMENU " << std::endl;
+		std::cout << "\n@PALM TUNGSTEN E2 -2002-\nMENU " << std::endl;
 		std::cout << "|-COMMAND-|-------------------------DESCRIPTION----------------------------|" << std::endl;
-		std::cout << "ADD        Add new contact in phonebook of palm pilot" << std::endl;
+		std::cout << "ADD        Add new contact in phonebook of palm tungsten e2" << std::endl;
 		std::cout << "SEARCH     Show all recorded contacts" << std::endl;
-		std::cout << "EXIT       Shut down your palm pilot. *warning: All contact will be deleted*\n" << std::endl;
+		std::cout << "EXIT       Shut down your palm tungsten e2. *warning: All contact will be deleted*\n" << std::endl;
 		std::cout << "Enter your command: ";
 		std::getline(std::cin, input);
 	} while (input != "ADD" && input != "SEARCH" && input != "EXIT");
@@ -66,7 +66,7 @@ void	PhoneBook::_rand_answer(void) const
 	int	const	nb_case = 5;
 	std::string	answer[nb_case];
 	
-	answer[0] = ".... palm pilot doesn't respond....";
+	answer[0] = ".... palm tungsten e2 doesn't respond....";
 	answer[1] = "You touch your screen somewhere but it click somewhere else..";
 	answer[2] = "You should upgrade to last release product";
 	answer[3] = "When you bought it, it was already not working well. Don't expect more today.";
@@ -113,7 +113,7 @@ void	PhoneBook::_get_contact(void) const
 	//while (input.size() != 1 && input[0] < '1' && input[0] > '0' + Contact::nb_recorded)
 	while (input.size() != 1 || input[0] < '1' || input[0] > '0' + Contact::nb_recorded)
 	{
-		std::cout << "Palm pilot freeze ... information doesnt compute ..." << std::endl;
+		std::cout << "Palm tungsten e2 freeze ... information doesnt compute ..." << std::endl;
 		std::cout << "Retry!" << std::endl;
 		std::cout << "\nEnter index of contact you want to see the information: ";
 		std::getline(std::cin, input);

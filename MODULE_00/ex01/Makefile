@@ -10,7 +10,7 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= 	palm_pilot
+NAME 			= 	palm_tungsten_e2
 
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
@@ -28,7 +28,7 @@ HEADERS			= 	Contact.hpp \
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 00 _ EX01 _ MY AWESOME_PHONEBOOK / MY_PALM_PILOT
+MODULE 00 _ EX01 _ MY AWESOME_PHONEBOOK / MY_PALM_TUNGSTEN_E2
 
 Faire un programme qui jouera le role d'un repertoire de contact
 Pouvoir faire les commandes:
@@ -171,6 +171,9 @@ test:
 			$(LEAK_CMD) ./$(NAME) < testfile > log
 			@echo "$Y\nEND OF TESTS----------------------------------$W"
 re:			fclean all
+
+palm:
+			@open https://en.wikipedia.org/wiki/Palm_Tungsten
 
 #PHONY--------------------------------------------------------------------------
 
