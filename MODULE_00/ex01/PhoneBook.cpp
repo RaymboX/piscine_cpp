@@ -51,7 +51,7 @@ std::string	PhoneBook::_menu(void) const
 			PhoneBook::_rand_answer();
 		std::cout << "\n@PALM TUNGSTEN E2 -2002-\nMENU " << std::endl;
 		std::cout << "|-COMMAND-|-------------------------DESCRIPTION----------------------------|" << std::endl;
-		std::cout << "ADD        Add new contact in phonebook to palm tungsten e2" << std::endl;
+		std::cout << "ADD        Add new contact in palm tungsten e2" << std::endl;
 		std::cout << "SEARCH     Show contact info" << std::endl;
 		std::cout << "EXIT       Shut down your palm tungsten e2. *warning: All contact will be deleted*\n" << std::endl;
 		std::cout << "Enter your command: ";
@@ -68,7 +68,7 @@ void	PhoneBook::_rand_answer(void) const
 	
 	answer[0] = ".... palm tungsten e2 doesn't respond....";
 	answer[1] = "You touch your screen somewhere but it click somewhere else..";
-	answer[2] = "You should upgrade to last release product";
+	answer[2] = "You should upgrade to last release product (Version 2004)";
 	answer[3] = "When you bought it, it was already not working well. Don't expect more today.";
 	answer[4] = "We are sorry about your general experience. This is a default answer.";
 	std::cout << answer[rand() % 5] << std::endl;
