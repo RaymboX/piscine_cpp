@@ -1,59 +1,92 @@
 #include "Contact.hpp"
 #include "ctype.h"
 
+int const	Contact::nbmax = 8;
+int 		Contact::nb_recorded = 0;
+
 Contact::Contact(void)
 {
-	std::cout << "Contact constructor" << std::endl;
 }
 
 Contact::~Contact(void)
 {
-	std::cout << "Contact destructor" << std::endl;
 }
 
-int	Contact::setFirstname(std::string firstname)
+std::string	Contact::get_input(std::string attr) const
 {
-	this->_firstname = firstname;
-}
-
-int	Contact::setLastname(std::string lastname)
-{
-	this->_lastname = lastname;
-}
-
-int	Contact::setNickname(std::string nickname)
-{
-	this->_nickname = nickname;
-}
-
-int	Contact::setPhonenum(std::string num)
-{
-	if (valid_phonenum(num) == 0)
+	std::string	input;
+	
+	std::cout << attr;
+	std::getline(std::cin, input);
+	while (input.size() == 0)
 	{
-		this->_phonenum = format_phonenum(num);
-		return (0);
+		std::cout << "You press enter. I know you probably didn't want to. Welcome to palm_pilot B quality product!" << std::endl;
+		std::cout << "Retry!" << std::endl;
+		std::cout << attr;
+		std::getline(std::cin, input);
 	}
-	return (1);
+	//std::cout << std::endl;
+	return (input);
 }
 
-int	Contact::setDarksecret(std::string ds)
+void	Contact::setFirstname(void)
 {
-	this->_darksecret = ds;
+	this->_firstname = Contact::get_input("Firstname: ");
+}
+
+void	Contact::setLastname(void)
+{
+	this->_lastname = Contact::get_input("Lastname: ");
+}
+
+void	Contact::setNickname(void)
+{
+	this->_nickname = Contact::get_input("Nickname: ");
+}
+
+void	Contact::setPhonenum(void)
+{
+	std::string	number;
+	
+	number = Contact::get_input("Phone number: ");
+	while (valid_phonenum(number) != 0)
+	{
+		std::cout << "Accepted phone number format are:" << std::endl;
+		std::cout << "1231231234 or 123-123-1234 or (123)123-1234" << std::endl;
+		std::cout << "Retry!" << std::endl;
+		number = Contact::get_input("Phone number: ");
+	}
+	this->_phonenum = format_phonenum(number);
+}
+
+void	Contact::setDarksecret(void)
+{
+	this->_darksecret = Contact::get_input("Darkest secret: ");
 }
 
 std::string	Contact::getFirstname(void) const
 {
-	
+	return (this->_firstname);
 }
 
 std::string	Contact::getLastname(void) const
 {
-	
+	return (this->_lastname);
 }
 
 std::string	Contact::getNickname(void) const
 {
-	
+	return (this->_nickname);
+}
+
+std::string	Contact::getPhonenum(void) const
+{
+	return (this->_phonenum);
+}
+
+std::string	Contact::getDarksecret(void) const
+{
+	return (this->_darksecret);
 }
 
 int	valid_string(std::string str)
@@ -92,11 +125,11 @@ std::string	format_phonenum(std::string num)
 		return (num);
 	else
 	{
-		format_num = "(" + num[0] + num[1] + num[2] + ")";
+		format_num = "(" + num.substr(1, 3) + ")";
 		if (num.size() == 10)
-			format_num += &num[3];
+			format_num += num.substr(3, 3) + "-" + num.substr(6, 4);
 		else
-			format_num += &num[4];
+			format_num += num.substr(4, 8);
 		return (format_num);
 	}
 }

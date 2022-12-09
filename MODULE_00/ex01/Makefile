@@ -17,7 +17,7 @@ NAME 			= 	palm_pilot
 
 SRCS			= 	Contact.cpp \
 					PhoneBook.cpp \
-					main.cpp 
+					main.cpp \
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
@@ -29,6 +29,19 @@ HEADERS			= 	Contact.hpp \
 define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 00 _ EX01 _ MY AWESOME_PHONEBOOK / MY_PALM_PILOT
+
+Faire un programme qui jouera le role d'un repertoire de contact
+Pouvoir faire les commandes:
+- ADD:    Ajout d'un contact
+- SEARCH: Afficher les contacts par index / selectionner un index / affiche data
+- EXIT:   Sortir du programme
+
+Contact info: First/Last/Nick name, Phone number, Darkest secret
+
+Ajout perso:
+- Ajout d'un menu
+- Parcing et formatage du numero de telephone
+- Message d'erreur random
 
 --------------------------------------------------------------------------------
 endef
@@ -78,6 +91,7 @@ clean:
 
 fclean: clean
 			@$(RM) $(NAME)
+			@$(RM) testfile log
 			@echo "$RExecutable $(NAME) deleted$W"
 
 goal:
@@ -85,20 +99,77 @@ goal:
 
 test:
 			@echo "$YTESTS BEGIN--------------------------------------$W"
-			@echo "$Y\nTEST 1$Z"
-			./megaphone "shhhhh... I think the students are asleep..."
-			@echo "$Y\nTEST 2$Z"
-			./megaphone Damnit " ! " "Sorry students, I thought this thing was off."
-			@echo "$Y\nTEST 3$Z"
-			./megaphone
-			@echo "$Y\nTEST 4$Z"
-			./megaphone ""
-			@echo "$Y\nTEST 5$Z"
-			./megaphone "" "" "" ""
-			@echo "$Y\nTEST 6$Z"
-			./megaphone "" allo
+			
+			@echo "sdfsdf" > testfile
+			@echo "SEARCH" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin1111111111111" >> testfile
+			@echo "Raymond111111111111" >> testfile
+			@echo "RaymboX111111111111" >> testfile
+			@echo "ddsf sdf sdf sdf" >> testfile
+			@echo "4353456" >> testfile
+			@echo "123-1231232" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk11111111" >> testfile
+			@echo "SEARCH" >> testfile
+			@echo "" >> testfile
+			@echo "0" >> testfile
+			@echo "-1" >> testfile
+			@echo "2" >> testfile
+			@echo "1" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin2" >> testfile
+			@echo "Raymond2" >> testfile
+			@echo "RaymboX2222222222222222222222" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk2" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin3" >> testfile
+			@echo "Raymond3" >> testfile
+			@echo "RaymboX3" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk3" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin4" >> testfile
+			@echo "Raymond4" >> testfile
+			@echo "RaymboX4" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk4" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin5" >> testfile
+			@echo "Raymond5" >> testfile
+			@echo "RaymboX5" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk5" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin6" >> testfile
+			@echo "Raymond6" >> testfile
+			@echo "RaymboX6" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk6" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin7" >> testfile
+			@echo "Raymond7" >> testfile
+			@echo "RaymboX7" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk7" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin8" >> testfile
+			@echo "Raymond8" >> testfile
+			@echo "RaymboX8" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk8" >> testfile
+			@echo "ADD" >> testfile
+			@echo "Martin999999999999999" >> testfile
+			@echo "Raymond9" >> testfile
+			@echo "RaymboX9" >> testfile
+			@echo "1231231234" >> testfile
+			@echo "Darkkkkkkkk9999" >> testfile
+			@echo "SEARCH" >> testfile
+			@echo "2" >> testfile
+			@echo "EXIT" >> testfile
+			./palm_pilot < testfile > log
 			@echo "$Y\nEND OF TESTS----------------------------------$W"
-
 re:			fclean all
 
 #PHONY--------------------------------------------------------------------------

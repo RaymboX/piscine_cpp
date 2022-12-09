@@ -5,6 +5,6 @@ int	main(void)
 {
 	PhoneBook	repertoire;
 
-	std::cout << "Main first line" << std::endl;
+	repertoire.palm_routine();
 	return (0);
 }
