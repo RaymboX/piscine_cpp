@@ -51,8 +51,8 @@ std::string	PhoneBook::_menu(void) const
 			PhoneBook::_rand_answer();
 		std::cout << "\n@PALM TUNGSTEN E2 -2002-\nMENU " << std::endl;
 		std::cout << "|-COMMAND-|-------------------------DESCRIPTION----------------------------|" << std::endl;
-		std::cout << "ADD        Add new contact in phonebook of palm tungsten e2" << std::endl;
-		std::cout << "SEARCH     Show all recorded contacts" << std::endl;
+		std::cout << "ADD        Add new contact in phonebook to palm tungsten e2" << std::endl;
+		std::cout << "SEARCH     Show contact info" << std::endl;
 		std::cout << "EXIT       Shut down your palm tungsten e2. *warning: All contact will be deleted*\n" << std::endl;
 		std::cout << "Enter your command: ";
 		std::getline(std::cin, input);
