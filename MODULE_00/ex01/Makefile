@@ -168,7 +168,7 @@ test:
 			@echo "SEARCH" >> testfile
 			@echo "2" >> testfile
 			@echo "EXIT" >> testfile
-			./palm_pilot < testfile > log
+			$(LEAK_CMD) ./$(NAME) < testfile > log
 			@echo "$Y\nEND OF TESTS----------------------------------$W"
 re:			fclean all
 

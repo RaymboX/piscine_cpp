@@ -3,8 +3,8 @@
 
 int	main(void)
 {
-	PhoneBook	repertoire;
+	PhoneBook	repertoire; //instance de PhoneBook
 
-	repertoire.palm_routine();
+	repertoire.palm_routine(); //Routine de repertoire
 	return (0);
 }

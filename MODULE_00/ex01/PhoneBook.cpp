@@ -1,17 +1,82 @@
 #include "PhoneBook.hpp"
-#include <stdlib.h>
-#include "ctype.h"
+#include <stdlib.h> //rand
+#include "ctype.h" //isdigit
 
+//constructor
+PhoneBook::PhoneBook(void){}
+//destructor
+PhoneBook::~PhoneBook(void){}
 
-PhoneBook::PhoneBook(void)
+//Main routine
+void	PhoneBook::palm_routine (void)
 {
+	int			i = 0;
+	std::string	input;
+	
+	Contact::nb_recorded = 0;
+	do
+	{
+		input = PhoneBook::_menu();
+		if (input == "ADD")
+		{
+			this->_set_contact(i);
+			i++;
+			if (i == Contact::nbmax)
+				i = 0;
+			if (Contact::nb_recorded > Contact::nbmax)
+			{
+				Contact::nb_recorded = Contact::nbmax;
+				std::cout << "Memory full. Older contact erased and replaced by this one. Thanks to use our product" << std::endl;
+			}
+		}
+		else if (input == "SEARCH")
+		{
+			if (Contact::nb_recorded > 0)
+				this->_get_contact();
+			else
+				std::cout << "No contact to search. First add one and after search." << std::endl;
+		}
+	} while (input != "EXIT");
+	std::cout << "Thanks to use our product. All contacts deleted\n" << std::endl;
 }
 
-PhoneBook::~PhoneBook(void)
+//show menu and return input from user (parse the input)
+std::string	PhoneBook::_menu(void) const
 {
+	std::string	input = "";
+	
+	do
+	{
+		if (input != "")
+			PhoneBook::_rand_answer();
+		std::cout << "\n@PALM PILOT -2002-\nMENU " << std::endl;
+		std::cout << "|-COMMAND-|-------------------------DESCRIPTION----------------------------|" << std::endl;
+		std::cout << "ADD        Add new contact in phonebook of palm pilot" << std::endl;
+		std::cout << "SEARCH     Show all recorded contacts" << std::endl;
+		std::cout << "EXIT       Shut down your palm pilot. *warning: All contact will be deleted*\n" << std::endl;
+		std::cout << "Enter your command: ";
+		std::getline(std::cin, input);
+	} while (input != "ADD" && input != "SEARCH" && input != "EXIT");
+	return (input);
 }
 
-void	PhoneBook::set_contact(int i)
+//Return a random answer if bad input in menu
+void	PhoneBook::_rand_answer(void) const
+{
+	int	const	nb_case = 5;
+	std::string	answer[nb_case];
+	
+	answer[0] = ".... palm pilot doesn't respond....";
+	answer[1] = "You touch your screen somewhere but it click somewhere else..";
+	answer[2] = "You should upgrade to last release product";
+	answer[3] = "When you bought it, it was already not working well. Don't expect more today.";
+	answer[4] = "We are sorry about your general experience. This is a default answer.";
+	std::cout << answer[rand() % 5] << std::endl;
+	std::cout << "Retry!" << std::endl;
+}
+
+//add contact
+void	PhoneBook::_set_contact(int const i)
 {
 	this->contacts[i].setFirstname();
 	this->contacts[i].setLastname();
@@ -23,7 +88,8 @@ void	PhoneBook::set_contact(int i)
 	Contact::nb_recorded++;
 }
 
-void	PhoneBook::get_contact(void) const
+//SEARCH and SHOW contact
+void	PhoneBook::_get_contact(void) const
 {
 	int			i = -1;
 	std::string	input;
@@ -35,11 +101,11 @@ void	PhoneBook::get_contact(void) const
 		i_to_a[0] = i + '1';
 		std::cout << "         " + i_to_a;
 		std::cout << "|";
-		PhoneBook::cout_col10(this->contacts[i].getFirstname());
+		PhoneBook::_cout_col10(this->contacts[i].getFirstname());
 		std::cout << "|";
-		PhoneBook::cout_col10(this->contacts[i].getLastname());
+		PhoneBook::_cout_col10(this->contacts[i].getLastname());
 		std::cout << "|";
-		PhoneBook::cout_col10(this->contacts[i].getNickname());
+		PhoneBook::_cout_col10(this->contacts[i].getNickname());
 		std::cout << std::endl;
 	}
 	std::cout << "\nEnter index of contact you want to see the information: ";
@@ -62,7 +128,8 @@ void	PhoneBook::get_contact(void) const
 	std::cout << "-------------------------------------------\n" << std::endl;
 }
 
-void	PhoneBook::cout_col10(std::string const str) const
+//COUT on 10 char. If more add .
+void	PhoneBook::_cout_col10(std::string const str) const
 {
 	std::string	space = "          ";
 	
@@ -78,67 +145,3 @@ void	PhoneBook::cout_col10(std::string const str) const
 	}
 }
 
-void	PhoneBook::palm_routine (void)
-{
-	int			i = 0;
-	std::string	input;
-	
-	Contact::nb_recorded = 0;
-	do
-	{
-		input = PhoneBook::menu();
-		if (input == "ADD")
-		{
-			this->set_contact(i);
-			i++;
-			if (i == Contact::nbmax)
-				i = 0;
-			if (Contact::nb_recorded > Contact::nbmax)
-			{
-				Contact::nb_recorded = Contact::nbmax;
-				std::cout << "Memory full. Older contact erased and replaced by this one. Thanks to use our product" << std::endl;
-			}
-		}
-		else if (input == "SEARCH")
-		{
-			if (Contact::nb_recorded > 0)
-				this->get_contact();
-			else
-				std::cout << "No contact to search. First add one and after search." << std::endl;
-		}
-	} while (input != "EXIT");
-	std::cout << "Thanks to use our product. All contacts deleted\n" << std::endl;
-}
-
-std::string	PhoneBook::menu(void) const
-{
-	std::string	input = "";
-	
-	do
-	{
-		if (input != "")
-			PhoneBook::rand_answer();
-		std::cout << "\n@PALM PILOT -2002-\nMENU " << std::endl;
-		std::cout << "|-COMMAND-|-------------------------DESCRIPTION----------------------------|" << std::endl;
-		std::cout << "ADD        Add new contact in phonebook of palm pilot" << std::endl;
-		std::cout << "SEARCH     Show all recorded contacts" << std::endl;
-		std::cout << "EXIT       Shut down your palm pilot. *warning: All contact will be deleted*\n" << std::endl;
-		std::cout << "Enter your command: ";
-		std::getline(std::cin, input);
-	} while (input != "ADD" && input != "SEARCH" && input != "EXIT");
-	return (input);
-}
-
-void	PhoneBook::rand_answer(void) const
-{
-	int	const	nb_case = 5;
-	std::string	answer[nb_case];
-	
-	answer[0] = ".... palm pilot doesn't respond....";
-	answer[1] = "You touch your screen somewhere but it click somewhere else..";
-	answer[2] = "You should upgrade to last release product";
-	answer[3] = "When you bought it, it was already not working well. Don't expect more today.";
-	answer[4] = "We are sorry about your general experience. This is a default answer.";
-	std::cout << answer[rand() % 5] << std::endl;
-	std::cout << "Retry!" << std::endl;
-}
