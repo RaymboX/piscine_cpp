@@ -25,6 +25,11 @@ SRCS			= 	Contact.cpp \
 HEADERS			= 	Contact.hpp \
 					PhoneBook.hpp 
 
+#TESTFILE-----------------------------------------------------------------------
+TESTFILE		= testfile
+
+LOGFILE			= test.log
+
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
@@ -91,7 +96,7 @@ clean:
 
 fclean: clean
 			@$(RM) $(NAME)
-			@$(RM) testfile log
+			@$(RM) $(TESTFILE) $(LOGFILE)
 			@echo "$RExecutable $(NAME) deleted$W"
 
 goal:
@@ -100,75 +105,78 @@ goal:
 test:
 			@echo "$YTESTS BEGIN--------------------------------------$W"
 			
-			@echo "sdfsdf" > testfile
-			@echo "SEARCH" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin1111111111111" >> testfile
-			@echo "Raymond111111111111" >> testfile
-			@echo "RaymboX111111111111" >> testfile
-			@echo "ddsf sdf sdf sdf" >> testfile
-			@echo "4353456" >> testfile
-			@echo "123-1231232" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk11111111" >> testfile
-			@echo "SEARCH" >> testfile
-			@echo "" >> testfile
-			@echo "0" >> testfile
-			@echo "-1" >> testfile
-			@echo "2" >> testfile
-			@echo "1" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin2" >> testfile
-			@echo "Raymond2" >> testfile
-			@echo "RaymboX2222222222222222222222" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk2" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin3" >> testfile
-			@echo "Raymond3" >> testfile
-			@echo "RaymboX3" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk3" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin4" >> testfile
-			@echo "Raymond4" >> testfile
-			@echo "RaymboX4" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk4" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin5" >> testfile
-			@echo "Raymond5" >> testfile
-			@echo "RaymboX5" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk5" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin6" >> testfile
-			@echo "Raymond6" >> testfile
-			@echo "RaymboX6" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk6" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin7" >> testfile
-			@echo "Raymond7" >> testfile
-			@echo "RaymboX7" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk7" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin8" >> testfile
-			@echo "Raymond8" >> testfile
-			@echo "RaymboX8" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk8" >> testfile
-			@echo "ADD" >> testfile
-			@echo "Martin999999999999999" >> testfile
-			@echo "Raymond9" >> testfile
-			@echo "RaymboX9" >> testfile
-			@echo "1231231234" >> testfile
-			@echo "Darkkkkkkkk9999" >> testfile
-			@echo "SEARCH" >> testfile
-			@echo "2" >> testfile
-			@echo "EXIT" >> testfile
-			$(LEAK_CMD) ./$(NAME) < testfile > log
+#$(TESTFILE) creation#########################################
+			@echo "sdfsdf" > $(TESTFILE)
+			@echo "SEARCH" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin1111111111111" >> $(TESTFILE)
+			@echo "Raymond111111111111" >> $(TESTFILE)
+			@echo "RaymboX111111111111" >> $(TESTFILE)
+			@echo "ddsf sdf sdf sdf" >> $(TESTFILE)
+			@echo "4353456" >> $(TESTFILE)
+			@echo "123-1231232" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk11111111" >> $(TESTFILE)
+			@echo "SEARCH" >> $(TESTFILE)
+			@echo "" >> $(TESTFILE)
+			@echo "0" >> $(TESTFILE)
+			@echo "-1" >> $(TESTFILE)
+			@echo "2" >> $(TESTFILE)
+			@echo "1" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin2" >> $(TESTFILE)
+			@echo "Raymond2" >> $(TESTFILE)
+			@echo "RaymboX2222222222222222222222" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk2" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin3" >> $(TESTFILE)
+			@echo "Raymond3" >> $(TESTFILE)
+			@echo "RaymboX3" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk3" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin4" >> $(TESTFILE)
+			@echo "Raymond4" >> $(TESTFILE)
+			@echo "RaymboX4" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk4" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin5" >> $(TESTFILE)
+			@echo "Raymond5" >> $(TESTFILE)
+			@echo "RaymboX5" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk5" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin6" >> $(TESTFILE)
+			@echo "Raymond6" >> $(TESTFILE)
+			@echo "RaymboX6" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk6" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin7" >> $(TESTFILE)
+			@echo "Raymond7" >> $(TESTFILE)
+			@echo "RaymboX7" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk7" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin8" >> $(TESTFILE)
+			@echo "Raymond8" >> $(TESTFILE)
+			@echo "RaymboX8" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk8" >> $(TESTFILE)
+			@echo "ADD" >> $(TESTFILE)
+			@echo "Martin999999999999999" >> $(TESTFILE)
+			@echo "Raymond9" >> $(TESTFILE)
+			@echo "RaymboX9" >> $(TESTFILE)
+			@echo "1231231234" >> $(TESTFILE)
+			@echo "Darkkkkkkkk9999" >> $(TESTFILE)
+			@echo "SEARCH" >> $(TESTFILE)
+			@echo "2" >> $(TESTFILE)
+			@echo "EXIT" >> $(TESTFILE)
+#$(TESTFILE) created##########################################
+
+			$(LEAK_CMD) ./$(NAME) < $(TESTFILE) > $(LOGFILE)
 			@echo "$Y\nEND OF TESTS----------------------------------$W"
 re:			fclean all
 

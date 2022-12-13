@@ -1,7 +1,9 @@
 #pragma once
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
 
 //declaration des functions et var de contact
 //
@@ -40,9 +42,11 @@ public:
 	std::string			getNickname(void) const;
 	std::string			getPhonenum(void) const;
 	std::string			getDarksecret(void) const;
+	void				set_color(std::string const color) const; 
 
 	//CONSTRUCTOR DESTRUCTOR
 	Contact(void);
 	~Contact(void);
 };
 
+#endif

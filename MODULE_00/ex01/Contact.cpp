@@ -19,8 +19,10 @@ std::string	Contact::_get_input(std::string const attr) const
 	std::getline(std::cin, input);
 	while (input.size() == 0)
 	{
+		std::cout << "\033[1;31m";
 		std::cout << "You press enter. I know you probably didn't want to. Welcome to palm tungsten e2 B quality product!" << std::endl;
 		std::cout << "Retry!" << std::endl;
+		std::cout << "\033[0m";
 		std::cout << attr;
 		std::getline(std::cin, input);
 	}
@@ -54,9 +56,11 @@ void	Contact::setPhonenum(void)
 	number = Contact::_get_input("Phone number: ");
 	while (_valid_phonenum(number) != 0)
 	{
+		std::cout << "\033[1;31m";
 		std::cout << "Accepted phone number format are:" << std::endl;
 		std::cout << "1231231234 or 123-123-1234 or (123)123-1234" << std::endl;
 		std::cout << "Retry!" << std::endl;
+		std::cout << "\033[0m";
 		number = Contact::_get_input("Phone number: ");
 	}
 	this->_phonenum = _format_phonenum(number);
@@ -138,7 +142,4 @@ std::string	Contact::getDarksecret(void) const
 {
 	return (this->_darksecret);
 }
-
-
-
 

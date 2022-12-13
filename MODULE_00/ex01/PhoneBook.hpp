@@ -1,6 +1,8 @@
 #pragma once
+#ifndef PHONEBOOK_HPP
+# define PHONEBOOPK_HPP
 
-#include "Contact.hpp"
+# include "Contact.hpp"
 
 class PhoneBook
 {
@@ -30,3 +32,5 @@ public:
 	~PhoneBook(void);
 
 };
+
+#endif

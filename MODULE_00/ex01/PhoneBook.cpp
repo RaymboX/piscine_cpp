@@ -26,7 +26,9 @@ void	PhoneBook::palm_routine (void)
 			if (Contact::nb_recorded > Contact::nbmax)
 			{
 				Contact::nb_recorded = Contact::nbmax;
+				std::cout << "\033[1;33m";
 				std::cout << "Memory full. Older contact erased and replaced by this one. Thanks to use our product" << std::endl;
+				std::cout << "\033[0m";
 			}
 		}
 		else if (input == "SEARCH")
@@ -34,10 +36,16 @@ void	PhoneBook::palm_routine (void)
 			if (Contact::nb_recorded > 0)
 				this->_get_contact();
 			else
+			{
+				std::cout << "\033[1;33m";
 				std::cout << "No contact to search. First add one and after search." << std::endl;
+				std::cout << "\033[0m";
+			}
 		}
 	} while (input != "EXIT");
-	std::cout << "Thanks to use our product. All contacts deleted\n" << std::endl;
+	std::cout << "\033[1;32m";
+	std::cout << "Thanks using our product. All contacts deleted\n" << std::endl;
+	std::cout << "\033[0m";
 }
 
 //show menu and return input from user (parse the input)
@@ -50,7 +58,7 @@ std::string	PhoneBook::_menu(void) const
 		if (input != "")
 			PhoneBook::_rand_answer();
 		std::cout << "\n@PALM TUNGSTEN E2 -2002-\nMENU " << std::endl;
-		std::cout << "|-COMMAND-|-------------------------DESCRIPTION----------------------------|" << std::endl;
+		std::cout << "|-COMMAND-|-----------------------------DESCRIPTION--------------------------------|" << std::endl;
 		std::cout << "ADD        Add new contact in palm tungsten e2" << std::endl;
 		std::cout << "SEARCH     Show contact info" << std::endl;
 		std::cout << "EXIT       Shut down your palm tungsten e2. *warning: All contact will be deleted*\n" << std::endl;
@@ -71,8 +79,10 @@ void	PhoneBook::_rand_answer(void) const
 	answer[2] = "You should upgrade to last release product (Version 2004)";
 	answer[3] = "When you bought it, it was already not working well. Don't expect more today.";
 	answer[4] = "We are sorry about your general experience. This is a default answer.";
+	std::cout << "\033[1;31m";
 	std::cout << answer[rand() % 5] << std::endl;
 	std::cout << "Retry!" << std::endl;
+	std::cout << "\033[0m";
 }
 
 //add contact
@@ -83,7 +93,9 @@ void	PhoneBook::_set_contact(int const i)
 	this->contacts[i].setNickname();
 	this->contacts[i].setPhonenum();
 	this->contacts[i].setDarksecret();
+	std::cout << "\033[1;32m";
 	std::cout << "\nContact recorded at index ";
+	std::cout << "\033[0m";
 	std::cout << i + 1 << std::endl;
 	Contact::nb_recorded++;
 }
@@ -113,18 +125,22 @@ void	PhoneBook::_get_contact(void) const
 	//while (input.size() != 1 && input[0] < '1' && input[0] > '0' + Contact::nb_recorded)
 	while (input.size() != 1 || input[0] < '1' || input[0] > '0' + Contact::nb_recorded)
 	{
+		std::cout << "\033[1;31m";
 		std::cout << "Palm tungsten e2 freeze ... information doesnt compute ..." << std::endl;
 		std::cout << "Retry!" << std::endl;
+		std::cout << "\033[0m";
 		std::cout << "\nEnter index of contact you want to see the information: ";
 		std::getline(std::cin, input);
 	}
 	i = input[0] - '1';
 	std::cout << "-------------------------------------------" << std::endl;
+	std::cout << "\033[1;32m";
 	std::cout << "First name    : " + this->contacts[i].getFirstname() << std::endl;
 	std::cout << "Last name     : " + this->contacts[i].getLastname() << std::endl;
 	std::cout << "Nick name     : " + this->contacts[i].getNickname() << std::endl;
 	std::cout << "Phone number  : " + this->contacts[i].getPhonenum() << std::endl;
 	std::cout << "Darkest secret: " + this->contacts[i].getDarksecret() << std::endl;
+	std::cout << "\033[0m";
 	std::cout << "-------------------------------------------\n" << std::endl;
 }
 
