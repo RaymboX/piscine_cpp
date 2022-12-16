@@ -10,27 +10,24 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= 	account_tester
+NAME 			= BraiiiiiiinnnzzzZ
 
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
-SRCS			= 	Account.cpp \
-					tests.cpp
+SRCS			= 
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			= 	Account.hpp
+HEADERS			= 
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 00 _ EX02 _ L'EMPLOI DE VOS REVE
+MODULE 01 _ EX00 _ BraiiiiiiinnnzzzZ
 
-Produire un file Account.cpp qui sera compatible avec le Account.hpp fourni,
-de sorte que lorsque la classe sera utilisee avec test.cpp fourni,
-la sorti soit "identique" a la sortie de la file .log fourni.
+
 
 --------------------------------------------------------------------------------
 endef
@@ -80,14 +77,13 @@ clean:
 
 fclean: clean
 			@$(RM) $(NAME)
-			@$(RM) $(TESTFILE) $(LOGFILE)
 			@echo "$RExecutable $(NAME) deleted$W"
 
 goal:
 			@echo "$C$$EXPLANATION$W"
 
-log:
-			open https://projects.intra.42.fr/uploads/document/document/10777/19920104_091532.log
+test:
+			
 
 re:			fclean all
 
