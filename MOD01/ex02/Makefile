@@ -10,74 +10,47 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= BraiiiiiiinnnzzzZ
+NAME 			= brain
 
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
-SRCS			=	main.cpp \
-					newZombie.cpp \
-					randomChump.cpp \
-					Zombie.cpp 
+SRCS			=	main.cpp
+					
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			= Zombie.hpp
+HEADERS			= 
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 01 _ EX00 _ BraiiiiiiinnnzzzZ
-Creer une classe nommee Zombie comprenant:
-- Attribut prive _name
-- Fonction annonce faisant presenter le Zombie
-- Constructeur
-- Destructeur envoyant un message comprenant le nom du zombie.
+MODULE 01 _ EX02 _ BONJOUR ICI LE CERVEAU
+Faire un programme avec
+- variable std::string initialiser "HI THIS IS BRAIN"
+- Un pointeur sur la string
+- Une reference sur la string
 
-Deux fonctions ayant en parametre le nom du zombie:
-- Une fonction newZombie
-	- Nommant l'instance le nom en parametre
-	- retournant un pointeur d'instance de Zombie
-- Une fonction randomChump
-	- Creant un Zombie
-	- Lui attribuant le nom en parametre
-	- Le faisant s'annoncer
+Afficher ensuite les adresses des trois et ensuite les valeurs
 
-Le programme cree un instance dans la heap (Zombie Heapzzz)
-	a l'aide de la fonction newZombie. 
-	- (aucun retour)
-Ensuite, il appel la fonction randomChump (Zombie Stackzzz)
-	- Le Zombie s'annonce
-	- Le Destructeur est appeler a la fin de la fonction
-Finalement, Heapzzz est deleted
-	- Le destructeur est appeler.
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
 
-define ZOMBIE
-                                .....            
-      BraiiiiiiinnnzzzZ        C C  /            
-                              /<   /             
-               ___ __________/_#__=o             
-              /(- /(\_\________   \              
-              \ ) \ )_      \o     \             
-              /|\ /|\       |'     |             
-                            |     _|             
-                            /o   __\             
-                           / '     |             
-                          / /      |             
-                         /_/\______|             
-                        (   _(    <              
-                         \    \    \             
-                          \    \    |            
-                           \____\____\           
-                           ____\_\__\_\          
-                         /`   /`     o\          
-                         |___ |_______|          
+define BRAIN
+      _---~~(~~-_.
+    _{        )   )
+  ,   ) -~~- ( ,-' )_
+ (  `-,_..`., )-- '_,)
+( ` _)  (  -~( -_ `,  }
+(_-  _  ~_-~~~~`,  ,' )
+  `~ -^(    __;-,((()))
+        ~~~~ {_ -_(())
+               `\  }
+                 { } 
 endef
-export ZOMBIE
+export BRAIN
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -112,7 +85,7 @@ all: 	init $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "$G$$ZOMBIE$W"
+			@echo "$G$$BRAIN$W"
 			@echo "$G$(NAME) ready!$W"
 			
 init:
@@ -129,6 +102,9 @@ fclean: clean
 
 goal:
 			@echo "$C$$EXPLANATION$W"
+
+leak:
+			$(LEAK_CMD) ./$(NAME)
 
 test:
 			
