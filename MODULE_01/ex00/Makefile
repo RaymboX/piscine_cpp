@@ -29,9 +29,29 @@ HEADERS			= Zombie.hpp
 define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 01 _ EX00 _ BraiiiiiiinnnzzzZ
+Creer une classe nommee Zombie comprenant:
+- Attribut prive _name
+- Fonction annonce faisant presenter le Zombie
+- Constructeur
+- Destructeur envoyant un message comprenant le nom du zombie.
 
+Deux fonctions ayant en parametre le nom du zombie:
+- Une fonction newZombie
+	- Nommant l'instance le nom en parametre
+	- retournant un pointeur d'instance de Zombie
+- Une fonction randomChump
+	- Creant un Zombie
+	- Lui attribuant le nom en parametre
+	- Le faisant s'annoncer
 
-
+Le programme cree un instance dans la heap (Zombie Heapzzz)
+	a l'aide de la fonction newZombie. 
+	- (aucun retour)
+Ensuite, il appel la fonction randomChump (Zombie Stackzzz)
+	- Le Zombie s'annonce
+	- Le Destructeur est appeler a la fin de la fonction
+Finalement, Heapzzz est deleted
+	- Le destructeur est appeler.
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
