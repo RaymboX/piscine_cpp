@@ -15,12 +15,15 @@ NAME 			= BraiiiiiiinnnzzzZ
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
-SRCS			= 
+SRCS			=	main.cpp \
+					newZombie.cpp \
+					randomChump.cpp \
+					Zombie.cpp 
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			= 
+HEADERS			= Zombie.hpp
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
@@ -32,6 +35,29 @@ MODULE 01 _ EX00 _ BraiiiiiiinnnzzzZ
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
+
+define ZOMBIE
+                                .....            
+      BraiiiiiiinnnzzzZ        C C  /            
+                              /<   /             
+               ___ __________/_#__=o             
+              /(- /(\_\________   \              
+              \ ) \ )_      \o     \             
+              /|\ /|\       |'     |             
+                            |     _|             
+                            /o   __\             
+                           / '     |             
+                          / /      |             
+                         /_/\______|             
+                        (   _(    <              
+                         \    \    \             
+                          \    \    |            
+                           \____\____\           
+                           ____\_\__\_\          
+                         /`   /`     o\          
+                         |___ |_______|          
+endef
+export ZOMBIE
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -62,11 +88,13 @@ $(OBJS_DIR)/%.o:%.cpp $(HEADERS)
 #RULES--------------------------------------------------------------------------
 
 all: 	init $(NAME)
+		
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+			@echo "$G$$ZOMBIE$W"
 			@echo "$G$(NAME) ready!$W"
-
+			
 init:
 			@mkdir -p $(OBJS_DIR)
 

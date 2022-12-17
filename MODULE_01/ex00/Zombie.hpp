@@ -10,14 +10,16 @@ private:
 	std::string	_name;
 
 public:
-	void	announce(void) const;
+	void	announce(void);
 
-	std::string const & getname(void) const;
-
+	std::string& getname(void);
+	
 	Zombie(void);
 	~Zombie(void);
 
 };
 
+Zombie	*newZombie(std::string name);
+void	randomChump(std::string name);
 
 #endif
