@@ -47,7 +47,7 @@ Add on
 endef
 export EXPLANATION
 
-define VIOLENCE
+define ART
                         ____________ 
                       .~      ,   . ~. 
                      /                \ 
@@ -71,7 +71,7 @@ X      X     @%%;;@   |. ` ; ; ; ;  ,|   @%%;;@     X      X
                          @%%;;@..@@ 
                           @@@  @@@ 
 endef
-export VIOLENCE
+export ART
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -106,7 +106,7 @@ all: 	init $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "$G$$VIOLENCE$W"
+			@echo "$G$$ART$W"
 			@echo "$G$(NAME) ready!$W"
 			
 init:
@@ -126,6 +126,9 @@ goal:
 
 leak:
 			$(LEAK_CMD) ./$(NAME)
+
+art:
+			@echo "$G$$ART$W"
 
 test:
 			

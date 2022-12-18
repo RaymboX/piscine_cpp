@@ -36,7 +36,7 @@ Cette fonction demande a initialiser un array d'instance de classe.
 endef
 export EXPLANATION
 
-define ZOMBIE
+define ART
                   .....                  .....                  ..... 
                  C C  /                 C C  /                 C C  / 
                 /<   /                 /<   /                 /<   /  
@@ -57,7 +57,7 @@ define ZOMBIE
            /`   /`     o\         /`   /`     o\         /`   /`     o\ 
            |___ |_______|         |___ |_______|         |___ |_______| 
 endef
-export ZOMBIE
+export ART
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -92,7 +92,7 @@ all: 	init $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "$G$$ZOMBIE$W"
+			@echo "$G$$ART$W"
 			@echo "$G$(NAME) ready!$W"
 			
 init:
@@ -112,6 +112,9 @@ goal:
 
 leak:
 			$(LEAK_CMD) ./$(NAME)
+
+art:
+			@echo "$G$$ART$W"
 
 test:
 			

@@ -38,7 +38,7 @@ Afficher ensuite les adresses des trois et ensuite les valeurs
 endef
 export EXPLANATION
 
-define BRAIN
+define ART
       _---~~(~~-_.
     _{        )   )
   ,   ) -~~- ( ,-' )_
@@ -50,7 +50,7 @@ define BRAIN
                `\  }
                  { } 
 endef
-export BRAIN
+export ART
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -85,7 +85,7 @@ all: 	init $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "$G$$BRAIN$W"
+			@echo "$G$$ART$W"
 			@echo "$G$(NAME) ready!$W"
 			
 init:
@@ -105,6 +105,9 @@ goal:
 
 leak:
 			$(LEAK_CMD) ./$(NAME)
+
+art:
+			@echo "$G$$ART$W"
 
 test:
 			

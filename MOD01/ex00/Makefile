@@ -56,7 +56,7 @@ Finalement, Heapzzz est deleted
 endef
 export EXPLANATION
 
-define ZOMBIE
+define ART
                                 .....            
       BraiiiiiiinnnzzzZ        C C  /            
                               /<   /             
@@ -77,7 +77,7 @@ define ZOMBIE
                          /`   /`     o\          
                          |___ |_______|          
 endef
-export ZOMBIE
+export ART
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -112,7 +112,7 @@ all: 	init $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
-			@echo "$G$$ZOMBIE$W"
+			@echo "$G$$ART$W"
 			@echo "$G$(NAME) ready!$W"
 			
 init:
@@ -132,6 +132,9 @@ goal:
 
 leak:
 			$(LEAK_CMD) ./$(NAME)
+
+art:
+			@echo "$G$$ART$W"
 
 test:
 			
