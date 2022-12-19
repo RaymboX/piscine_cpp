@@ -37,9 +37,11 @@ Le programme recevra en parametre dans l'ordre
 	- string a remplacer
 	- string qui remplace
 
-Outil
-	- Make file = Creer un file pour les tests nomme chapter1
-	(extrait du chapitre 1 de The Hitchhiker’s Guide to the Galaxy)
+Outils
+	- make file = Creer deux files pour les tests 
+		- chapter1 (extrait du chapitre 1 de The Hitchhiker’s Guide to the Galaxy)
+		- simple (File courte et simple servant aussi pour make test)
+	- make test = Execute une serie de tests
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
@@ -56,8 +58,12 @@ define ART
 endef
 export ART
 
+FILE		= 	chapter1 \
+				chapter1.replace \
+				simple \
+				simple.replace
 #FILE
-define FILE
+define FILE1
 Chapter One
 
 The house stood on a slight rise just on the edge of the village. It stood on its own and looked out over a broad spread of West Country farmland. Not a remarkable house by any means—it was about thirty years old, squattish, squarish, made of brick, and had four windows set in the front of a size and proportion which more or less exactly failed to please the eye.
@@ -163,7 +169,19 @@ Mr. Prosser’s mouth opened and closed a couple of times while his mind was for
 Copyright © 1997 by Douglas Adams
 
 endef
-export FILE
+export FILE1
+
+define FILE2
+A 1 CC
+B 2 DD
+C 1 EE
+D 2 FF
+E 1 AA
+F 2 BB
+G 1 CC
+endef
+export FILE2
+
 
 #DIRECTORY----------------------------------------------------------------------
 
@@ -173,6 +191,7 @@ OBJS_DIR		= 	./obj
 
 CFLAGS 			= 	-Wall -Werror -Wextra -std=c++98
 CC				= 	g++
+CC_DEBUG		=	g++ -g
 
 RM				= 	rm -rf
 LEAK_CMD		=	leaks --atExit --
@@ -207,11 +226,13 @@ init:
 clean:
 			@$(RM) $(OBJS)
 			@$(RM) $(OBJS_DIR)
-			@$(RM) chapter1
 			@echo "$RObjects removed$W"
 
 fclean: clean
 			@$(RM) $(NAME)
+			@$(RM) $(FILE)
+			@$(RM) $(NAME)_debug
+			@$(RM) $(NAME)_debug.dSYM
 			@echo "$RExecutable $(NAME) deleted$W"
 
 goal:
@@ -224,13 +245,33 @@ art:
 			@echo "$G$$ART$W"
 
 file:
-			@echo "$$FILE" > chapter1
+			@echo "$$FILE1" > chapter1
+			@echo "$$FILE2" > simple
 
 test:
+			@make file
+			@echo "$CTEST 1: number of argument$W"
+			./$(NAME)
+			./$(NAME) simple
+			./$(NAME) simple a
+			./$(NAME) notexist a b c
+			@echo "$CTEST 2: not existing file$W"
+			./$(NAME) notexist "A" "ALLO"
+			@echo "$CTEST 3: empty arg$W"
+			./$(NAME) "" "a" "ALLO"
+			./$(NAME) simple "" "ALLO"
+			./$(NAME) simple "A" ""
+			@echo "$CTEST 4: real try$W"
+			./$(NAME) simple "A" "ALLO"
+			cat simple
+			cat simple.replace
 			
+debug:	fclean
+			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug
+			@echo "$YDebbuging executable ready!$W"
 
 re:			fclean all
 
 #PHONY--------------------------------------------------------------------------
 
-.PHONY:				all clean fclean re init goal test
+.PHONY:				all clean fclean re init goal test art leak
