@@ -250,21 +250,49 @@ file:
 
 test:
 			@make file
-			@echo "$CTEST 1: number of argument$W"
-			./$(NAME)
-			./$(NAME) simple
-			./$(NAME) simple a
-			./$(NAME) notexist a b c
-			@echo "$CTEST 2: not existing file$W"
-			./$(NAME) notexist "A" "ALLO"
-			@echo "$CTEST 3: empty arg$W"
-			./$(NAME) "" "a" "ALLO"
-			./$(NAME) simple "" "ALLO"
-			./$(NAME) simple "A" ""
-			@echo "$CTEST 4: real try$W"
-			./$(NAME) simple "A" "ALLO"
+			@echo "\n$YTEST 1: number of argument"
+			@echo "\n$YTEST 1a: no argument$C"
+			$(LEAK_CMD) ./$(NAME)
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "\n$YTEST 1b: one argument$C"
+			$(LEAK_CMD) ./$(NAME) simple
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "\n$YTEST 1c: two arguments$C"
+			$(LEAK_CMD) ./$(NAME) simple a
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "\n$YTEST 1d: four arguments$C"
+			$(LEAK_CMD) ./$(NAME) notexist a b c
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "$YTEST 2: not existing file$C"
+			$(LEAK_CMD) ./$(NAME) notexist "A" "ALLO"
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "$YTEST 3: empty arg"
+			@echo "$YTEST 3a: empty filename$C"
+			$(LEAK_CMD) ./$(NAME) "" "a" "ALLO"
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "$YTEST 3b: empty find string$C"
+			$(LEAK_CMD) ./$(NAME) simple "" "ALLO"
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "$YTEST 3c: empty replace string$C"
+			$(LEAK_CMD) ./$(NAME) simple "A" ""
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "$YTEST 4: real try$C"
+			$(LEAK_CMD) ./$(NAME) simple "A" "ALLO"
+			@echo "$Wpress enter to continue"
+			@read
+			@echo "$YResult of < ./sed_is_for_loser simple "A" "ALLO" >$C"
 			cat simple
+			@echo "$Z"
 			cat simple.replace
+			@echo "$W"
 			
 debug:	fclean
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug

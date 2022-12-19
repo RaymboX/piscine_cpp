@@ -3,6 +3,7 @@
 HumanB::HumanB(std::string const name)
 {
 	this->_name = name;
+	this->_Weapon = NULL;
 }
 
 HumanB::~HumanB()
