@@ -3,7 +3,7 @@
 int	main(int argc, char **argv)
 {
 	Harl	harl_instance;
-	int		level = 0;
+	int		level = -1;
 
 	if (argc != 2)
 	{
@@ -23,6 +23,9 @@ int	main(int argc, char **argv)
 			harl_instance.complain("WARNING");
 		case 3:
 			harl_instance.complain("ERROR");
+			break;
+		default:
+			std::cout << "[ He's talking about <don't care> things! ]" << std::endl << std::endl;
 	}
 	
 	return(0);

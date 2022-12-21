@@ -119,6 +119,37 @@ art:
 			@echo "$G$$ART$W"
 
 test:
+			@echo "$Y\nTEST1: No arg$C"
+			$(LEAK_CMD) ./$(NAME)
+			@echo "$W\n press enter to continue\n"
+			@read _
+			@echo "$Y\nTEST2: Empty arg$C"
+			$(LEAK_CMD) ./$(NAME) ""
+			@echo "$W\n press enter to continue\n"
+			@read _
+			@echo "$Y\nTEST3: DEBUG$C"
+			$(LEAK_CMD) ./$(NAME) DEBUG
+			@echo "$W\n press enter to continue\n"
+			@read _
+			@echo "$Y\nTEST4: INFO$C"
+			$(LEAK_CMD) ./$(NAME) INFO
+			@echo "$W\n press enter to continue\n"
+			@read _
+			@echo "$Y\nTEST5: WARNING$C"
+			$(LEAK_CMD) ./$(NAME) WARNING
+			@echo "$W\n press enter to continue\n"
+			@read _
+			@echo "$Y\nTEST6: ERROR$C"
+			$(LEAK_CMD) ./$(NAME) ERROR
+			@echo "$W\n press enter to continue\n"
+			@read _
+			@echo "$Y\nTEST7: Random stuff$C"
+			$(LEAK_CMD) ./$(NAME) fdsgsdkjfgh
+			@echo "$YTEST END-----------------\n$W"
+
+
+
+
 			
 debug:	fclean
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug
