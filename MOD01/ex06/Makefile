@@ -10,7 +10,7 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= harl2_0
+NAME 			= HarlFilter
 
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
@@ -27,12 +27,13 @@ HEADERS			=	Harl.hpp
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 01 _ EX05 _ HARL 2.0
-Le but est d'etre en mesure d'utiliser les pointeurs de fonction membre.
-Il faut regarder dans le code et s'assurer que la fonction complain ne comprend
-	pas de foret de if et qu'elle utilise un pointeur de fonction.
+MODULE 01 _ EX06 _ HARL FILTER
+Cette exercice oblige l'utilisation de la function switch.
 
-Le programme doit renvoyer ces messages via 4 fonctions.
+En utilisant la base de l'ex05, il doit etre maintenant possible de passer
+	en argument l'un des niveaux de messages.
+Tous les messages avec un niveau egal ou superieur doivent s'afficher.
+Les mauvaises entrer sont naturellement filtrees par la function switch.
 
 --------------------------------------------------------------------------------
 endef
@@ -42,13 +43,13 @@ define ART
        _______ 
      _/       \_ 
     / |       | \ 
-   /  |__   __|  \ 
+   /  |_/   \_|  \ 
   |__/((o| |o))\__| 
   |      | |      | 
   |\     |_|     /| 
   | \           / | 
-   \| /  ___  \ |/ 
-    \ | / _ \ | / 
+   \|    \ /    |/ 
+    \    / \    / 
      \_________/ 
       _|_____|_ 
  ____|_________|____ 

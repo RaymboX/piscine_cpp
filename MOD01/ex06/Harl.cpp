@@ -7,10 +7,10 @@ Harl::Harl(void)
 	ptrcomplain[2] = &Harl::warning;
 	ptrcomplain[3] = &Harl::error;
 
-	this->_level[0] = "DEBUG";
-	this->_level[1] = "INFO";
-	this->_level[2] = "WARNING";
-	this->_level[3] = "ERROR";
+	this->level[0] = "DEBUG";
+	this->level[1] = "INFO";
+	this->level[2] = "WARNING";
+	this->level[3] = "ERROR";
 
 }
 
@@ -43,7 +43,7 @@ void	Harl::complain(std::string level)
 {
 	int	i = -1;
 
-	while (++i < 4 && this->_level[i] != level){}
+	while (++i < 4 && this->level[i] != level){}
 
 	(this->*ptrcomplain[i])();
 

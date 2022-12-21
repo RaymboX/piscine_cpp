@@ -8,11 +8,11 @@ private:
 	void		warning( void );
 	void		error( void );
 	void		(Harl::*ptrcomplain[4])(void);
-	std::string	_level[4];
 
 public:
 	void		complain(std::string level);
-
+	std::string	level[4];
+	
 	Harl(void);
 	~Harl(void);
 
