@@ -118,6 +118,7 @@ art:
 			@echo "$G$$ART$W"
 
 test:
+			$(LEAK_CMD) ./$(NAME)
 			
 debug:	fclean
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug

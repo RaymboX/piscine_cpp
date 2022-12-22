@@ -145,10 +145,7 @@ test:
 			@read _
 			@echo "$Y\nTEST7: Random stuff$C"
 			$(LEAK_CMD) ./$(NAME) fdsgsdkjfgh
-			@echo "$YTEST END-----------------\n$W"
-
-
-
+			@echo "$Y------------------TEST END-----------------\n$W"
 
 			
 debug:	fclean

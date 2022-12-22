@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		std::cout << "You need to input a parameter DEBUG||INFO||WARNING||ERROR" << std::endl;
+		std::cout << "You need to input a parameter DEBUG||INFO||WARNING||ERROR" << std::endl << std::endl;
 		return (0);
 	}
 	
