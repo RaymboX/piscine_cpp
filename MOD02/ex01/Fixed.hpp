@@ -16,11 +16,18 @@ public:
 	int		getRawBits(void) const;
 	void	setRawBits(int const raw);
 
+	//MEMBER FUNCTION
+	float 	toFloat(void) const;
+	int		toInt(void) const;
+
 	//OPERATORS
 	Fixed &	operator=(Fixed const & rhs);
+	Fixed & operator<<(std::ostream & o);
 
 	//CONSTRUCTOR DESTRUCTOR
 	Fixed(void);
+	Fixed(int const intVal);
+	Fixed(float const floatVal);
 	Fixed(Fixed const & src);
 	~Fixed(void);
 };

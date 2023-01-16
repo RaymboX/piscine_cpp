@@ -27,7 +27,7 @@ HEADERS			=	Fixed.hpp
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 02 _ EX0! _ PREMIERS PAS VERS UNE CLASSE UTILE
+MODULE 02 _ EX01 _ PREMIERS PAS VERS UNE CLASSE UTILE
 A partir du dernier exercice, ajouter ceci
 
 - Constructeur prenant un int const en parametre et qui le converti en
