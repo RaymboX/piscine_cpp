@@ -23,6 +23,7 @@ Fixed & Fixed::operator=(Fixed const & src)
 	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixVal = src.getRawBits();
 	this->_fractLen = 8;
+	return (*this);
 }
 
 int		Fixed::getRawBits(void) const

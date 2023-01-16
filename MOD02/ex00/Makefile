@@ -16,13 +16,13 @@ NAME 			= mon1ercanon
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					
+					Fixed.cpp
 					
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	
+HEADERS			=	Fixed.hpp
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
