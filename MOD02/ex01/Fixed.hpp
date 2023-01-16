@@ -3,6 +3,7 @@
 # define FIXED_HPP
 
 # include <iostream>
+# include <fstream>
 
 class Fixed
 {
@@ -22,7 +23,7 @@ public:
 
 	//OPERATORS
 	Fixed &	operator=(Fixed const & rhs);
-	Fixed & operator<<(std::ostream & o);
+	
 
 	//CONSTRUCTOR DESTRUCTOR
 	Fixed(void);
@@ -31,5 +32,7 @@ public:
 	Fixed(Fixed const & src);
 	~Fixed(void);
 };
+
+std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
 
 #endif
