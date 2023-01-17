@@ -18,8 +18,6 @@ Fixed::Fixed(float const floatVal)
 {
 	std::cout << "Float constructor called" << std::endl;
 	this->_fixVal = floatVal * (float)(2 << 8) + (floatVal >= 0 ? 0.5 : -0.5);
-	std::cout << "FLoatVal: " << floatVal << std::endl;
-	std::cout << "Fix from it: " << this->_fixVal << std::endl;
 	this->_fractLen = 8; 
 }
 
@@ -55,7 +53,7 @@ int	Fixed::toInt(void) const
 
 float Fixed::toFloat(void) const
 {
-	return (float)(this->getRawBits() / (2 << 8));
+	return ((float)this->getRawBits()) / ((float)(2 << 8));
 }
 
 int		Fixed::getRawBits(void) const
