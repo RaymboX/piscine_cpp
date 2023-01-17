@@ -102,7 +102,7 @@ Fixed & Fixed::operator*(Fixed const & rhs)
 	return *this;
 }
 
-Fixed & Fixed::operator/(Fixed const & rhs)
+Fixed &	Fixed::operator/(Fixed const & rhs)
 {
 	if (rhs.getRawBits() != 0)
 		this->_fixVal /= rhs.getRawBits();
@@ -111,10 +111,32 @@ Fixed & Fixed::operator/(Fixed const & rhs)
 	return *this;
 }
 
-Fixed & Fixed::operator++(void)
+Fixed &	Fixed::operator++(void)
 {
 	this->_fixVal += 1 * (2 << this->_fractLen);
 	return *this;
+}
+
+Fixed &	Fixed::operator--(void)
+{
+	this->_fixVal -= 1 * (2 << this->_fractLen);
+	return *this;
+}
+
+Fixed	Fixed::operator++(void)
+{
+	Fixed	a(*this);
+	
+	this->_fixVal += 1 * (2 << this->_fractLen);
+	return a;
+}
+
+Fixed	Fixed::operator--(void)
+{
+	Fixed	a(*this);
+	
+	this->_fixVal -= 1 * (2 << this->_fractLen);
+	return a;
 }
 
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs)
@@ -151,4 +173,32 @@ int		Fixed::getRawBits(void) const
 void	Fixed::setRawBits(int const raw)
 {
 	this->_fixVal = raw;
+}
+
+Fixed &	Fixed::min(Fixed & a, Fixed & b) const
+{
+	if (a <= b)
+		return a;
+	return b;
+}
+
+Fixed const &	Fixed::min(Fixed const & a, Fixed const & b) const
+{
+	if (a <= b)
+		return a;
+	return b;
+}
+
+Fixed &	Fixed::max(Fixed & a, Fixed & b) const
+{
+	if (a >= b)
+		return a;
+	return b;
+}
+
+Fixed const &	Fixed::max(Fixed const & a, Fixed const & b) const
+{
+	if (a >= b)
+		return a;
+	return b;
 }
