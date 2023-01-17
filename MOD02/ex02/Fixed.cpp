@@ -123,19 +123,19 @@ Fixed &	Fixed::operator--(void)
 	return *this;
 }
 
-Fixed	Fixed::operator++(void)
+Fixed	Fixed::operator++(int const i)
 {
 	Fixed	a(*this);
 	
-	this->_fixVal += 1 * (2 << this->_fractLen);
+	this->_fixVal += i * (2 << this->_fractLen);
 	return a;
 }
 
-Fixed	Fixed::operator--(void)
+Fixed	Fixed::operator--(int const i)
 {
 	Fixed	a(*this);
 	
-	this->_fixVal -= 1 * (2 << this->_fractLen);
+	this->_fixVal -= i * (2 << this->_fractLen);
 	return a;
 }
 
@@ -175,28 +175,28 @@ void	Fixed::setRawBits(int const raw)
 	this->_fixVal = raw;
 }
 
-Fixed &	Fixed::min(Fixed & a, Fixed & b) const
+Fixed &	Fixed::min(Fixed & a, Fixed & b)
 {
 	if (a <= b)
 		return a;
 	return b;
 }
 
-Fixed const &	Fixed::min(Fixed const & a, Fixed const & b) const
+Fixed const &	Fixed::min(Fixed const & a, Fixed const & b)
 {
 	if (a <= b)
 		return a;
 	return b;
 }
 
-Fixed &	Fixed::max(Fixed & a, Fixed & b) const
+Fixed &	Fixed::max(Fixed & a, Fixed & b)
 {
 	if (a >= b)
 		return a;
 	return b;
 }
 
-Fixed const &	Fixed::max(Fixed const & a, Fixed const & b) const
+Fixed const &	Fixed::max(Fixed const & a, Fixed const & b)
 {
 	if (a >= b)
 		return a;
