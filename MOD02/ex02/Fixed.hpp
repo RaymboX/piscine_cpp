@@ -46,8 +46,8 @@ public:
 
 	Fixed &			operator++(void);
 	Fixed &			operator--(void);
-	Fixed			operator++(int const i);
-	Fixed			operator--(int const i);
+	Fixed			operator++(int);
+	Fixed			operator--(int);
 
 
 	//CONSTRUCTOR DESTRUCTOR

@@ -1,15 +1,14 @@
 #include "Fixed.hpp"
+#include <cmath>
 
 Fixed::Fixed(void)
 {
-	std::cout << "Default constructor called" << std::endl;
 	this->_fixVal = 0;
 	this->_fractLen = 8;
 }
 
 Fixed::Fixed(int const intVal)
 {
-	std::cout << "Int constructor called" << std::endl;
 	this->_fractLen = 8;
 	this->_fixVal = this->toFix(intVal);
 }
@@ -17,25 +16,19 @@ Fixed::Fixed(int const intVal)
 
 Fixed::Fixed(float const floatVal)
 {
-	std::cout << "Float constructor called" << std::endl;
 	this->_fractLen = 8; 
 	this->_fixVal = this->toFix(floatVal);
 }
 
 Fixed::Fixed(Fixed const & src)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = src;
 }
 
-Fixed::~Fixed(void)
-{
-	std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed(void){}
 
 Fixed & Fixed::operator=(Fixed const & src)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixVal = src.getRawBits();
 	this->_fractLen = 8;
 	return (*this);
@@ -98,7 +91,7 @@ Fixed & Fixed::operator-(Fixed const & rhs)
 
 Fixed & Fixed::operator*(Fixed const & rhs)
 {
-	this->_fixVal *= rhs.getRawBits();
+	this->_fixVal =  this->toFix(this->toFloat() * rhs.toFloat());
 	return *this;
 }
 
@@ -113,29 +106,29 @@ Fixed &	Fixed::operator/(Fixed const & rhs)
 
 Fixed &	Fixed::operator++(void)
 {
-	this->_fixVal += 1 * (2 << this->_fractLen);
+	this->_fixVal++;
 	return *this;
 }
 
 Fixed &	Fixed::operator--(void)
 {
-	this->_fixVal -= 1 * (2 << this->_fractLen);
+	this->_fixVal--;
 	return *this;
 }
 
-Fixed	Fixed::operator++(int const i)
+Fixed	Fixed::operator++(int)
 {
 	Fixed	a(*this);
 	
-	this->_fixVal += i * (2 << this->_fractLen);
+	this->_fixVal++;
 	return a;
 }
 
-Fixed	Fixed::operator--(int const i)
+Fixed	Fixed::operator--(int)
 {
 	Fixed	a(*this);
 	
-	this->_fixVal -= i * (2 << this->_fractLen);
+	this->_fixVal--;
 	return a;
 }
 
@@ -147,22 +140,22 @@ std::ostream & operator<<(std::ostream & o, Fixed const & rhs)
 
 int	Fixed::toInt(void) const
 {
-	return (int)(this->getRawBits() / (2 << this->_fractLen));
+	return (int)(this->getRawBits() / (1 << this->_fractLen));
 }
 
 float Fixed::toFloat(void) const
 {
-	return ((float)this->getRawBits()) / ((float)(2 << this->_fractLen));
+	return ((float)this->getRawBits()) / ((float)(1 << this->_fractLen));
 }
 
 int	Fixed::toFix(int const i) const
 {
-	return i * (int)(2 << this->_fractLen);
+	return (int)(i * (float)(1 << this->_fractLen));
 }
 
 int	Fixed::toFix(float const f) const
 {
-	return f * (float)(2 << this->_fractLen) + (f >= 0 ? 0.5 : -0.5);
+	return (int)(f * (float)(1 << this->_fractLen) + (f >= 0 ? 0.5 : -0.5));
 }
 
 int		Fixed::getRawBits(void) const

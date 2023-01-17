@@ -10,14 +10,14 @@ Fixed::Fixed(void)
 Fixed::Fixed(int const intVal)
 {
 	std::cout << "Int constructor called" << std::endl;
-	this->_fixVal = intVal * (int)(2 << 8);
+	this->_fixVal = intVal * (int)(1 << 8);
 	this->_fractLen = 8;
 }
 
 Fixed::Fixed(float const floatVal)
 {
 	std::cout << "Float constructor called" << std::endl;
-	this->_fixVal = floatVal * (float)(2 << 8) + (floatVal >= 0 ? 0.5 : -0.5);
+	this->_fixVal = floatVal * (float)(1 << 8) + (floatVal >= 0 ? 0.5 : -0.5);
 	this->_fractLen = 8; 
 }
 
@@ -48,12 +48,12 @@ std::ostream & operator<<(std::ostream & o, Fixed const & rhs)
 
 int	Fixed::toInt(void) const
 {
-	return (int)(this->getRawBits() / (2 << 8));
+	return (int)(this->getRawBits() / (1 << 8));
 }
 
 float Fixed::toFloat(void) const
 {
-	return ((float)this->getRawBits()) / ((float)(2 << 8));
+	return ((float)this->getRawBits()) / ((float)(1 << 8));
 }
 
 int		Fixed::getRawBits(void) const
