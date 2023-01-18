@@ -19,4 +19,3 @@ Point &	Point::operator=(Point const & rhs)
 	*temp_y = rhs.get_y();
 	return *this;
 }
-

@@ -16,13 +16,16 @@ NAME 			= BSP
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					Fixed.cpp
+					Fixed.cpp \
+					Point.cpp \
+					bsp.cpp
 					
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	Fixed.hpp
+HEADERS			=	Fixed.hpp \
+					Point.hpp
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
@@ -39,9 +42,6 @@ A partir du dernier exercice, ajouter ceci
 	et qui retournera si le point quelconque est dans le triangle
 
 Le main est laissé a notre discretion pour les tests.
-Il n'est pas indiqué que le programme ne prend pas d'argument alors celui-ceci
-	prendra les paramêtres de la fonction bsp afin de pouvoir tester n'importequelle
-	points et triangles.
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
@@ -51,11 +51,13 @@ export EXPLANATION
 define TOOLS
 --------------------------------------------------------------------------------
 OUTILS INCLUS DISPONIBLES
-make goal	-> Vulgarisation du but de l'exercice
-make pdf 	-> Ouvre le PDF sujet
-make leak	-> Execute le programme avec "leaks -- atExit -- " en premice
-make test	-> Creer un nouveau main et execute ce main avec la meme classe
-make tools	-> Affiche les outils disponibles (ceci)
+make goal		-> Vulgarisation du but de l'exercice
+make pdf 		-> Ouvre le PDF sujet
+make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
+make video_ref	-> Video pour fonction bsp
+make triangle	-> Illustration du cas testé dans le main
+make demo		-> make triangle + ./BSP
+make tools		-> Affiche les outils disponibles (ceci)
 --------------------------------------------------------------------------------
 endef
 export TOOLS
@@ -70,10 +72,33 @@ TEST_SRCS		=
 TEST_FILES		=	
 
 #MAINTEST-----------------------------------------------------------------------
-define MAINTEST
+define TRIANGLE
 
+------------------------------------------------------------------
+                  Cas qui sont testés dans le main
+
+  0 1 2 3 4 5 6 7 8 |
+0                   |
+                    |
+1   a           2   |        Triangle:
+    |\              |          a:  (1, 1)
+2   | \             |          b:  (1, 7)
+    |  \     5      |          c:  (7, 7)
+3   |   3           |
+    |    \          |        Point test:
+4   |     \         |          p1: (3, 5)       inside  = true  (1)
+    |      \        |          p2: (7, 1)       outside = false (0)
+5   |   1   \       |          p3: (3, 3)       dessus  = false (0)
+    |        6      |          p4: (1.5f, 6.5f) inside  = true  (1)
+6   |         \     |          p5: (5.5f, 2.5f) outside = false (0)
+    |4         \    |          p6: (5.5f, 5.5f) dessus  = false (0)
+7   b___________c   |
+                    |
+8                   |
+
+-------------------------------------------------------------------
 endef
-export MAINTEST
+export TRIANGLE
 
 
 #DIRECTORY----------------------------------------------------------------------
@@ -129,8 +154,13 @@ fclean: clean
 			@$(RM) $(TEST_FILES)
 			@echo "$RExecutable $(NAME) deleted$W"
 
-test:
-			
+triangle:
+			@echo "$G$$TRIANGLE$W"
+
+demo:
+			@make triangle
+			@./$(NAME)
+			@echo "$C\nA votre tour de faire des tests en modifiant le main\n$W"
 
 tools:
 			@echo "$C$$TOOLS$W"
@@ -143,7 +173,10 @@ leak:
 
 pdf:
 			@open https://cdn.intra.42.fr/pdf/pdf/66965/fr.subject.pdf
-			
+
+video_ref:
+			@open https://youtu.be/kkucCUlyIUE
+
 debug:	fclean
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug
 			@echo "$YDebbuging executable ready!$W"
