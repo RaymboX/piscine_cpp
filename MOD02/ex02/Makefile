@@ -58,6 +58,13 @@ endef
 export TOOLS
 
 
+#MAINTEST--------------------------------------------------------------------------
+define MAINTEST
+
+endef
+export MAINTEST
+
+
 #DIRECTORY----------------------------------------------------------------------
 
 OBJS_DIR		= 	./obj

@@ -77,31 +77,39 @@ bool	Fixed::operator!=(Fixed const & rhs) const
 }
 
 
-Fixed & Fixed::operator+(Fixed const & rhs)
+Fixed	Fixed::operator+(Fixed const & rhs)
 {
-	this->_fixVal += rhs.getRawBits();
-	return *this;
+	Fixed	rtn(*this);
+
+	rtn._fixVal = rtn.toFix(this->toFloat() + rhs.toFloat());
+	return rtn;
 }
 
-Fixed & Fixed::operator-(Fixed const & rhs)
+Fixed	Fixed::operator-(Fixed const & rhs)
 {
-	this->_fixVal -= rhs.getRawBits();
-	return *this;
+	Fixed	rtn(*this);
+
+	rtn._fixVal = rtn.toFix(this->toFloat() - rhs.toFloat());
+	return rtn;
 }
 
-Fixed & Fixed::operator*(Fixed const & rhs)
+Fixed	Fixed::operator*(Fixed const & rhs)
 {
-	this->_fixVal =  this->toFix(this->toFloat() * rhs.toFloat());
-	return *this;
+	Fixed	rtn(*this);
+
+	rtn._fixVal = rtn.toFix(this->toFloat() * rhs.toFloat());
+	return rtn;
 }
 
-Fixed &	Fixed::operator/(Fixed const & rhs)
+Fixed	Fixed::operator/(Fixed const & rhs)
 {
+	Fixed	rtn(*this);
+
 	if (rhs.getRawBits() != 0)
-		this->_fixVal /= rhs.getRawBits();
+		rtn._fixVal = rtn.toFix(this->toFloat() / rhs.toFloat());
 	else
 		std::cout << "Error: Divide by zero" << std::endl;
-	return *this;
+	return rtn;
 }
 
 Fixed &	Fixed::operator++(void)
