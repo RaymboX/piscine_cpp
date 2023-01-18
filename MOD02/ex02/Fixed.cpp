@@ -108,7 +108,7 @@ Fixed	Fixed::operator/(Fixed const & rhs)
 	if (rhs.getRawBits() != 0)
 		rtn._fixVal = rtn.toFix(this->toFloat() / rhs.toFloat());
 	else
-		std::cout << "Error: Divide by zero" << std::endl;
+		std::cout << "Error: Divide bBy zero" << std::endl;
 	return rtn;
 }
 

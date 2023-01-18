@@ -52,15 +52,75 @@ OUTILS INCLUS DISPONIBLES
 make goal	-> Vulgarisation du but de l'exercice
 make pdf 	-> Ouvre le PDF sujet
 make leak	-> Execute le programme avec "leaks -- atExit -- " en premice
+make test	-> Creer un nouveau main et execute ce main avec la meme classe
 make tools	-> Affiche les outils disponibles (ceci)
 --------------------------------------------------------------------------------
 endef
 export TOOLS
 
+#TEST---------------------------------------------------------------------------
 
-#MAINTEST--------------------------------------------------------------------------
+TEST_NAME		= 	mod02_ex02_test
+
+#TEST_CPP_LIST
+TEST_SRCS		=	main_test.cpp \
+					Fixed.cpp
+
+TEST_FILES		=	main_test.cpp \
+					mod02_ex02_test
+
+#MAINTEST-----------------------------------------------------------------------
 define MAINTEST
+#include "Fixed.hpp"
+#include <iostream>
 
+int main( void )
+{
+	Fixed a(42.42f);
+	Fixed const b(100);
+	Fixed c (-123.456f);
+	Fixed d (-22);
+	
+	std::cout << "VALUES-----------------" << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "b:         " << b << std::endl;
+	std::cout << "c:         " << c << std::endl;
+	std::cout << "d:         " << d << std::endl << std::endl;
+	
+	std::cout << "ITERATION--------------" << std::endl;
+	std::cout << "++a:       " << ++a << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "a++:       " << a++ << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "--a:       " << --a << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "a--:       " << a-- << std::endl;
+	std::cout << "a:         " << a << std::endl << std::endl;
+
+	std::cout << "OPERATION--------------" << std::endl;
+	std::cout << "a + b:     " << a + b << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "a - b:     " << a - b << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "a * b:     " << a * b << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "a / b:     " << a / b << std::endl;
+	std::cout << "a:         " << a << std::endl;
+	std::cout << "a / 0:     " << a / 0 << std::endl << std::endl;
+
+	std::cout << "COMPARATEUR-------------" << std::endl;
+	std::cout << "a == b:    " << (a == b) << std::endl;
+	std::cout << "a > b:     " << (a > b) << std::endl;
+	std::cout << "a < b:     " << (a < b) << std::endl;
+	std::cout << "a >= b:    " << (a >= b) << std::endl;
+	std::cout << "a <= b:    " << (a <= b) << std::endl << std::endl;
+
+	std::cout << "MAX_MIN FUNCTION--------" << std::endl;
+	std::cout << "max(a, b): " << Fixed::max( a, b ) << std::endl;
+	std::cout << "min(a, b): " << Fixed::min( a, b ) << std::endl << std::endl;
+	
+	return 0;
+}	
 endef
 export MAINTEST
 
@@ -115,7 +175,13 @@ fclean: clean
 			@$(RM) $(FILE)
 			@$(RM) $(NAME)_debug
 			@$(RM) $(NAME)_debug.dSYM
+			@$(RM) $(TEST_FILES)
 			@echo "$RExecutable $(NAME) deleted$W"
+
+test:
+			@echo "$$MAINTEST" > main_test.cpp
+			@$(CC) $(CFLAGS) $(TEST_SRCS) -o $(TEST_NAME)
+			@./mod02_ex02_test
 
 tools:
 			@echo "$C$$TOOLS$W"
