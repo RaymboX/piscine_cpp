@@ -85,7 +85,7 @@ define TRIANGLE
 2   | \             |          b:  (1, 7)
     |  \     5      |          c:  (7, 7)
 3   |   3           |
-    |    \          |        Point test:
+    |    \          |        Points test:
 4   |     \         |          p1: (3, 5)       inside  = true  (1)
     |      \        |          p2: (7, 1)       outside = false (0)
 5   |   1   \       |          p3: (3, 3)       dessus  = false (0)
