@@ -2,15 +2,15 @@
 
 //CANONICAL CONSTRUCTOR, =, DESTRUCTOR------------------------------------------
 ClapTrap::ClapTrap(void): 
-	_name("NO_NAME"), _hitPoint(10), _energyPoint(10),
-	_attackDamage(0), _weaponMaxDamage(0)
+	_name("NO_NAME"), _hitPoint(100), _energyPoint(50),
+	_attackDamage(20), _weaponMaxDamage(20)
 {
 	std::cout << "ClapTrap constructor default called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name): 
-	_name(name), _hitPoint(10), _energyPoint(10),
-	_attackDamage(0), _weaponMaxDamage(0)
+	_name(name), _hitPoint(100), _energyPoint(50),
+	_attackDamage(20), _weaponMaxDamage(20)
 {
 	std::cout << "ClapTrap constructor name parameter called" << std::endl;
 }
