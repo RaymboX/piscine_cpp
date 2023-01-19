@@ -15,13 +15,14 @@ NAME 			= etAction
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
-SRCS			=	
+SRCS			=	main.cpp \
+					ClapTrap.cpp
 					
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	
+HEADERS			=	ClapTrap.hpp
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
@@ -30,6 +31,21 @@ MODULE 03 _ EX00 _ EEEEET ACTION!
 Créer une classe qui se nommera ClapTrap avec les attributs et functions décrit
 	dans le sujet.
 Faite make pdf pour voir le pdf
+
+J'ai bâti le programme afin de créer un combat entre Ragnar et Rollo.
+(le priest est la pour observer et est créé à l'instance de Ragnar)
+Le résultat est aléatoire.
+
+Vert: 	Ramasse leur armes
+Blanc: 	Prépare à attaquer
+Rouge:	Attaque et perte de hitpoint
+Mauve:	Status
+Cyan:	Réparation
+Jaune:	Inaction dû a un manque d'énergie
+Bleu:	Résultat du combat
+
+Enjoy!
+
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
