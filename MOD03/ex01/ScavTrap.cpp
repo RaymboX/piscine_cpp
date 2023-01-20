@@ -44,19 +44,23 @@ void	ScavTrap::setGuardMode(bool const guardMode) {this->_guardMode = guardMode;
 
 void	ScavTrap::guardGate()
 {
-	if (this->_defense < 10)
-		this->_defense += rand() % 5 + 1;
+	this->_defense += rand() % 5 + 1;
+	this->_guardMode = true;
 	std::cout << BLUE << "ScavTrap used guardGate. Is defense is now "
 			  << this->_defense << std::endl;
 }
 
 void	ScavTrap::coutStatus(void) const
 {
+	if (this->isDead() == false)
 	std::cout << PURPLE << "ScavTrap " << this->getName()
 		<< " have " << this->getHitPoint()
 		<< " hitpoint(s) left, " << this->getEnergyPoint()
 		<< " energypoint(s) left and " << this->_defense
-			<< std::endl;
+		<< " defense left" << std::endl;
+	else
+		std::cout << RED << "ScavTrap " << this->getName()
+			<< " is dead!" << std::endl;
 }
 
 void	ScavTrap::attack(const std::string target)
@@ -86,11 +90,13 @@ void	ScavTrap::actionAttack(ClapTrap & target)
 
 void	ScavTrap::takeDamage(unsigned int amount)
 {
-	int block = 0;
+	unsigned int block = 0;
 
 	if (this->getGuardMode() == true)
 	{
 		block = rand() % (this->getDefense() + 1);
+		if (block > amount)
+			block = amount;
 		std::cout << CYAN << "SlavTrap " << this->getName()
 				  << " is in guardMode and block " << block
 				  << " hitpoint(s)" << std::endl;
@@ -100,4 +106,7 @@ void	ScavTrap::takeDamage(unsigned int amount)
 	std::cout << RED << "ScavTrap " << this->getName()
 			  << " lost " << amount - block
 			  << " hitpoint(s)" << std::endl;
+	if (this->isDead() == true)
+		std::cout << RED << "ScavTrap " << this->getName()
+			  << " died!" << std::endl;
 }

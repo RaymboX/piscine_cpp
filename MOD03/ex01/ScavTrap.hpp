@@ -27,7 +27,7 @@ public:
 	
 	void	attack(const std::string target);
 	void	actionAttack(ClapTrap & target);
-	void	ScavTrap::takeDamage(unsigned int amount);
+	void	takeDamage(unsigned int amount);
 };
 
 #endif

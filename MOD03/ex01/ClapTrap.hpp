@@ -58,4 +58,6 @@ public:
 	bool				isDead(void) const;
 };
 
+
+
 #endif

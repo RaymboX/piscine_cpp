@@ -1,4 +1,5 @@
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 //CANONICAL CONSTRUCTOR, =, DESTRUCTOR------------------------------------------
 ClapTrap::ClapTrap(void): 
@@ -53,18 +54,20 @@ void		ClapTrap::setWeaponMaxDamage(int weaponMaxDamage)	{this->_weaponMaxDamage 
 //MEMBER FUNCTIONS--------------------------------------------------------------
 void	ClapTrap::actionAttack(ClapTrap & receiver)
 {
-	std::cout << WHITE << "ClapTrap " << this->_name 
-			<< " is preparing to attack " << receiver.getName() << std::endl;
+	this->setAttackDamage(0);
 	if (this->_energyPoint > 0)
 	{
+		std::cout << WHITE << "ClapTrap " << this->_name 
+			<< " is preparing to attack " << receiver.getName() << std::endl;
 		this->setAttackDamage(rand() % (this->_weaponMaxDamage + 1));
 		this->attack(receiver.getName());
-		receiver.takeDamage(this->getAttackDamage());
 	}
 	else
+	{
 		std::cout << YELLOW << "ClapTrap " << this->_name 
-			  << " can't attack " << receiver.getName()
-			  << " because he has no more energy" << std::endl;
+			  << " rest one turn to gain one energypoint" << std::endl;
+		this->_energyPoint++;
+	}
 }
 
 void	ClapTrap::actionStatus(void)
@@ -92,6 +95,9 @@ void	ClapTrap::takeDamage(unsigned int amount)
 	std::cout << RED << "ClapTrap " << this->_name
 			  << " lost " << amount
 			  << " hitpoint(s)" << std::endl;
+	if (this->isDead() == true)
+		std::cout << RED << "ClapTrap " << this->_name
+			  << " died!" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
@@ -125,10 +131,14 @@ void	ClapTrap::heal(ClapTrap & receiver)
 
 void	ClapTrap::coutStatus(void) const
 {
-	std::cout << PURPLE << "ClapTrap " << this->_name
-		<< " have " << this->_hitPoint
-		<< " hitpoint(s) left and " << this->_energyPoint
-		<< " energypoint(s) left" << std::endl;
+	if (this->isDead() == false)
+		std::cout << PURPLE << "ClapTrap " << this->_name
+			<< " have " << this->_hitPoint
+			<< " hitpoint(s) left and " << this->_energyPoint
+			<< " energypoint(s) left" << std::endl;
+	else
+		std::cout << RED << "ClapTrap " << this->_name
+			<< " is dead!" << std::endl;
 }
 
 bool	ClapTrap::isDead(void) const
