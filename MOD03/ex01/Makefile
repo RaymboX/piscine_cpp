@@ -10,19 +10,22 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= etAction
+NAME 			= serena
 
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					ClapTrap.cpp
+					ClapTrap.cpp \
+					ScavTrap.cpp
 					
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	ClapTrap.hpp
+HEADERS			=	ClapTrap.hpp \
+					ScavTrap.hpp
+					
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION

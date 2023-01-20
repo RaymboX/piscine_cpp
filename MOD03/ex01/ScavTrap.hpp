@@ -8,6 +8,7 @@ class	ScavTrap : public ClapTrap
 {
 private:
 	int		_defense;
+	bool	_guardMode;
 
 public:
 	ScavTrap(void);
@@ -16,11 +17,17 @@ public:
 	ScavTrap &	operator=(const ScavTrap & src);
 	~ScavTrap(void);
 	
+	int		getDefense() const;
+	bool	getGuardMode() const;
+	void	setDefense(int const defense);
+	void	setGuardMode(bool const guardMode);
+
 	void	guardGate();
 	void	coutStatus(void) const;
-
-	int		getDefense() const;
-	void	setDefense(int const defense);
+	
+	void	attack(const std::string target);
+	void	actionAttack(ClapTrap & target);
+	void	ScavTrap::takeDamage(unsigned int amount);
 };
 
 #endif

@@ -33,7 +33,7 @@ public:
 	ClapTrap &			operator=(ClapTrap const & src);
 	~ClapTrap(void);
 
-	std::string			getname(void) const;
+	std::string			getName(void) const;
 	int					getHitPoint(void) const;
 	int					getEnergyPoint(void) const;
 	int					getAttackDamage(void) const;
@@ -51,6 +51,7 @@ public:
 	void				takeDamage(unsigned int amount);
 	void				beRepaired(unsigned int amount);
 	void				coutStatus() const;
+	void				heal(ClapTrap & receiver);
 
 	void				actionAttack(ClapTrap & receiver);
 	void				actionStatus(void);

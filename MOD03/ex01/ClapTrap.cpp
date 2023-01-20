@@ -5,25 +5,25 @@ ClapTrap::ClapTrap(void):
 	_name("NO_NAME"), _hitPoint(100), _energyPoint(50),
 	_attackDamage(20), _weaponMaxDamage(20)
 {
-	std::cout << "ClapTrap constructor default called" << std::endl;
+	std::cout << "ClapTrap " << this->getName() << " constructor default called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const std::string name): 
 	_name(name), _hitPoint(100), _energyPoint(50),
 	_attackDamage(20), _weaponMaxDamage(20)
 {
-	std::cout << "ClapTrap constructor name parameter called" << std::endl;
+	std::cout << "ClapTrap " << this->getName() << " constructor parameter called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap & src)
 {
 	this->operator=(src);
-	std::cout << "ClapTrap constructor copy called" << std::endl;
+	std::cout << "ClapTrap " << this->getName() << " constructor copy called" << std::endl;
 }
 
 ClapTrap &	ClapTrap::operator=(const ClapTrap & src)
 {
-	this->_name = src.getname();
+	this->_name = src.getName();
 	this->_hitPoint = src.getHitPoint();
 	this->_energyPoint = src.getEnergyPoint();
 	this->_attackDamage = src.getAttackDamage();
@@ -33,11 +33,11 @@ ClapTrap &	ClapTrap::operator=(const ClapTrap & src)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "ClapTrap destructor called" << std::endl;
+	std::cout << BLUE << "ClapTrap " << this->getName() << " destructor called" << std::endl;
 }
 
 //GET ACCESSORS-----------------------------------------------------------------
-std::string	ClapTrap::getname(void) const						{return this->_name;}
+std::string	ClapTrap::getName(void) const						{return this->_name;}
 int			ClapTrap::getHitPoint(void) const					{return this->_hitPoint;}
 int			ClapTrap::getEnergyPoint(void) const				{return this->_energyPoint;}
 int			ClapTrap::getAttackDamage(void) const				{return this->_attackDamage;}
@@ -49,20 +49,21 @@ void		ClapTrap::setHitPoint(int hitpoint)					{this->_hitPoint = hitpoint;}
 void		ClapTrap::setEnergyPoint(int energyPoint)			{this->_energyPoint = energyPoint;}
 void		ClapTrap::setAttackDamage(int attackDamage)			{this->_attackDamage = attackDamage;}
 void		ClapTrap::setWeaponMaxDamage(int weaponMaxDamage)	{this->_weaponMaxDamage = weaponMaxDamage;}
+
 //MEMBER FUNCTIONS--------------------------------------------------------------
 void	ClapTrap::actionAttack(ClapTrap & receiver)
 {
 	std::cout << WHITE << "ClapTrap " << this->_name 
-			<< " is preparing to attack " << receiver.getname() << std::endl;
+			<< " is preparing to attack " << receiver.getName() << std::endl;
 	if (this->_energyPoint > 0)
 	{
 		this->setAttackDamage(rand() % (this->_weaponMaxDamage + 1));
-		this->attack(receiver.getname());
+		this->attack(receiver.getName());
 		receiver.takeDamage(this->getAttackDamage());
 	}
 	else
 		std::cout << YELLOW << "ClapTrap " << this->_name 
-			  << " can't attack " << receiver.getname()
+			  << " can't attack " << receiver.getName()
 			  << " because he has no more energy" << std::endl;
 }
 
@@ -101,6 +102,25 @@ void	ClapTrap::beRepaired(unsigned int amount)
 			  << " repaired himself to add " << amount
 			  << " hitpoint(s)" << std::endl;
 	this->coutStatus();
+}
+
+void	ClapTrap::heal(ClapTrap & receiver)
+{
+	int	healPoint;
+	
+	if (this->_energyPoint > 0)
+	{
+		this->_energyPoint--;
+		healPoint = rand() % (this->getWeaponMaxDamage() + 1) + 1;
+		receiver.setHitPoint(receiver.getHitPoint() + healPoint);
+		std::cout << BLUE << "ClapTrap " << this->getName()
+				<< " heal and add " << healPoint
+				<< " hitPoint to ClapTrap " << receiver.getName()
+				<< std::endl;
+	}
+	else
+		std::cout << YELLOW << "ClapTrap " << this->getName()
+				  << " have no energy left to heal." << std::endl;
 }
 
 void	ClapTrap::coutStatus(void) const

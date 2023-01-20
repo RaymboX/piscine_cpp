@@ -15,12 +15,27 @@ int main(void)
 	while (ragnar.isDead() == false && rollo.isDead() == false
 			&& (ragnar.getEnergyPoint() > 0 && rollo.getEnergyPoint() > 0))
 	{
-		ragnar.actionAttack(rollo);
-		rollo.actionStatus();
-		if (rollo.isDead() == false)
+		if (rand() % 2 == 0)
 		{
+			std::cout << CYAN << "Ragnar win the turn" << std::endl;
+			ragnar.actionAttack(rollo);
+			rollo.actionStatus();
+			if (rollo.isDead() == false)
+			{
+				rollo.actionAttack(ragnar);
+				ragnar.actionStatus();
+			}
+		}
+		else
+		{
+			std::cout << CYAN << "Rollo win the turn" << std::endl;
 			rollo.actionAttack(ragnar);
 			ragnar.actionStatus();
+			if (ragnar.isDead() == false)
+			{
+				ragnar.actionAttack(rollo);
+				rollo.actionStatus();
+			}
 		}
 	}
 
