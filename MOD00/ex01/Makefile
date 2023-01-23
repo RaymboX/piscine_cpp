@@ -52,6 +52,19 @@ Ajout perso:
 endef
 export EXPLANATION
 
+#TOOLS--------------------------------------------------------------------------
+define TOOLS
+--------------------------------------------------------------------------------
+OUTILS INCLUS DISPONIBLES
+make goal		-> Vulgarisation du but de l'exercice
+make pdf 		-> Ouvre le PDF sujet
+make test		-> Lance une série de tests exporter dans un fichier test.log
+make tools		-> Affiche les outils disponibles (ceci)
+make palm		-> Ouvre une page avec la description du palm tungsten e2
+--------------------------------------------------------------------------------
+endef
+export TOOLS
+
 #DIRECTORY----------------------------------------------------------------------
 
 OBJS_DIR		= 	./obj
@@ -85,6 +98,7 @@ all: 	init $(NAME)
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@echo "$G$(NAME) ready!$W"
+			@make tools
 
 init:
 			@mkdir -p $(OBJS_DIR)
@@ -101,6 +115,12 @@ fclean: clean
 
 goal:
 			@echo "$C$$EXPLANATION$W"
+
+tools:
+			@echo "$C$$TOOLS$W"
+
+pdf:
+			@open https://cdn.intra.42.fr/pdf/pdf/59641/fr.subject.pdf
 
 test:
 			@echo "$YTESTS BEGIN--------------------------------------$W"

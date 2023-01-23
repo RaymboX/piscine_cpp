@@ -36,6 +36,18 @@ la sorti soit "identique" a la sortie de la file .log fourni.
 endef
 export EXPLANATION
 
+#TOOLS--------------------------------------------------------------------------
+define TOOLS
+--------------------------------------------------------------------------------
+OUTILS INCLUS DISPONIBLES
+make goal		-> Vulgarisation du but de l'exercice
+make pdf 		-> Ouvre le PDF sujet
+make tools		-> Affiche les outils disponibles (ceci)
+make log		-> Fichier de comparaison fourni
+--------------------------------------------------------------------------------
+endef
+export TOOLS
+
 #DIRECTORY----------------------------------------------------------------------
 
 OBJS_DIR		= 	./obj
@@ -69,6 +81,7 @@ all: 	init $(NAME)
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@echo "$G$(NAME) ready!$W"
+			@make tools
 
 init:
 			@mkdir -p $(OBJS_DIR)
@@ -85,6 +98,12 @@ fclean: clean
 
 goal:
 			@echo "$C$$EXPLANATION$W"
+
+tools:
+			@echo "$C$$TOOLS$W"
+
+pdf:
+			@open https://cdn.intra.42.fr/pdf/pdf/59641/fr.subject.pdf
 
 log:
 			open https://projects.intra.42.fr/uploads/document/document/10777/19920104_091532.log

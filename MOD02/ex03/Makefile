@@ -54,8 +54,8 @@ OUTILS INCLUS DISPONIBLES
 make goal		-> Vulgarisation du but de l'exercice
 make pdf 		-> Ouvre le PDF sujet
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
-make video_ref	-> Video pour fonction bsp
-make triangle	-> Illustration du cas testé dans le main
+make video_ref		-> Video pour fonction bsp
+make triangle		-> Illustration du cas testé dans le main
 make demo		-> make triangle + ./BSP
 make tools		-> Affiche les outils disponibles (ceci)
 --------------------------------------------------------------------------------

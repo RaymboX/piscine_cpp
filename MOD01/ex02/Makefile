@@ -38,6 +38,19 @@ Afficher ensuite les adresses des trois et ensuite les valeurs
 endef
 export EXPLANATION
 
+#TOOLS--------------------------------------------------------------------------
+define TOOLS
+--------------------------------------------------------------------------------
+OUTILS INCLUS DISPONIBLES
+make goal	-> Vulgarisation du but de l'exercice
+make pdf 	-> Ouvre le PDF sujet
+make leak	-> Execute le programme avec "leaks -- atExit -- " en premice
+make art	-> Affiche le ascii art
+make tools	-> Affiche les outils disponibles (ceci)
+--------------------------------------------------------------------------------
+endef
+export TOOLS
+
 define ART
       _---~~(~~-_.
     _{        )   )
@@ -87,6 +100,7 @@ $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@echo "$G$$ART$W"
 			@echo "$G$(NAME) ready!$W"
+			@make tools
 			
 init:
 			@mkdir -p $(OBJS_DIR)
@@ -102,6 +116,12 @@ fclean: clean
 
 goal:
 			@echo "$C$$EXPLANATION$W"
+
+tools:
+			@echo "$C$$TOOLS$W"
+
+pdf:
+			@open https://cdn.intra.42.fr/pdf/pdf/66969/fr.subject.pdf
 
 leak:
 			$(LEAK_CMD) ./$(NAME)

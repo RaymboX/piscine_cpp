@@ -38,22 +38,10 @@ Par contre, les valeurs de ses attributs seront différent de l'ancien exercice
 	et il aura une nouvelle capacité spéciale
 	void guardGate();
 
-Le scénario sera que Ragnar et Rollo (ClapTrap) se sont allié pour combattre
-	ensemble le roi Horik (ScavTrap).
-À chaque tour, les ClapTraps attaquent mais le ScavTrap à une chance sur 5
-	d'attaquer.
-
-
-Vert: 	Ramasse leur armes
-Blanc: 	Prépare à attaquer
-Rouge:	Attaque et perte de hitpoint
-Mauve:	Status
-Cyan:	Réparation
-Jaune:	Inaction dû a un manque d'énergie
-Bleu:	Résultat du combat
+Le scénario sera que Ragnar, Rollo et le priest (ClapTrap) se sont allié pour 
+	combattre ensemble le roi Horik (ScavTrap).
 
 Enjoy!
-
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
