@@ -22,3 +22,5 @@ fclean:
 		$(MAKE) -s fclean -C MOD03/ex00
 		$(MAKE) -s fclean -C MOD03/ex01
 		$(MAKE) -s fclean -C MOD03/ex02
+		$(MAKE) -s fclean -C MOD03/ex02
+		$(MAKE) -s fclean -C MOD04/ex00
