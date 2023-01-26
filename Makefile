@@ -3,14 +3,15 @@
 all: fclean
 		git add .
 		git status
-		@echo "\n-----Last commits (oldest to newest)-----"
+		@echo "--------------Last commits (oldest to newest)-------------"
 		@git log --reverse -n 3 --pretty="format:%ci  -  %cr  -  %s"
+		@echo "----------------------------------------------------------"
 		@echo "\n TIME TO : git commit -m \n"
 
 push:
 		@git push
-		@echo "\n-----Last commits (oldest to newest)-----"
-		@git log --reverse -n 3 --pretty="format:%cr -> %s"
+		@echo "\n------Last commit work confirmation-----"
+		@git log -n 1 --pretty="format:%cr -> %s"
 
 
 fclean:
