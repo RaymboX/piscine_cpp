@@ -3,18 +3,18 @@
 //CONSTRUCTOR default, cpy OPERATOR= DESTRUCTOR
 Animal::Animal(): _type("BLANK")
 {
-	std::cout << "Animal default constructor called" << std::endl;
+	std::cout << BLUE << "Animal default constructor called" << std::endl;
 }
 
 Animal::Animal(const Animal& src)
 {
+	std::cout << BLUE << "Animal copy constructor called" << std::endl;
 	*this = src;
-	std::cout << "Animal copy constructor called" << std::endl;
 }
 
 Animal&	Animal::operator=(const Animal& src)
 {
-	std::cout << "Animal operator= called" << std::endl;
+	std::cout << YELLOW << "Animal operator= called" << std::endl;
 		
 	this->setType(src.getType());
 	return *this;
@@ -22,7 +22,7 @@ Animal&	Animal::operator=(const Animal& src)
 
 Animal::~Animal()
 {
-	std::cout << "Animal Destructor called" << std::endl;
+	std::cout << RED << "Animal Destructor called" << WHITE << std::endl;
 }
 
 
@@ -34,7 +34,7 @@ void		Animal::setType(const std::string type) {this->_type = type;}
 //MEMBER FUNCTION
 void	Animal::makeSound() const
 {
-	std::cout << "Animal doesn't know concept of sound." << std::endl;
+	std::cout << PURPLE << "Animal doesn't know concept of sound." << std::endl;
 }
 
 

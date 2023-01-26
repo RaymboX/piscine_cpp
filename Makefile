@@ -3,6 +3,7 @@
 all: fclean
 		git add .
 		git status
+		git log -n 1
 
 fclean:
 		$(MAKE) -s fclean -C MOD00/ex00

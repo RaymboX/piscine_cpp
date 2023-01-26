@@ -3,18 +3,18 @@
 //CONSTRUCTOR default, cpy OPERATOR= DESTRUCTOR
 Dog::Dog():_type("Dog"), _brain_ptr(new Brain)
 {
-	std::cout << "Dog default constructor called" << std::endl;
+	std::cout << BLUE << "Dog    default constructor called" << std::endl;
 }
 
 Dog::Dog(const Dog& src): Animal(src), _brain_ptr(new Brain)
 {
+	std::cout << BLUE << "Dog    copy constructor called" << std::endl;
 	*this = src;
-	std::cout << "Dog copy constructor called" << std::endl;
 }
 
 Dog&	Dog::operator=(const Dog& src)
 {
-	std::cout << "Dog operator= called" << std::endl;
+	std::cout << YELLOW << "Dog    operator= called" << std::endl;
 	*this->_brain_ptr = *src._brain_ptr;
 	this->setType(src.getType());
 	return *this;
@@ -22,8 +22,8 @@ Dog&	Dog::operator=(const Dog& src)
 
 Dog::~Dog()
 {
+	std::cout << RED << "Dog    Destructor called" << WHITE << std::endl;
 	delete this->_brain_ptr;
-	std::cout << "Dog Destructor called" << std::endl;
 }
 
 //ACCESSORS
@@ -32,12 +32,10 @@ Brain&	Dog::getBrain()
 	return *(this->_brain_ptr);
 }	
 
-
-
 //MEMBER FUNCTION
 void	Dog::makeSound() const
 {
-	std::cout << "Dog says woof." << std::endl;
+	std::cout << PURPLE << "Dog    says woof." << std::endl;
 }
 
 
