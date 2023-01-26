@@ -100,6 +100,7 @@ $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@echo "$G$$ART$W"
 			@echo "$G$(NAME) ready!$W"
+			@make goal
 			@make tools
 			
 init:
