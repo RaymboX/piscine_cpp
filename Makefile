@@ -4,6 +4,11 @@ all: fclean
 		git add .
 		git status
 		git log -n 1
+		@echo "\n TIME TO : git commit -m \n"
+
+push:
+		git push
+		git log -n 1
 
 fclean:
 		$(MAKE) -s fclean -C MOD00/ex00
