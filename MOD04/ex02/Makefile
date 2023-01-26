@@ -58,9 +58,7 @@ La partie homemade démontrera une série de tests démontrant
 		l'utilisation d'objet Animal
 - L'ajout et la récupération d'idées dans le brain de chaque Animal
 - La création d'une copie de chaque animals
-- Modification de l'idée du parent
 - La récupération de l'idée ajouté dans le 'parent' a partir de la copie
-	(démonstration de la copie profonde)
 - L'ordre d'appel des destructeurs
 --------------------------------------------------------------------------------
 endef
@@ -130,7 +128,6 @@ all: 	init $(NAME)
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 			@echo "$G$(NAME) ready!$W"
-			@make goal
 			@make tools
 			
 init:

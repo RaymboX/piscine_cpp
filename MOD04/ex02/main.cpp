@@ -45,14 +45,7 @@ int main(void)
 	std::cout << WHITE << "\nCat have child and teach him."  << std::endl;;
 	Cat	cat_ref(*cat_ptr);
 
-	std::cout << WHITE << "\nBut, with time, parent's memories are affected."  << std::endl;;
-	dog_ptr->getBrain().setIdea("Did I said woof?", 1);
-	std::cout << WHITE << "Dog ptr idea 1 is: " << dog_ptr->getBrain().getIdea(1) << std::endl;
-	cat_ptr->getBrain().setIdea("Did I said miaw?", 45);
-	std::cout << WHITE << "Cat ptr idea 45 is: " << cat_ptr->getBrain().getIdea(45) << std::endl;
-
-
-	std::cout << WHITE << "\nBut the children remember what their parents taught them."  << std::endl;;
+	std::cout << WHITE << "\nSo they remembering what there parent teach them."  << std::endl;;
 	std::cout << WHITE << "Dog ref idea 1 is: " << dog_ref.getBrain().getIdea(1) << std::endl;
 	std::cout << WHITE << "Cat ref idea 45 is: " << cat_ref.getBrain().getIdea(45) << std::endl;
 
