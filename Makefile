@@ -3,12 +3,14 @@
 all: fclean
 		git add .
 		git status
-		git log -n 1
+		@echo "Last commit:"
+		@git log -n 1 --pretty="format:%h -> %s"
 		@echo "\n TIME TO : git commit -m \n"
 
 push:
-		git push
-		git log -n 1
+		@git push
+		@echo "Last commit:"
+		@git log -n 1 --pretty=oneline
 
 fclean:
 		$(MAKE) -s fclean -C MOD00/ex00
