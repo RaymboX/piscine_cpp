@@ -3,14 +3,15 @@
 all: fclean
 		git add .
 		git status
-		@echo "Last commit:"
-		@git log -n 1 --pretty="format:%h -> %s"
+		@echo "Lasts commits (oldest to newest)"
+		@git log --reverse -n 3 --pretty="format:%h -> %s"
 		@echo "\n TIME TO : git commit -m \n"
 
 push:
 		@git push
-		@echo "Last commit:"
-		@git log -n 1 --pretty=oneline
+		@echo "Lasts commits (oldest to newest)"
+		@git log --reverse -n 3 --pretty="format:%h -> %s"
+
 
 fclean:
 		$(MAKE) -s fclean -C MOD00/ex00
