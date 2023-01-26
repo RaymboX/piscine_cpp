@@ -6,7 +6,7 @@ Dog::Dog():_type("Dog"), _brain_ptr(new Brain)
 	std::cout << BLUE << "Dog    default constructor called" << std::endl;
 }
 
-Dog::Dog(const Dog& src): Animal(src), _brain_ptr(new Brain)
+Dog::Dog(const Dog& src): AAnimal(src), _brain_ptr(new Brain)
 {
 	std::cout << BLUE << "Dog    copy constructor called" << std::endl;
 	*this = src;

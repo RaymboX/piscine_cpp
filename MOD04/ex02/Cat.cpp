@@ -6,7 +6,7 @@ Cat::Cat(): _type("Cat"), _brain_ptr(new Brain)
 	std::cout << BLUE << "Cat    default constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat& src): Animal(src), _brain_ptr(new Brain)
+Cat::Cat(const Cat& src): AAnimal(src), _brain_ptr(new Brain)
 {
 	std::cout << BLUE << "Cat    copy constructor called" << std::endl;
 	*this = src;

@@ -11,55 +11,46 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= dontBurnTheBeds
+NAME 			= Aabstrait
 
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					Animal.cpp \
+					AAnimal.cpp \
 					Dog.cpp \
 					Cat.cpp \
-					WrongAnimal.cpp \
+					WrongAAnimal.cpp \
 					WrongCat.cpp \
 					Brain.cpp
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	Animal.hpp \
+HEADERS			=	AAnimal.hpp \
 					Dog.hpp \
 					Cat.hpp \
-					WrongAnimal.hpp \
+					WrongAAnimal.hpp \
 					WrongCat.hpp \
 					Brain.hpp
 
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 04 _ EX01 _ JE NE VEUX PAS BRULER LE MONDE
+MODULE 04 _ EX02 _ CLASSE ABSTRAITE
 
-En réutilisant les fichiers du dernier exercice,
-- ajouter une classe Brain ayant comme attribut un array de std::string de 100 ideas
-- ajouter un attribut Brain* dans la classe Dog et Cat 
-		(dont les constructeurs devront créer le brain via new Brain
-		et naturellement être détruit dans le destructeur)
+En réutilisant les fichiers du dernier exercice, faire de la classe Animal une
+	classe abstraite soit en
+	- Faisant de la fonction makeSound ne fonction virtuel pure (virtual et = 0)
 
-La partie mandatoire du main devra créer un tableau de 100 animals soit
-- 50 premiers des Dog
-- 50 derniers des Cat
+Ensuite le code doit fonctionner comme avant donc, le main n'a pas été modifier
+	à l'exception du nom de la classe Animal qui est maintenant AAnimal 
+	(A pour abstraite)
 
-La copie d'un objet Dog ou Cat doit être profonde (création d'un nouvelle espace mémoire)
-	et non superficiel (copie des pointeurs)
+- Toute les classe appelant Animal appel maintenant AAnimal
+- Le comportement de la fonction makeSound de la classe AAnimal à été effacée
 
-La partie homemade démontrera une série de tests démontrant
-- L'ordre de création des classes par défaut
-- L'utilisation de la fonction makeSound membre de la classe Animal démontrant
-		l'utilisation d'objet Animal
-- L'ajout et la récupération d'idées dans le brain de chaque Animal
-- La création d'une copie de chaque animals
-- La récupération de l'idée ajouté dans le 'parent' a partir de la copie
-- L'ordre d'appel des destructeurs
+
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION

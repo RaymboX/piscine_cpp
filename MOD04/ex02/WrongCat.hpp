@@ -2,9 +2,9 @@
 #ifndef WRONGCAT_HPP
 # define WRONGCAT_HPP
 
-#include "WrongAnimal.hpp"
+#include "WrongAAnimal.hpp"
 
-class	WrongCat: public WrongAnimal
+class	WrongCat: public WrongAAnimal
 {
 private:
 	std::string	_type;
