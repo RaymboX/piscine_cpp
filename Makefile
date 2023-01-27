@@ -10,7 +10,7 @@ all: fclean
 
 push:
 		@git push
-		@echo "\n------Last commit work confirmation-----"
+		@echo "\n------Last commit confirmation-------"
 		@git log -n 1 --pretty="format:%cr -> %s"
 
 
