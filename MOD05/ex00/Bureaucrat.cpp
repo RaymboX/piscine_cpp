@@ -1,9 +1,10 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(): _name("GrayMan")
+//CANONIQUE -> CONSTRUCTOR, OPERATOR=, DESTRUCTOR
+
+Bureaucrat::Bureaucrat(): _name("GrayMan"), _grade(150)
 {
 	std::cout << BLUE << "Bureaucrat default constructor called" << std::endl;
-	this->setGrade(150);	
 }
 
 Bureaucrat::Bureaucrat(const std::string name, const int grade): _name(name)
@@ -20,7 +21,56 @@ Bureaucrat::Bureaucrat(const Bureaucrat& src): _name(src.getName())
 
 Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& src)
 {
-	std::string*	temp_name_ptr;
+	std::cout << YELLOW << "Bureaucrat copy constructor called" << std::endl;
+	this->setGrade(src.getGrade());
+	return *this;
+}
 
-	temp_name_ptr = &(this->_name);
+Bureaucrat::~Bureaucrat() 
+{
+	std::cout << RED << "Bureaucrat destructor called" << std::endl;
+}
+
+
+//ACCESSORS
+
+std::string	Bureaucrat::getName() const {return this->_name;}
+int			Bureaucrat::getGrade() const {return this->_grade;}
+
+void		Bureaucrat::setGrade(const int grade)
+{
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
+	else
+		this->_grade = grade;
+}
+
+
+//MEMBER FUNCTION
+
+void	Bureaucrat::incrementGrade() {this->setGrade(this->getGrade() - 1);}
+void	Bureaucrat::decrementGrade() {this->setGrade(this->getGrade() + 1);}
+
+
+//OPERATOR
+
+std::ostream&	operator<<(std::ostream& o, const Bureaucrat& rhs)
+{
+	o << PURPLE << rhs.getName() << ", bureaucrat grade " << rhs.getGrade()  << COLORDEF;
+	return o;
+}
+
+
+//CLASS TOO HIGH
+const char*	Bureaucrat::GradeTooHighException::what() const throw()
+{
+	return ("The grade is out tolerance: Grade to high ( < 1 )");
+}
+
+//CLASS TOO LOW
+const char*	Bureaucrat::GradeTooLowException::what() const throw()
+{
+	return ("The grade is out tolerance: Grade to low ( > 150 )");
 }

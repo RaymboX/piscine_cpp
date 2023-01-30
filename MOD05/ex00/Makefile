@@ -16,12 +16,13 @@ NAME 			= wantToBeBureaucrat
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					
+					Bureaucrat.cpp
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
 HEADERS			=	colors.hpp \
+					Bureaucrat.hpp
 					
 
 #COLORS FILE--------------------------------------------------------------------
@@ -64,7 +65,7 @@ Faire une classe Bureaucrate avec les attributs
 - void			decrementGrade()
 - operateur<< qui affichera -> <name>, bureaucrat grade <grade>
 
-Ajouter un try et un catch pour les exceptions
+Ajouter des try et des catch lors des tests afin de démontrer les execptions.
 
 --------------------------------------------------------------------------------
 endef
@@ -77,10 +78,10 @@ define TOOLS
 OUTILS INCLUS DISPONIBLES
 make goal		-> Vulgarisation du but de l'exercice
 make pdf 		-> Ouvre le PDF sujet
+make video42	-> Ouvre la page des vidéos CPP sur l'intra
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
 make valgrind		-> Execute le programme avec "valgrind --leak-check=full " en premice
 make tools		-> Affiche les outils disponibles (ceci)
-make howcanwesleep 	-> You'll see.
 --------------------------------------------------------------------------------
 endef
 export TOOLS
@@ -157,6 +158,7 @@ fclean: clean
 			@$(RM) $(NAME)_debug
 			@$(RM) $(NAME)_debug.dSYM
 			@$(RM) $(TEST_FILES)
+			@$(RM) $(COLORS_FILE)
 			@echo "$RExecutable $(NAME) deleted$W"
 
 tools:
@@ -171,11 +173,11 @@ leak:
 valgrind:
 			$(VALGRIND_CMD) ./$(NAME)
 
-howcanwesleep:
-			@open https://youtu.be/ejorQVy3m8E
-
 pdf:
-			@open https://cdn.intra.42.fr/pdf/pdf/58235/fr.subject.pdf
+			@open https://cdn.intra.42.fr/pdf/pdf/58237/fr.subject.pdf
+
+video42:
+			@open https://elearning.intra.42.fr/tags/38/notions
 
 debug:	fclean
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug
