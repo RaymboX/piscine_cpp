@@ -2,31 +2,17 @@
 
 //CANONIQUE -> CONSTRUCTOR, OPERATOR=, DESTRUCTOR
 
-Bureaucrat::Bureaucrat(): _name("GrayMan"), _grade(150)
+Bureaucrat::Bureaucrat(): _name("GrayMan"), _grade(Bureaucrat::lowestGrade)
 {
 	std::cout << BLUE << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(const std::string name, const int grade): _name(name)
+Bureaucrat::Bureaucrat(const std::string name, const int grade): _name(name), _grade(Bureaucrat::lowestGrade)
 {
 	std::cout << BLUE << "Bureaucrat param constructor called" << std::endl;
-	try
-	{
-		this->setGrade(grade);
-	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		std::cerr << YELLOW << e.what() << std::endl;
-		std::cerr << YELLOW << "Grade set to lowest rank" << std::endl;
-		this->setGrade(150);
-	}
-	catch(const Bureaucrat::GradeTooLowException& e)
-	{
-		std::cerr << YELLOW << e.what() << std::endl;
-		std::cerr << YELLOW << "Grade set to lowest rank" << std::endl;
-		this->setGrade(150);
-	}
-	
+	this->setGrade(grade);
+	if (this->getGrade() != grade)
+		std::cout << YELLOW << "The grade is set to the lowest grade" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat& src): _name(src.getName())
@@ -55,9 +41,25 @@ int			Bureaucrat::getGrade() const {return this->_grade;}
 
 void		Bureaucrat::setGrade(const int grade)
 {
-	if (grade < 1)
+	try
+	{
+		this->_changingGrade(grade);
+	}
+	catch(const Bureaucrat::GradeTooHighException& e)
+	{
+		std::cerr << YELLOW << e.what() << std::endl;
+	}
+	catch(const Bureaucrat::GradeTooLowException& e)
+	{
+		std::cerr << YELLOW << e.what() << std::endl;
+	}
+}
+
+void		Bureaucrat::_changingGrade(const int grade)
+{
+	if (grade < Bureaucrat::highestGrade)
 		throw Bureaucrat::GradeTooHighException();
-	else if (grade > 150)
+	else if (grade > Bureaucrat::lowestGrade)
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->_grade = grade;
@@ -82,11 +84,15 @@ std::ostream&	operator<<(std::ostream& o, const Bureaucrat& rhs)
 //CLASS TOO HIGH
 const char*	Bureaucrat::GradeTooHighException::what() const throw()
 {
-	return ("The grade is out tolerance: Grade too high ( < 1 )");
+	return ("Error setting grade: Too high");
 }
 
 //CLASS TOO LOW
 const char*	Bureaucrat::GradeTooLowException::what() const throw()
 {
-	return ("The grade is out tolerance: Grade too low ( > 150 )");
+	return ("Error setting grade: Too low");
 }
+
+//NON MEMBER
+const int	Bureaucrat::highestGrade = 1;
+const int	Bureaucrat::lowestGrade = 150;

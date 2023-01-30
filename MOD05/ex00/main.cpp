@@ -2,12 +2,14 @@
 
 int main()
 {
+	
 	Bureaucrat	grayman;
 	Bureaucrat	hermes("Hermes", 1);
 	Bureaucrat	fry(grayman);
+	Bureaucrat	hacker("hacker", 0);
 
 	std::cout << "\n--------Initial status--------" << std::endl; 
-	std::cout << grayman << std::endl << hermes << std::endl << fry << std::endl;
+	std::cout << grayman << std::endl << hermes << std::endl << fry << std::endl << hacker << std::endl;
 
 	std::cout << CYAN << "\n--------Test set valid--------" << std::endl;
 	try
