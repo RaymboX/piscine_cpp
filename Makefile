@@ -1,18 +1,26 @@
-
+R = $(shell tput -Txterm setaf 1)
+G = $(shell tput -Txterm setaf 2)
+W = $(shell tput -Txterm setaf 7)
+C = $(shell tput -Txterm setaf 6)
+Y = $(shell tput -Txterm setaf 3)
+Z = $(shell tput -Txterm setaf 5)
 
 all: fclean
 		git add .
 		git status
-		@echo "--------------Last commits (oldest to newest)-------------"
-		@git log --reverse -n 3 --pretty="format:%ci  -  %cr  -  %s"
+		@echo "--------------Last commits (newest to oldest)-------------"
+		@echo "$G"
+		@git log -n 3 --pretty="format:%ci  -  %cr  -  %s"
+		@echo "$W"
 		@echo "----------------------------------------------------------"
 		@echo "\n TIME TO : git commit -m \n"
 
 push:
 		@git push
 		@echo "\n------Last commit confirmation-------"
+		@echo "$G"
 		@git log -n 1 --pretty="format:%cr -> %s"
-
+		@echo "$W"
 
 fclean:
 		$(MAKE) -s fclean -C MOD00/ex00
