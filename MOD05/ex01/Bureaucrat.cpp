@@ -30,7 +30,7 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& src)
 
 Bureaucrat::~Bureaucrat() 
 {
-	std::cout << RED << "Bureaucrat destructor called" << std::endl;
+	std::cout << RED << "Bureaucrat destructor called" << COLORDEF << std::endl;
 }
 
 
@@ -71,6 +71,24 @@ void		Bureaucrat::_changingGrade(const int grade)
 void	Bureaucrat::incrementGrade() {this->setGrade(this->getGrade() - 1);}
 void	Bureaucrat::decrementGrade() {this->setGrade(this->getGrade() + 1);}
 
+void	Bureaucrat::signForm(Form& form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << GREEN << this->getName() << " signed " << form.getName() << std::endl;
+	}
+	catch(const Form::GradeTooLowException& e)
+	{
+		std::cout << RED << this->getName() << " couldn't signed " << form.getName()
+				  << " because " << e.what() << std::endl;
+	}
+	catch(const Form::SignedFormExeception& e)
+	{
+		std::cout << RED << this->getName() << " couldn't signed " << form.getName()
+				  << " because " << e.what() << std::endl;
+	}
+}
 
 //OPERATOR
 

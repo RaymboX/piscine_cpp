@@ -16,13 +16,15 @@ NAME 			= larvation
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					Bureaucrat.cpp
+					Bureaucrat.cpp \
+					Form.cpp
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
 HEADERS			=	colors.hpp \
-					Bureaucrat.hpp
+					Bureaucrat.hpp \
+					Form.hpp
 					
 
 #COLORS FILE--------------------------------------------------------------------
@@ -174,7 +176,7 @@ pdf:
 video42:
 			@open https://elearning.intra.42.fr/tags/38/notions
 
-debug:	fclean
+debug:	fclean colors
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug
 			@echo "$YDebbuging executable ready!$W"
 

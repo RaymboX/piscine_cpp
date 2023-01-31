@@ -2,7 +2,7 @@
 
 //CANONICAL Constructor, operator=, destructor
 
-Form::Form(): 	_name("Blank Form"), _isSigned(false),
+Form::Form(): 	_name("Blank"), _isSigned(false),
 				_signGrade(Form::lowestGrade), _execGrade(Form::lowestGrade)
 {
 	std::cout << BLUE << "Form default constructor called" << std::endl;
@@ -10,16 +10,20 @@ Form::Form(): 	_name("Blank Form"), _isSigned(false),
 
 Form::Form(const std::string name, const int signGrade, const int execGrade):
 				_name(name), _isSigned(false),
-				_signGrade(Form::lowestGrade), _execGrade(Form::lowestGrade)
+				_signGrade(signGrade), _execGrade(execGrade)
 {
 	std::cout << BLUE <<  "Form parameter constructor called" << std::endl;
 	
-	this->setSignGrade(signGrade);
-	if (this->getSignGrade() != signGrade)
-		std::cout << YELLOW << "Signed grade set to lowestGrade" << std::endl;
-	this->setExecGrade(execGrade);
-	if (this->getExecGrade() != execGrade)
-		std::cout << YELLOW << "Execution grade set to lowestgrade" << std::endl;
+	if (signGrade > Form::lowestGrade || execGrade > Form::lowestGrade)
+	{
+		std::cout << YELLOW << "Form parameter constructor failed" << std::endl;
+		throw Form::GradeTooLowException();
+	}
+	if (signGrade < Form::highestGrade || execGrade < Form::highestGrade)
+	{
+		std::cout << YELLOW << "Form parameter constructor failed" << std::endl;
+		throw Form::GradeTooHighException();
+	}
 }
 
 Form::Form(const Form& src): _name(src.getName()), _isSigned(false),
@@ -36,62 +40,65 @@ Form&	Form::operator=(const Form& src)
 
 Form::~Form()
 {
-	std::cout << RED << "Form desctructor called" << std::endl;
+	std::cout << RED << "Form destructor called" << std::endl;
 }
 
 // ACCESSOR
 
 const std::string	Form::getName() const {return this->_name;}
 bool				Form::getIsSigned() const {return this->_isSigned;}
-const int			Form::getSignGrade() const {return this->_signGrade;}
-const int			Form::getExecGrade() const {return this->_execGrade;}
+int			Form::getSignGrade() const {return this->_signGrade;}
+int			Form::getExecGrade() const {return this->_execGrade;}
 
 void	Form::setIsSigned(const bool isSigned)
 {
 	this->_isSigned = isSigned;
 }
 
-void	Form::setSignGrade(const int grade)
+//OPERATOR
+
+std::ostream&	operator<<(std::ostream& o, const Form& src)
 {
-	try
-	{
-		this->_changingSignGrade(grade);
-	}
-	catch(const Form::GradeTooHighException& e)
-	{
-		std::cerr << YELLOW << e.what() << std::endl;
-	}
-	catch(const Form::GradeTooLowException& e)
-	{
-		std::cerr << YELLOW << e.what() << std::endl;
-	}
-	
+	o << PURPLE << "Form " << src.getName() << " with signed grade at "
+		<< src.getSignGrade() << " and execution grade at " << src.getExecGrade()
+		<< " is " << GREEN;
+	if (src.getIsSigned() == false)
+		o << RED << "not ";
+	o << "signed.";
+	return o;
 }
 
-void	Form::_changingSignGrade(const int grade)
+//MEMBER FUNCTION
+
+void	Form::beSigned(const Bureaucrat& bureaucrat)
 {
-	if (grade < Form::highestGrade)
-		throw Form::GradeTooHighException();
-	else if (grade > Form::lowestGrade)
+	if (this->getSignGrade() < bureaucrat.getGrade())
 		throw Form::GradeTooLowException();
+	else if (this->getIsSigned() == true)
+		throw Form::SignedFormExeception();
 	else
-		this->_
+		this->setIsSigned(true);
 }
 
-
-
-
-
+//MEMBER CLASS
 
 const char*	Form::GradeTooHighException::what() const throw()
 {
-	return ("Error setting grade: Too high");
+	return ("Grade too high");
 }
 
 const char*	Form::GradeTooLowException::what() const throw()
 {
-	return ("Error setting grade: Too low");
+	return ("Grade too low");
 }
+
+const char*	Form::SignedFormExeception::what() const throw()
+{
+	return ("form is already signed");
+}
+
+
+//NON MEMBER ATTRIBUTE
 
 const int	Form::lowestGrade = 150;
 const int	Form::highestGrade = 1;

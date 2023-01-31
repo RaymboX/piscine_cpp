@@ -44,7 +44,7 @@ Bureaucrat&	Bureaucrat::operator=(const Bureaucrat& src)
 
 Bureaucrat::~Bureaucrat() 
 {
-	std::cout << RED << "Bureaucrat destructor called" << std::endl;
+	std::cout << RED << "Bureaucrat destructor called" << COLORDEF << std::endl;
 }
 
 

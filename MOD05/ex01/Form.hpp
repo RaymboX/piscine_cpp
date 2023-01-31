@@ -9,6 +9,8 @@
 # include "colors.hpp"
 # include "Bureaucrat.hpp"
 
+class	Bureaucrat;
+
 class	Form
 {
 private:
@@ -16,9 +18,6 @@ private:
 	bool				_isSigned;
 	const int			_signGrade;
 	const int			_execGrade;
-
-	void				_changingSignGrade(const int signGrade);
-	void				_changingExecGrade(const int execGrade);
 
 public:
 	Form();
@@ -29,13 +28,10 @@ public:
 
 	const std::string	getName() const;
 	bool				getIsSigned() const;
-	const int			getSignGrade() const;
-	const int			getExecGrade() const;
+	int					getSignGrade() const;
+	int					getExecGrade() const;
 
 	void				setIsSigned(const bool isSigned);
-	void				setSignGrade(const int grade);
-	void				setExecGrade(const int grade);
-
 	void				beSigned(const Bureaucrat& bureaucrat);
 
 	class	GradeTooHighException: public std::exception
@@ -50,6 +46,12 @@ public:
 		virtual const char* what() const throw();
 	};
 	
+	class	SignedFormExeception: public std::exception
+	{
+	public:
+		virtual const char* what() const throw();
+	};
+
 	static const int	lowestGrade;
 	static const int	highestGrade;
 
