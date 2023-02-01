@@ -150,7 +150,7 @@ clean:
 			@$(RM) $(OBJS_DIR)
 			@echo "$RObjects removed$W"
 
-fclean: clean
+fclean: clean clean_shrub_file
 			@$(RM) $(NAME)
 			@$(RM) $(FILE)
 			@$(RM) $(NAME)_debug
@@ -158,6 +158,9 @@ fclean: clean
 			@$(RM) $(TEST_FILES)
 			@$(RM) $(COLORS_FILE)
 			@echo "$RExecutable $(NAME) deleted$W"
+
+clean_shrub_file:
+			@find ./*_shrubbery | xargs $(RM)
 
 tools:
 			@echo "$C$$TOOLS$W"

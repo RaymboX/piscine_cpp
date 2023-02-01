@@ -72,29 +72,48 @@ std::ostream&	operator<<(std::ostream& o, const AForm& src)
 
 void	AForm::beSigned(const Bureaucrat& bureaucrat)
 {
+	try
+	{
 	if (this->getSignGrade() < bureaucrat.getGrade())
-		throw AForm::GradeTooLowException();
+		throw AForm::GradeTooHighException();
 	else if (this->getIsSigned() == true)
 		throw AForm::SignedFormException();
-	else
+	
 		this->setIsSigned(true);
+		std::cout << PURPLE << "Form " << this->getName() 
+				  << " is signed by " << bureaucrat.getName() << std::endl;
+	}
+	catch(const AForm::GradeTooHighException& e)
+	{
+		std::cerr << YELLOW << "Form's " << e.what() 
+				  << " to be sign by " << bureaucrat.getName() << std::endl;
+	}
+	catch(const AForm::SignedFormException& e)
+	{
+		std::cerr << YELLOW << e.what() << std::endl;
+	}
 }
 
 //MEMBER CLASS
 
 const char*	AForm::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high");
+	return ("grade too high");
 }
 
 const char*	AForm::GradeTooLowException::what() const throw()
 {
-	return ("Grade too low");
+	return ("grade too low");
 }
 
 const char*	AForm::SignedFormException::what() const throw()
 {
 	return ("Form is already signed");
+}
+
+const char*	AForm::ExecutionFormException::what() const throw()
+{
+	return ("Form need to be sign to be executed");
 }
 
 

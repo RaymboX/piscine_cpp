@@ -53,6 +53,12 @@ public:
 	public:
 		virtual const char* what() const throw();
 	};
+	
+	class	ExecutionFormException: public std::exception
+	{
+	public:
+		virtual const char* what() const throw();
+	};
 
 	static const int	lowestGrade;
 	static const int	highestGrade;
