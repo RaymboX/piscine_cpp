@@ -10,6 +10,7 @@ Bureaucrat::Bureaucrat(): _name("GrayMan"), _grade(Bureaucrat::lowestGrade)
 Bureaucrat::Bureaucrat(const std::string name, const int grade): _name(name), _grade(Bureaucrat::lowestGrade)
 {
 	std::cout << BLUE << "Bureaucrat param constructor called" << std::endl;
+	
 	this->setGrade(grade);
 	if (this->getGrade() != grade)
 		std::cout << YELLOW << "The grade is set to the lowest grade" << std::endl;
@@ -83,7 +84,7 @@ void	Bureaucrat::signForm(Form& form)
 		std::cout << RED << this->getName() << " couldn't signed " << form.getName()
 				  << " because " << e.what() << std::endl;
 	}
-	catch(const Form::SignedFormExeception& e)
+	catch(const Form::SignedFormException& e)
 	{
 		std::cout << RED << this->getName() << " couldn't signed " << form.getName()
 				  << " because " << e.what() << std::endl;

@@ -1,6 +1,6 @@
 #pragma once
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 # include <iostream>
 # include <fstream>
@@ -11,7 +11,7 @@
 
 class	Bureaucrat;
 
-class	Form
+class	AForm
 {
 private:
 	const std::string	_name;
@@ -20,11 +20,11 @@ private:
 	const int			_execGrade;
 
 public:
-	Form();
-	Form(const std::string name, const int signGrade, const int execGrade);
-	Form(const Form& src);
-	Form&	operator=(const Form& src);
-	~Form();
+	AForm();
+	AForm(const std::string name, const int signGrade, const int execGrade);
+	AForm(const AForm& src);
+	AForm&	operator=(const AForm& src);
+	virtual	~AForm();
 
 	const std::string	getName() const;
 	bool				getIsSigned() const;
@@ -33,6 +33,8 @@ public:
 
 	void				setIsSigned(const bool isSigned);
 	void				beSigned(const Bureaucrat& bureaucrat);
+
+	virtual void		execute(const Bureaucrat& executor) = 0;
 
 	class	GradeTooHighException: public std::exception
 	{
@@ -46,7 +48,7 @@ public:
 		virtual const char* what() const throw();
 	};
 	
-	class	SignedFormExeception: public std::exception
+	class	SignedFormException: public std::exception
 	{
 	public:
 		virtual const char* what() const throw();
@@ -56,6 +58,6 @@ public:
 	static const int	highestGrade;
 
 };
-std::ostream&	operator<<(std::ostream& o, const Form& src);
+std::ostream&	operator<<(std::ostream& o, const AForm& src);
 
 #endif

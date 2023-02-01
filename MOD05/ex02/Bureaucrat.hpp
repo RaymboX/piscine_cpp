@@ -7,9 +7,9 @@
 # include <stdexcept>
 
 # include "colors.hpp"
-# include "Form.hpp"
+# include "AForm.hpp"
 
-class	Form;
+class	AForm;
 
 class	Bureaucrat
 {
@@ -33,7 +33,7 @@ public:
 	void				incrementGrade();
 	void				decrementGrade();
 
-	void				signForm(Form& form);
+	void				signForm(AForm& AForm);
 
 	class	GradeTooHighException: public std::exception
 	{

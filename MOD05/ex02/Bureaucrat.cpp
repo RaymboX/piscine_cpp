@@ -71,21 +71,21 @@ void		Bureaucrat::_changingGrade(const int grade)
 void	Bureaucrat::incrementGrade() {this->setGrade(this->getGrade() - 1);}
 void	Bureaucrat::decrementGrade() {this->setGrade(this->getGrade() + 1);}
 
-void	Bureaucrat::signForm(Form& form)
+void	Bureaucrat::signForm(AForm& AForm)
 {
 	try
 	{
-		form.beSigned(*this);
-		std::cout << GREEN << this->getName() << " signed " << form.getName() << std::endl;
+		AForm.beSigned(*this);
+		std::cout << GREEN << this->getName() << " signed " << AForm.getName() << std::endl;
 	}
-	catch(const Form::GradeTooLowException& e)
+	catch(const AForm::GradeTooLowException& e)
 	{
-		std::cout << RED << this->getName() << " couldn't signed " << form.getName()
+		std::cout << RED << this->getName() << " couldn't signed " << AForm.getName()
 				  << " because " << e.what() << std::endl;
 	}
-	catch(const Form::SignedFormExeception& e)
+	catch(const AForm::SignedFormException& e)
 	{
-		std::cout << RED << this->getName() << " couldn't signed " << form.getName()
+		std::cout << RED << this->getName() << " couldn't signed " << AForm.getName()
 				  << " because " << e.what() << std::endl;
 	}
 }
