@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
@@ -49,8 +50,9 @@ int main()
 	std::cout << "\n--------Final status--------" << std::endl; 
 	std::cout << grayman << std::endl << hermes << std::endl << fry << std::endl << hacker << std::endl;
 
-	
+	ShrubberyCreationForm	form1;
 
-	std::cout << WHITE << "\nNO DESTRUCTOR FOR ABORTED CONSTRUCTOR WITH BAD PARAMETERS" << std::endl;
+	form1.execute(fry);
+
 	return 0;
 }

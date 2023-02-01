@@ -17,15 +17,16 @@ NAME 			= larvation
 
 SRCS			=	main.cpp \
 					Bureaucrat.cpp \
-					AForm.cpp
+					AForm.cpp \
+					ShrubberyCreationForm.cpp
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
 HEADERS			=	colors.hpp \
 					Bureaucrat.hpp \
-					AForm.hpp
-					
+					AForm.hpp \
+					ShrubberyCreationForm.hpp
 
 #COLORS FILE--------------------------------------------------------------------
 COLORS_FILE = colors.hpp
