@@ -148,7 +148,7 @@ colors: $(COLORS_FILE)
 
 $(COLORS_FILE):
 			@echo "$$COLORS_FILE_CONTENT" > $(COLORS_FILE)
-			@echo "J'ai fait colors.hpp"
+			@echo "$GJ'$Rai $Yfait $Ccolors$G.$Zhpp$W"
 
 clean: clean_shrub_file
 			@$(RM) $(OBJS)
