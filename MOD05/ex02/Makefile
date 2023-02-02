@@ -11,7 +11,7 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			= larvation
+NAME 			= 28BForm
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
@@ -53,17 +53,18 @@ export COLORS_FILE_CONTENT
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 05 _ EX01 _ EN RANG, LES LARVES!
-
+MODULE 05 _ EX02 _ AH MAIS NON, IL VOUS FAUT LA 28B, PAS LA 
 À partir des fichiers de l'autre exercice
-- On ajoute la fonctionnalité des formulaires (class Form) qui auront 
-	- nom
-	- Un statut signé
-	- Un grade de signature
-	- Un grade d'execution
-- Un bureaucrat pourra signé via une nouvelle fonction si son statut le permet
 
-Le tout doit être géré selon le pdf
+Rendre la class form en classe abstraite qui sera la base de trois autre class
+- ShrubberyCreationForm: Creer un fichier avec un arbuste
+- RobotomyRequestForm: Fait bruit de perceuse et réussi l'opération 1 fois sur 2
+- PresidentialPardonForm: Inscrit un message de pardon
+
+Chacune de ces classes devront avoir une fonction pour etre exécutées.
+
+Le main à été fait afin de permettre à l'utilisateur de tester des bureaucrats
+	différents pour tester les trois nouvelles classes.
 
 --------------------------------------------------------------------------------
 endef
@@ -76,7 +77,7 @@ define TOOLS
 OUTILS INCLUS DISPONIBLES
 make goal		-> Vulgarisation du but de l'exercice
 make pdf 		-> Ouvre le PDF sujet
-make video42	-> Ouvre la page des vidéos CPP sur l'intra
+make video42		-> Ouvre la page des vidéos CPP sur l'intra
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
 make valgrind		-> Execute le programme avec "valgrind --leak-check=full " en premice
 make tools		-> Affiche les outils disponibles (ceci)
@@ -145,12 +146,12 @@ $(COLORS_FILE):
 			@echo "$$COLORS_FILE_CONTENT" > $(COLORS_FILE)
 			@echo "J'ai fait colors.hpp"
 
-clean:
+clean: clean_shrub_file
 			@$(RM) $(OBJS)
 			@$(RM) $(OBJS_DIR)
 			@echo "$RObjects removed$W"
 
-fclean: clean clean_shrub_file
+fclean: clean
 			@$(RM) $(NAME)
 			@$(RM) $(FILE)
 			@$(RM) $(NAME)_debug

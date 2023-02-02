@@ -32,7 +32,7 @@ public:
 	int					getExecGrade() const;
 
 	void				setIsSigned(const bool isSigned);
-	void				beSigned(const Bureaucrat& bureaucrat);
+	virtual void		beSigned(const Bureaucrat& bureaucrat);
 
 	virtual void		execute(const Bureaucrat& executor) = 0;
 

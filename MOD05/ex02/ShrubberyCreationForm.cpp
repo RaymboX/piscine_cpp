@@ -47,7 +47,7 @@ void	ShrubberyCreationForm::execute(const Bureaucrat& executor)
 			throw ShrubberyCreationForm::ExecutionFormException();
 		if (this->getExecGrade() < executor.getGrade())
 			throw ShrubberyCreationForm::GradeTooHighException();
-		std::ofstream	ofs("file_shrubbery");
+		std::ofstream	ofs(this->_target + "_shrubbery");
 		ofs << this->shrubArt;
 		ofs.close();
 		std::cout << PURPLE << "A shrubbery file has been created" << std::endl;
