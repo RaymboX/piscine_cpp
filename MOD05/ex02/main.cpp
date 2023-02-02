@@ -1,6 +1,8 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #include <string>
 #include <cstdlib>
@@ -12,8 +14,11 @@ std::string	inputString(const std::string titre);
 int			inputInt(const std::string titre);
 int			isPositiveInt(std::string input);
 std::string	getInput(std::string titre);
-void	formTests(const Bureaucrat& bureaucrat, AForm& form);
-void	shrubTest(const Bureaucrat& bureaucrat, const std::string target);
+void	formTests(Bureaucrat& bureaucrat, AForm& form);
+void	shrubTest(Bureaucrat& bureaucrat, const std::string target);
+void	robotomyTest(Bureaucrat& bureaucrat, const std::string target);
+void	pardonTest(Bureaucrat& bureaucrat, const std::string target);
+
 
 int main()
 {
@@ -23,7 +28,7 @@ int main()
 	{
 		menu();
 		inputAndTest();
-		std::cout << GREEN << "\nVoulez vous continuer? y/n: ";
+		std::cout << WHITE << "\nVoulez vous tester un autre bureaucrat? y/n: ";
 		std::cout << WHITE;
 		std::getline(std::cin, input);
 	}
@@ -50,28 +55,43 @@ void	menu()
 	std::cout << COLORDEF;
 }
 
-void	formTests(const Bureaucrat& bureaucrat, AForm& form)
+void	formTests(Bureaucrat& bureaucrat, AForm& form)
 {
 	std::cout << WHITE << "---------STATUS-----------" << std::endl;
 	std::cout << form << std::endl;
 	std::cout << WHITE << "--------SIGNATURE---------" << std::endl;
-	form.beSigned(bureaucrat);
+	bureaucrat.signForm(form);
 	std::cout << form << std::endl;
 	std::cout << WHITE << "--------EXECUTION---------" << std::endl;
-	form.execute(bureaucrat);
+	bureaucrat.executeForm(form);
 	std::cout << WHITE << "-----FORM DESTRUCTION-----" << std::endl;
 }
 
-void	shrubTest(const Bureaucrat& bureaucrat, const std::string target)
+void	shrubTest(Bureaucrat& bureaucrat, const std::string target)
 {
 	std::cout << YELLOW << "\n________TEST POUR SHRUBBERY FORM____________" << std::endl;
 	ShrubberyCreationForm	shrub("Shrubbery", target);
 	formTests(bureaucrat, shrub);
 }
 
+void	robotomyTest(Bureaucrat& bureaucrat, const std::string target)
+{
+	std::cout << YELLOW << "\n________TEST POUR ROBOTOMY FORM____________" << std::endl;
+	RobotomyRequestForm	robot("Robotomy", target);
+	formTests(bureaucrat, robot);
+}
+
+void	pardonTest(Bureaucrat& bureaucrat, const std::string target)
+{
+	std::cout << YELLOW << "\n________TEST POUR PRESIDENTIAL PARDON FORM____________" << std::endl;
+	PresidentialPardonForm	pardon("Pardon", target);
+	formTests(bureaucrat, pardon);
+}
+
 void	inputAndTest()
 {
 	std::string	target;
+	std::string	input;
 
 	std::cout << WHITE << "Entrez les informations suivantes pour le bureaucrat" << std::endl;
 	Bureaucrat	bureaucrat(inputString("Nom            "), inputInt("Grade (1 à 150)"));
@@ -80,6 +100,14 @@ void	inputAndTest()
 	target = inputString("Target");
 	
 	shrubTest(bureaucrat, target);
+	std::cout << WHITE <<  "\nPress enter to continue";
+	std::getline(std::cin, input);
+
+	robotomyTest(bureaucrat, target);
+	std::cout << WHITE <<  "\nPress enter to continue";
+	std::getline(std::cin, input);
+
+	pardonTest(bureaucrat, target);
 
 	std::cout << WHITE << "\n---BUREAUCRAT DESTRUCTION---" << COLORDEF << std::endl;;
 }

@@ -18,7 +18,9 @@ NAME 			= 28BForm
 SRCS			=	main.cpp \
 					Bureaucrat.cpp \
 					AForm.cpp \
-					ShrubberyCreationForm.cpp
+					ShrubberyCreationForm.cpp \
+					RobotomyRequestForm.cpp \
+					PresidentialPardonForm.cpp
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
@@ -26,7 +28,9 @@ SRCS			=	main.cpp \
 HEADERS			=	colors.hpp \
 					Bureaucrat.hpp \
 					AForm.hpp \
-					ShrubberyCreationForm.hpp
+					ShrubberyCreationForm.hpp \
+					RobotomyRequestForm.hpp \
+					PresidentialPardonForm.hpp
 
 #COLORS FILE--------------------------------------------------------------------
 COLORS_FILE = colors.hpp

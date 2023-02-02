@@ -41,25 +41,14 @@ void		ShrubberyCreationForm::setTarget(const std::string target) {this->_target 
 
 void	ShrubberyCreationForm::execute(const Bureaucrat& executor)
 {
-	try
-	{
-		if (this->getIsSigned() == false)
-			throw ShrubberyCreationForm::ExecutionFormException();
-		if (this->getExecGrade() < executor.getGrade())
-			throw ShrubberyCreationForm::GradeTooHighException();
-		std::ofstream	ofs(this->_target + "_shrubbery");
-		ofs << this->shrubArt;
-		ofs.close();
-		std::cout << PURPLE << "A shrubbery file has been created" << std::endl;
-	}
-	catch (const ShrubberyCreationForm::ExecutionFormException& e)
-	{
-		std::cerr << YELLOW << e.what() << std::endl;
-	}
-	catch (const ShrubberyCreationForm::GradeTooHighException& e)
-	{
-		std::cerr << YELLOW << "The form " << e.what() << " to be execute by " << executor.getName() << std::endl;
-	}
+	if (this->getIsSigned() == false)
+		throw AForm::ExecutionFormException();
+	if (this->getExecGrade() < executor.getGrade())
+		throw AForm::GradeTooHighException();
+	std::ofstream	ofs(this->_target + "_shrubbery");
+	ofs << this->shrubArt;
+	ofs.close();
+	std::cout << PURPLE << "Shrubbery file " << this->getTarget() << "_shrubbery has been created" << std::endl;
 }
 
 const int			ShrubberyCreationForm::signGradeDefault = 145;
