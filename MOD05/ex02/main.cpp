@@ -13,11 +13,12 @@ void		inputAndTest();
 std::string	inputString(const std::string titre);
 int			inputInt(const std::string titre);
 int			isPositiveInt(std::string input);
+int			isGoodString(std::string input);
 std::string	getInput(std::string titre);
-void	formTests(Bureaucrat& bureaucrat, AForm& form);
-void	shrubTest(Bureaucrat& bureaucrat, const std::string target);
-void	robotomyTest(Bureaucrat& bureaucrat, const std::string target);
-void	pardonTest(Bureaucrat& bureaucrat, const std::string target);
+void		formTests(Bureaucrat& bureaucrat, AForm& form);
+void		shrubTest(Bureaucrat& bureaucrat, const std::string target);
+void		robotomyTest(Bureaucrat& bureaucrat, const std::string target);
+void		pardonTest(Bureaucrat& bureaucrat, const std::string target);
 
 
 int main()
@@ -50,7 +51,7 @@ void	menu()
 	
 	std::cout << GREEN
 			  << "Créez un bureaucrat (nom, grades) et un nom de target pour les formulaires" << std::endl
-			  << "            et les tests seront fait sur chacun d'eux\n" << std::endl;
+			  << " et les tests seront fait sur chacun des formulaires\n" << std::endl;
 
 	std::cout << COLORDEF;
 }
@@ -127,12 +128,26 @@ std::string	inputString(const std::string titre)
 {
 	std::string	input = getInput(titre);
 	
-	while (input.empty() == true)
+	while (isGoodString(input)!= 0)
 	{
 		std::cout << RED << "Information refusé" << WHITE << std::endl;
 		input = getInput(titre);
 	}
 	return input;
+}
+
+int	isGoodString(std::string input)
+{
+	int len = input.length();
+	int i = -1;
+
+	if (input.empty() == true)
+		return -1;
+	
+	while (i++ < len && (isalpha(input[i]) == true || isnumber(input[i]) == true)) {}
+	if (i == len)
+		return 0;
+	return -1;
 }
 
 int		inputInt(const std::string titre)

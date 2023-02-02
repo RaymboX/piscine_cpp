@@ -1,6 +1,8 @@
 #include "Contact.hpp"
 #include "ctype.h"
 
+int	isGoodString(std::string input);
+
 //NON MEMBER ATTRIBUTE
 int const	Contact::nbmax = 8;
 int 		Contact::nb_recorded = 0;
@@ -17,7 +19,7 @@ std::string	Contact::_get_input(std::string const attr) const
 	
 	std::cout << attr;
 	std::getline(std::cin, input);
-	while (input.size() == 0)
+	while (isGoodString(input) != 0)
 	{
 		std::cout << "\033[1;31m";
 		std::cout << "You press enter. I know you probably didn't want to. Welcome to palm tungsten e2 B quality product!" << std::endl;
@@ -143,3 +145,16 @@ std::string	Contact::getDarksecret(void) const
 	return (this->_darksecret);
 }
 
+int	isGoodString(std::string input)
+{
+	int len = input.length();
+	int i = -1;
+
+	if (input.empty() == true)
+		return -1;
+	
+	while (i++ < len && (isalpha(input[i]) == true || isnumber(input[i]) == true)) {}
+	if (i == len)
+		return 0;
+	return -1;
+}
