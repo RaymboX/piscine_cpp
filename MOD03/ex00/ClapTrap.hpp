@@ -26,6 +26,8 @@ private:
 	int					_attackDamage;
 	int					_weaponMaxDamage;
 
+	void				_coutStatus() const;
+
 public:
 	ClapTrap(void);
 	ClapTrap(const std::string name);
@@ -50,7 +52,7 @@ public:
 	void				attack(const std::string& target);
 	void				takeDamage(unsigned int amount);
 	void				beRepaired(unsigned int amount);
-	void				coutStatus() const;
+	
 
 	void				actionAttack(ClapTrap & receiver);
 	void				actionStatus(void);

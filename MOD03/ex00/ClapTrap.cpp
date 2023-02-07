@@ -68,7 +68,7 @@ void	ClapTrap::actionAttack(ClapTrap & receiver)
 
 void	ClapTrap::actionStatus(void)
 {
-	this->coutStatus();
+	this->_coutStatus();
 	if (this->_hitPoint <= 0)
 		std::cout << RED << "ClapTrap " << this->_name
 			  << " is dead!" << std::endl;
@@ -100,10 +100,10 @@ void	ClapTrap::beRepaired(unsigned int amount)
 	std::cout << BLUE << "ClapTrap " << this->_name
 			  << " repaired himself to add " << amount
 			  << " hitpoint(s)" << std::endl;
-	this->coutStatus();
+	this->_coutStatus();
 }
 
-void	ClapTrap::coutStatus(void) const
+void	ClapTrap::_coutStatus(void) const
 {
 	std::cout << PURPLE << "ClapTrap " << this->_name
 		<< " have " << this->_hitPoint
