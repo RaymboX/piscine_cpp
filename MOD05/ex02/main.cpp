@@ -32,6 +32,8 @@ int main()
 		std::cout << WHITE << "\nVoulez vous tester un autre bureaucrat? y/n: ";
 		std::cout << WHITE;
 		std::getline(std::cin, input);
+		if (std::cin.eof())
+			exit(0);
 	}
 	std::cout << WHITE << "\nMerci d'avoir testé mon programme. Au revoir!\n" << std::endl;
 	return 0;
@@ -103,10 +105,14 @@ void	inputAndTest()
 	shrubTest(bureaucrat, target);
 	std::cout << WHITE <<  "\nPress enter to continue";
 	std::getline(std::cin, input);
+	if (std::cin.eof())
+			exit(0);
 
 	robotomyTest(bureaucrat, target);
 	std::cout << WHITE <<  "\nPress enter to continue";
 	std::getline(std::cin, input);
+	if (std::cin.eof())
+			exit(0);
 
 	pardonTest(bureaucrat, target);
 
@@ -121,6 +127,8 @@ std::string	getInput(std::string titre)
 	std::cout << titre << ": ";
 	std::cout << GREEN;
 	std::getline(std::cin, input);
+	if (std::cin.eof())
+			exit(0);
 	return input;
 }
 
