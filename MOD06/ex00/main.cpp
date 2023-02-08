@@ -20,7 +20,7 @@ int main(int argc, char** argv)
 	if (argc != 2 || strlen(argv[1]) == 0) // argument invalide
 	{
 		outputString(output);	
-		return (1);
+		return (0);
 	}
 
 	//isnan ou inf
@@ -135,10 +135,10 @@ int	goodVal(char* str)
 				&& i + 1 < strlen(str) && isnumber(str[i + 1]) //et qu'il n'est pas a la fin et qu'après c'est un chiffre
 				&& i - 1 >= 0 && isnumber(str[i - 1]))  // et qu'il n'est pas le premier et qu'avant c'est un chiffre
 				dot++;
-			else if (isprint(str[i]) != 0) // Compte le nombre de char
+			else //if (isprint(str[i]) != 0) // Compte le nombre de char
 				car++;
-			else							// Si aucune des conditions au dessus est atteinte, ce n'est pas valide
-				return -1;
+			//else							// Si aucune des conditions au dessus est atteinte, ce n'est pas valide
+			//	return -1;
 		}
 	}
 //ajouter condition + -

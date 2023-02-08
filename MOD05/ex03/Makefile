@@ -62,6 +62,9 @@ define EXPLANATION
 MODULE 05 _ EX03 _ 
 À partir des fichiers de l'autre exercice
 
+Maintenant, il y a un stagiaire (intern) qui va faire les formulaires.
+Pour l'exercice, demanderai au stagiaire quelle formulaire vous voulez faire
+	signer et executer.
 
 --------------------------------------------------------------------------------
 endef
