@@ -1,24 +1,13 @@
 #include "Fixed.hpp"
 #include <cmath>
 
-Fixed::Fixed(void)
-{
-	this->_fixVal = 0;
-	this->_fractLen = 8;
-}
+const int	Fixed::_fractLen = 8;
 
-Fixed::Fixed(int const intVal)
-{
-	this->_fractLen = 8;
-	this->_fixVal = this->toFix(intVal);
-}
+Fixed::Fixed(void): _fixVal(0) {}
 
+Fixed::Fixed(int const intVal): _fixVal(toFix(intVal)) {}
 
-Fixed::Fixed(float const floatVal)
-{
-	this->_fractLen = 8; 
-	this->_fixVal = this->toFix(floatVal);
-}
+Fixed::Fixed(float const floatVal): _fixVal(toFix(floatVal)) {}
 
 Fixed::Fixed(Fixed const & src)
 {
@@ -30,7 +19,6 @@ Fixed::~Fixed(void){}
 Fixed & Fixed::operator=(Fixed const & src)
 {
 	this->_fixVal = src.getRawBits();
-	this->_fractLen = 8;
 	return (*this);
 }
 

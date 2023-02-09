@@ -1,3 +1,6 @@
+#include <time.h>
+#include <stdlib.h>
+
 #include "data.hpp"
 
 uintptr_t	serialize(Data* ptr);
@@ -9,15 +12,16 @@ int main()
 	uintptr_t	ptr;
 	Data* 		dataFromRaw;
 
-	data.nom = "M. RaymboX";
-	data.age = 39;
+	data.nom = "USERNAME";
+	srand(time(NULL) * time(NULL));
+	data.age = rand() % 100;
 
 	ptr = serialize(&data);
 
-	std::cout << "\nAdresse de data:                  " << &data << std::endl;
-	std::cout << "Adresse de ptr (serialized Data): " <<  ptr << std::endl;
+	std::cout << "\nAdresse de -> data        (Data type)  : " << &data << std::endl;
+	std::cout << "Adresse de -> ptr         (serialized) : " <<  ptr << std::endl;
 	dataFromRaw = deserialize(ptr);
-	std::cout << "Adresse de dataFromRaw:           " << dataFromRaw << std::endl;
+	std::cout << "Adresse de -> dataFromRaw (deserialize): " << dataFromRaw << std::endl;
 
 
 	std::cout << "----Valeurs de retour----" << std::endl;

@@ -9,8 +9,9 @@ class Fixed
 {
 private:
 	//VAL
-	int		_fixVal;
-	int		_fractLen;
+	int						_fixVal;
+	
+	static const int		_fractLen;
 
 public:
 	//ACCESSORS
