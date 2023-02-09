@@ -22,6 +22,9 @@ push:
 		@git log -n 1 --pretty="format:%cr -> %s"
 		@echo "$W"
 
+video42:
+			@open https://elearning.intra.42.fr/tags/38/notions
+
 fclean:
 		$(MAKE) -s fclean -C MOD00/ex00
 		$(MAKE) -s fclean -C MOD00/ex01
