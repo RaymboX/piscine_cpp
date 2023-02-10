@@ -11,20 +11,17 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			=	whatTypeItIs
+NAME 			=	somefcts
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-					Base.cpp
+
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	Base.hpp \
-					A.hpp \
-					B.hpp \
-					C.hpp
+HEADERS			=	whatever.hpp
 
 #COLORS FILE--------------------------------------------------------------------
 COLORS_FILE = colors.hpp
@@ -51,15 +48,10 @@ export COLORS_FILE_CONTENT
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 06 _ EX02 _ IDENTIFIER LE VÉRITABLE TYPE
+MODULE 07 _ EX02 _ QUELQUES FONCTIONS POUR COMMENCER
 
-Implémenter 3 fonctions
-1) base* generate(void) -> qui créé et retourne le pointeur d'une instance
-	A, B ou C (random)
-2) void identify(Base* p) -> qui trouve le type de l'instance en lui passant la 
-	le pointeur de la classe de base
-3) void identify(Base& p) -> qui trouve le type de l'instance en lui passant la 
-	la référence de la classe de base
+Faire les trois fonctions template (swap, min, max) et les utiliser avec des
+	type différents.
 
 --------------------------------------------------------------------------------
 endef
@@ -171,7 +163,7 @@ valgrind:
 			$(VALGRIND_CMD) ./$(NAME)
 
 pdf:
-			@open https://cdn.intra.42.fr/pdf/pdf/58239/fr.subject.pdf
+			@open https://cdn.intra.42.fr/pdf/pdf/66962/fr.subject.pdf
 
 video42:
 			@open https://elearning.intra.42.fr/tags/38/notions
