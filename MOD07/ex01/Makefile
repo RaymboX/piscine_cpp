@@ -48,9 +48,9 @@ export COLORS_FILE_CONTENT
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 07 _ EX02 _ ITER
+MODULE 07 _ EX01 _ ITER
 
-Faire une foinction iter qui fera une iteration d'une fonction sur un array 
+Faire une fonction iter qui fera une iteration d'une fonction sur un array 
 	de n'importequelle type passé en paramètre
 
 --------------------------------------------------------------------------------
