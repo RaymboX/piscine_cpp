@@ -11,7 +11,7 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			=	somefcts
+NAME 			=	iter
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
@@ -21,7 +21,7 @@ SRCS			=	main.cpp \
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	whatever.hpp
+HEADERS			=	iter.hpp
 
 #COLORS FILE--------------------------------------------------------------------
 COLORS_FILE = colors.hpp
@@ -48,10 +48,10 @@ export COLORS_FILE_CONTENT
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 07 _ EX00 _ QUELQUES FONCTIONS POUR COMMENCER
+MODULE 07 _ EX02 _ ITER
 
-Faire les trois fonctions template (swap, min, max) et les utiliser avec des
-	type différents.
+Faire une foinction iter qui fera une iteration d'une fonction sur un array 
+	de n'importequelle type passé en paramètre
 
 --------------------------------------------------------------------------------
 endef
