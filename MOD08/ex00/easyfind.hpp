@@ -15,7 +15,7 @@ void	easyfind(T array, int valToFind)
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << "Exception: " << e.what() << '\n';
 	}
 }
 

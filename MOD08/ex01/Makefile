@@ -11,17 +11,19 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			=	easyfind
+NAME 			=	span
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
+					Span.cpp
 
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	easyfind.hpp
+HEADERS			=	colors.hpp \
+					Span.hpp
 
 #COLORS FILE--------------------------------------------------------------------
 COLORS_FILE = colors.hpp
@@ -48,21 +50,10 @@ export COLORS_FILE_CONTENT
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 08 _ EX00 _ EASY FIND
+MODULE 08 _ EX01 _ SPAN
 (Utiliser la STL au maximum)
 
-Faire une fonction easyfind qui renvoie du container inscrit comme premier 
-	paramètre de la fonction, la première position de la valeur de type int passé
-	dans le second paramètre.
 
-Exemple: array{34, 67, 23, 65, 67}
-easyfind(array, 67) retournera 1 soit la position du premier 67 dans array.
-
-Si la valeur n'est pas trouvé, une exception doit être envoyée.
-
-Perso:
-Un vector est utilisé et la fonction .at() retourne une exception si la 
-	position passé en paramètre ne fait pas partie de l'array.
 
 --------------------------------------------------------------------------------
 endef
@@ -127,7 +118,7 @@ $(OBJS_DIR)/%.o:%.cpp $(HEADERS)
 
 #RULES--------------------------------------------------------------------------
 
-all: 	init $(NAME)
+all: 	init colors $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
@@ -179,7 +170,7 @@ pdf:
 video42:
 			@open https://elearning.intra.42.fr/tags/38/notions
 
-debug:	fclean
+debug:	fclean colors
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug
 			@echo "$YDebbuging executable ready!$W"
 
