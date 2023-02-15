@@ -69,6 +69,7 @@ make video42		-> Ouvre la page des vidéos CPP sur l'intra
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
 make valgrind		-> Execute le programme avec "valgrind --leak-check=full " en premice
 make tools		-> Affiche les outils disponibles (ceci)
+make ref		-> Quelques documentations
 --------------------------------------------------------------------------------
 endef
 export TOOLS
@@ -159,6 +160,11 @@ leak:
 
 test:
 			
+ref:
+			@open https://cplusplus.com/reference/stack/stack/
+			@open https://en.cppreference.com/w/cpp/container/deque
+			@open https://en.cppreference.com/w/cpp/iterator/begin
+
 
 valgrind:
 			$(VALGRIND_CMD) ./$(NAME)
