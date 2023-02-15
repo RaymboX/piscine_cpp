@@ -53,7 +53,15 @@ define EXPLANATION
 MODULE 08 _ EX01 _ SPAN
 (Utiliser la STL au maximum)
 
-
+Créer une classe Span qui pourra stocker maximum N int.
+Elle devra contenir les fonctions
+- addNumber: Ajoute un nombre au container et renvoie une exception si over limit
+- shortestSpan: retourne la plus petite distance entre deux nombres
+- longuestSpan: retourne la plus grande distance entre deux nombres
+	pour les deux fonctions
+	- c'est le span pour n'importequelle chiffre et non le span entre les entiers
+		adjacent de la liste
+	- Renvoie une exception si aucune ou une donnée présente dans la liste
 
 --------------------------------------------------------------------------------
 endef

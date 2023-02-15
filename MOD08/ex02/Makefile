@@ -51,8 +51,8 @@ define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 08 _ EX02 _ MUTANTSTACK
 (Utiliser la STL au maximum)
-
-
+Faire de la classe MutantStack une stack mais qui aura un iterator 
+	(stack n'a pas d'iterator à la base)
 
 --------------------------------------------------------------------------------
 endef
