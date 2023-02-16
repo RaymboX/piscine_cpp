@@ -15,5 +15,10 @@ int main(void)
 	std::cout << "Test p5 -> retour de bsp: " << bsp(a, b, c, p5) << std::endl;
 	std::cout << "Test p6 -> retour de bsp: " << bsp(a, b, c, p6) << std::endl;
 
+	std::cout << "\nRecopy of constant class value demonstration" << std::endl;
+	std::cout << "Before: a.x = " << a.get_x() << "  a.y = " << a.get_y() << std::endl;
+	a = c;
+	std::cout << "After : a.x = " << a.get_x() << "  a.y = " << a.get_y() << std::endl;
+
 	return 0;
 }	

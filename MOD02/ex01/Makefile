@@ -50,10 +50,11 @@ export EXPLANATION
 define TOOLS
 --------------------------------------------------------------------------------
 OUTILS INCLUS DISPONIBLES
-make goal	-> Vulgarisation du but de l'exercice
-make pdf 	-> Ouvre le PDF sujet
-make leak	-> Execute le programme avec "leaks -- atExit -- " en premice
-make tools	-> Affiche les outils disponibles (ceci)
+make goal	    -> Vulgarisation du but de l'exercice
+make pdf 	    -> Ouvre le PDF sujet
+make leak	    -> Execute le programme avec "leaks -- atExit -- " en premice
+make fixvideo	-> Vidéo sur les fixed point values
+make tools	    -> Affiche les outils disponibles (ceci)
 --------------------------------------------------------------------------------
 endef
 export TOOLS
@@ -123,6 +124,9 @@ leak:
 
 pdf:
 			@open https://cdn.intra.42.fr/pdf/pdf/66965/fr.subject.pdf
+
+fixvideo:
+			@open https://youtu.be/ZMsrZvBmQnU?t=429
 			
 debug:	fclean
 			@$(CC_DEBUG) $(CFLAGS) $(SRCS) -o $(NAME)_debug

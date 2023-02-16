@@ -24,7 +24,6 @@ public:
 	int				toFix(float const f) const;
 	int				toFix(int const i) const;
 
-	//NON MEMBER FUNCTION
 	static Fixed &			min(Fixed & a, Fixed & b);
 	static Fixed const &	min(Fixed const & a, Fixed const & b);
 	static Fixed & 			max(Fixed & a, Fixed & b);
