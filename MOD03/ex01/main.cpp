@@ -11,6 +11,8 @@ void	statusList(ClapTrap & ragnar, ClapTrap & rollo,
 
 int main(void)
 {
+	std::cout << RED << "DISCLAIMER: GATE KEEPER IS GUARDMODE!\n" << std::endl;
+	
 	std::cout << BLUE << "-----CONSTRUCTING CLAPTRAP-----" << std::endl;
 	
 	ClapTrap	ragnar;
@@ -30,13 +32,14 @@ int main(void)
 		ScavTrap	soldier1;
 		ScavTrap	soldier2(soldier1);
 
-		std::cout << YELLOW << "\nSoldiers was afraid and run away!" << std::endl;
+		std::cout << YELLOW << "\nNO_NAME soldiers were afraid and ran away!" << std::endl;
 	}
 	
 	int	round = 0;
 
 	srand(time(0));
 
+	//MANUALY SETTING FOR SIMULATION PURPOSE
 	ragnar.setHitPoint(20);
 	rollo.setHitPoint(20);
 	priest.setHitPoint(10);
@@ -47,13 +50,15 @@ int main(void)
 	rollo.setWeaponMaxDamage(10);
 	priest.setWeaponMaxDamage(10);
 
+	//COMBAT LOOP
 	while (horik.isDead() == false
 			&& (ragnar.isDead() == false || rollo.isDead() == false || priest.isDead() == false)
 			&& (ragnar.getEnergyPoint() > 0 || rollo.getEnergyPoint() > 0
 			|| horik.getEnergyPoint() > 0))
 	{
 		std::cout << WHITE << "\nTurn " << ++round << std::endl;
-
+		
+		//RANDOM WHO HIT FIRST
 		if (rand() % 2 == 0)
 		{
 			std::cout << "The ClapTraps hit first!" << std::endl;
@@ -66,6 +71,7 @@ int main(void)
 			scavTrapTurn(ragnar, rollo, priest, horik);
 			clapTrapTurn(ragnar, rollo, priest, horik);
 		}
+		//OUTPUT STATUS OF ALL
 		statusList(ragnar, rollo, priest, horik);
 	}
 
@@ -79,6 +85,7 @@ int main(void)
 	return 0;
 }
 
+//HEROES ATTACKING
 void	clapTrapTurn(ClapTrap & ragnar, ClapTrap & rollo,
 					ClapTrap & priest, ScavTrap & horik)
 {
@@ -103,6 +110,7 @@ void	clapTrapTurn(ClapTrap & ragnar, ClapTrap & rollo,
 	}
 }
 
+//ENNEMY ATTACKING
 void	scavTrapTurn(ClapTrap & ragnar, ClapTrap & rollo,
 					ClapTrap & priest, ScavTrap & horik)
 {
@@ -138,6 +146,7 @@ void	scavTrapTurn(ClapTrap & ragnar, ClapTrap & rollo,
 	}
 }
 
+//ALL STATUS
 void	statusList(ClapTrap & ragnar, ClapTrap & rollo,
 					ClapTrap & priest, ScavTrap & horik)
 {

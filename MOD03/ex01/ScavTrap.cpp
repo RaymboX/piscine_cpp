@@ -46,8 +46,9 @@ void	ScavTrap::guardGate()
 {
 	this->_defense += rand() % 5 + 1;
 	this->_guardMode = true;
-	std::cout << BLUE << "ScavTrap used guardGate. Is defense is now "
-			  << this->_defense << std::endl;
+	std::cout << BLUE << "ScavTrap used guardGate. Is defense is now"
+			  << this->_defense
+			  << " (the pdf gate keeper)" << std::endl;
 }
 
 void	ScavTrap::coutStatus(void) const

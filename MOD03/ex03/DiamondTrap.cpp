@@ -97,3 +97,8 @@ void	DiamondTrap::highFivesGuys()
 	std::cout << CYAN << "DiamondTrap " << this->getName()
 			  << " gives a highfives to everybody around" << std::endl;
 }
+
+void	DiamondTrap::whoAmI();
+{
+	
+}

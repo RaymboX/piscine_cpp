@@ -20,16 +20,16 @@
 class	ClapTrap
 {
 private:
-	std::string			_name;
-	int					_hitPoint;
-	int					_energyPoint;
-	int					_attackDamage;
+	std::string			_name;//mandatory
+	int					_hitPoint;//mandatory
+	int					_energyPoint;//mandatory
+	int					_attackDamage;//mandatory
 	int					_weaponMaxDamage;
 
 	void				_coutStatus() const;
 
 public:
-	ClapTrap(void);
+	ClapTrap(void); //mandatory
 	ClapTrap(const std::string name);
 	ClapTrap(const ClapTrap & src);
 	ClapTrap &			operator=(ClapTrap const & src);
@@ -49,9 +49,9 @@ public:
 
 	void				setRandAttack(void);
 
-	void				attack(const std::string& target);
-	void				takeDamage(unsigned int amount);
-	void				beRepaired(unsigned int amount);
+	void				attack(const std::string& target);//mandatory
+	void				takeDamage(unsigned int amount);//mandatory
+	void				beRepaired(unsigned int amount);//mandatory
 	
 
 	void				actionAttack(ClapTrap & receiver);

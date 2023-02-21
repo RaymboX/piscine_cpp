@@ -78,7 +78,7 @@ void	ClapTrap::actionStatus(void)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	this->_energyPoint--;
+	this->_energyPoint--; //REMOVE ENERGY POINT
 	std::cout << RED << "ClapTrap " << this->_name 
 			  << " attacks " << target
 			  << " causing " << this->_attackDamage
@@ -95,7 +95,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	this->_energyPoint--;
+	this->_energyPoint--;//REMOVE ENERGY POINT
 	this->_hitPoint += amount;
 	std::cout << BLUE << "ClapTrap " << this->_name
 			  << " repaired himself to add " << amount
