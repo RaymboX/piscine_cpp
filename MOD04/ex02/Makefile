@@ -50,6 +50,8 @@ Ensuite le code doit fonctionner comme avant donc, le main n'a pas été modifie
 - Toute les classe appelant Animal appel maintenant AAnimal
 - Le comportement de la fonction makeSound de la classe AAnimal à été effacée
 
+- Un exemple //mute d'instanciation de la classe AAnimal est dans le main pour
+	démontrer qu'il n'est plus possible d'instacier cette classe.
 
 --------------------------------------------------------------------------------
 endef
@@ -65,7 +67,6 @@ make pdf 		-> Ouvre le PDF sujet
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
 make valgrind		-> Execute le programme avec "valgrind --leak-check=full " en premice
 make tools		-> Affiche les outils disponibles (ceci)
-make howcanwesleep 	-> You'll see.
 --------------------------------------------------------------------------------
 endef
 export TOOLS
@@ -149,9 +150,6 @@ leak:
 
 valgrind:
 			$(VALGRIND_CMD) ./$(NAME)
-
-howcanwesleep:
-			@open https://youtu.be/ejorQVy3m8E
 
 pdf:
 			@open https://cdn.intra.42.fr/pdf/pdf/58235/fr.subject.pdf
