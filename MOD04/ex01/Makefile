@@ -45,12 +45,15 @@ En réutilisant les fichiers du dernier exercice,
 		(dont les constructeurs devront créer le brain via new Brain
 		et naturellement être détruit dans le destructeur)
 
-La partie mandatoire du main devra créer un tableau de 100 animals soit
-- 50 premiers des Dog
-- 50 derniers des Cat
+La partie mandatoire du main devra créer un tableau d'Animals dont
+- la première moitié des Dog
+- la deuxième moitié des Cat
+(sera un tableau de 4 animals dont 2 Dog et 2 Cat)
+Ensuite, ceux-ci doivent être supprimer en tant qu'Animal 
+(soit chaque element du tableau d'Animal)
 
 La copie d'un objet Dog ou Cat doit être profonde (création d'un nouvelle espace mémoire)
-	et non superficiel (copie des pointeurs)
+	et non superficiel (copie des pointeurs ou références)
 
 La partie homemade démontrera une série de tests démontrant
 - L'ordre de création des classes par défaut

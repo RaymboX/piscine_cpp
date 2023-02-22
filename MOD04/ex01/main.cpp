@@ -6,16 +6,27 @@
 
 int main(void)
 {
-	Animal*	animals_ptr[100];
-
 	std::cout << WHITE << "Début de la partie mandatoire -------------" << std::endl;
-	for(int i = 0; i < 50; i++)
-		animals_ptr[i] = new Dog;
-	for(int i = 50; i < 100; i++)
-		animals_ptr[i] = new Cat;
+	
+	//Creation du tableau d'Animal
+	Animal*	animals_ptr[4];
 
-	for(int i = 0; i < 100; i++)
+	//Affectation des pointeurs 
+	for(int i = 0; i < 2; i++)
+	{
+		std::cout << WHITE << i << ": Creation Dog " << i + 1 << std::endl;
+		animals_ptr[i] = new Dog;
+	}
+	for(int i = 2; i < 4; i++)
+	{
+		std::cout << WHITE << i << ": Creation Cat " << i - 1 << std::endl;
+		animals_ptr[i] = new Cat;
+	}
+
+	std::cout << WHITE << "Destruction des elements du tableau Animal" << std::endl;
+	for(int i = 0; i < 4; i++)
 		delete animals_ptr[i];
+	
 	std::cout << WHITE << "Fin de la partie mandatoire ---------------" << std::endl;
 
 	std::cout << CYAN << "\nDebut des tests maison-------------" << std::endl;
@@ -32,8 +43,8 @@ int main(void)
 	animal_cat_ptr->makeSound();
 
 	std::cout << WHITE << "\nNow they thinking about what they said."  << std::endl;
-	dog_ptr->getBrain().setIdea("Im thinking about woof!", 1);
-	cat_ptr->getBrain().setIdea("Im thinking about miaw!", 45);
+	dog_ptr->getBrain().setIdea("I said woof!", 1);
+	cat_ptr->getBrain().setIdea("I said miaw!", 45);
 
 	std::cout << WHITE << "\nAnd they remembering it."  << std::endl;;
 	std::cout << WHITE << "Dog ptr idea 1 is: " << dog_ptr->getBrain().getIdea(1) << std::endl;

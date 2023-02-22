@@ -37,6 +37,17 @@ define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 04 _ EX00 _ POLYMORPHISME
 
+Le polymorphisme permet ceci:
+1) Faire une instance de classe Enfant
+2) Faire une référence de classe Parent et lui affecter l'instance de classe Enfant
+3) Si l'on passe ensuite cette référence d'instance dans une fonction prenant 
+comme parametre une référence de classe Parent et que dans cette fonction, 
+une fonction membre de l'instance est appelée, le polymorphisme permettera 
+de connaitre la classe "reel" de la référence de l'instance et d'utiliser 
+la bonne fonction soit celle de l'enfant même si son type est celle de la classe Parent.
+Pour rendre cela possible, il faut que le prototype de la fonction membre dans la 
+classe Parent soit virtual.
+
 Cette exercice demande de créer cinq classes
 1) La classe Animal (base)
 	 Attribut std::string	type
@@ -49,6 +60,8 @@ Cette exercice demande de créer cinq classes
 Ensuite, via le main, il faut démontrer que si l'on utilise instance de classe X
 	mais avec le type de la classe de base, il est possible d'utiliser une Fonction
 	de la classe de base et d'avoir un résultat selon son type.
+Preuve: makeSound est virtual, les réréfences de classe font le bruit de leur affectation.
+
 
 Finalement, il faut démontrer la mauvaise méthode avec les classe wrong.
 
