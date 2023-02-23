@@ -187,4 +187,4 @@ re:			fclean all
 
 #PHONY--------------------------------------------------------------------------
 
-.PHONY:				all clean fclean re init goal test art leak
+.PHONY:				all clean fclean re init goal test art leak colors

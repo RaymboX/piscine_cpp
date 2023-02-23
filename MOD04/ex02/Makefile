@@ -34,6 +34,29 @@ HEADERS			=	AAnimal.hpp \
 					WrongCat.hpp \
 					Brain.hpp
 
+#COLORS FILE--------------------------------------------------------------------
+COLORS_FILE = colors.hpp
+
+define COLORS_FILE_CONTENT
+#pragma once
+#ifndef COLORS_HPP
+# define COLORS_HPP
+
+# define COLORDEF "\033[0m"
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define CYAN "\033[1;34m"
+# define PURPLE "\033[1;35m"
+# define BLUE "\033[1;36m"
+# define WHITE "\033[1;37m"
+
+#endif
+endef
+export COLORS_FILE_CONTENT
+#-------------------------------------------------------------------------------
+
+
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
@@ -114,8 +137,7 @@ $(OBJS_DIR)/%.o:%.cpp $(HEADERS)
 
 #RULES--------------------------------------------------------------------------
 
-all: 	init $(NAME)
-
+all: 	init colors $(NAME)
 
 $(NAME): $(OBJS)
 			@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
@@ -125,6 +147,12 @@ $(NAME): $(OBJS)
 			
 init:
 			@mkdir -p $(OBJS_DIR)
+
+colors: $(COLORS_FILE)
+
+$(COLORS_FILE):
+			@echo "$$COLORS_FILE_CONTENT" > $(COLORS_FILE)
+			@echo "$GJ'$Rai $Yfait $Ccolors$G.$Zhpp$W"
 
 clean:
 			@$(RM) $(OBJS)
@@ -136,6 +164,7 @@ fclean: clean
 			@$(RM) $(FILE)
 			@$(RM) $(NAME)_debug
 			@$(RM) $(NAME)_debug.dSYM
+			@$(RM) $(COLORS_FILE)
 			@$(RM) $(TEST_FILES)
 			@echo "$RExecutable $(NAME) deleted$W"
 

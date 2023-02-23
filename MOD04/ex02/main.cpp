@@ -46,7 +46,7 @@ int main(void)
 	aanimal_dog_ptr->makeSound();
 	aanimal_cat_ptr->makeSound();
 
-	std::cout << WHITE << "\nNow they thinking about what they said."  << std::endl;
+	std::cout << WHITE << "\nNow they thinking about what they said." << std::endl;
 	dog_ptr->getBrain().setIdea("I said woof!", 1);
 	cat_ptr->getBrain().setIdea("I said miaw!", 45);
 
