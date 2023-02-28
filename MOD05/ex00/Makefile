@@ -52,7 +52,7 @@ define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 05 _ EX00 _ MAMAN, QUAND JE SERAI GRAND(E), JE SERAI BUREAUCRATE!
 
-Faire une classe Bureaucrate avec les attributs
+Faire une classe Bureaucrat avec les attributs
 - std::string	name const
 - int			grade (de 1 (haut) à 150 (bas))
 - void			setGrade(const int grade) -> qui retourne une execption si le

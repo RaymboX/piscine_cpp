@@ -58,13 +58,7 @@ int main()
 		fry.signForm(form1);
 		std::cout << form1 << std::endl;
 		hermes.signForm(form1);
-	
-		std::cout << CYAN << "\n-----Test form copy constructor------" << std::endl;
-		Form	form2(form1);
-		std::cout << form2 << std::endl;
-		hermes.signForm(form2);
-		std::cout << form2 << std::endl;
-		std::cout << RED << "\n------Test default and copy end-------" << std::endl;
+		std::cout << RED << "\n------Test default end-------" << std::endl;
 	}
 
 	std::cout << CYAN << "\n-----Test parameter constructor grade 50------" << std::endl;
@@ -75,6 +69,13 @@ int main()
 		fry.signForm(form50);
 		hermes.signForm(form50);
 		std::cout << form50 << std::endl;
+
+		std::cout << CYAN << "\n-----Test form copy constructor------" << std::endl;
+		Form	form2(form50);
+		std::cout << form2 << std::endl;
+		hermes.signForm(form2);
+		std::cout << form2 << std::endl;
+		std::cout << RED << "\n------Test parameter and copy end-------" << std::endl;
 	}
 	catch(const Form::GradeTooHighException& e)
 	{
