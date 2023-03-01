@@ -63,7 +63,6 @@ void	formTests(Bureaucrat& bureaucrat, AForm& form)
 	std::cout << form << std::endl;
 	std::cout << WHITE << "--------EXECUTION---------" << std::endl;
 	bureaucrat.executeForm(form);
-	std::cout << WHITE << "-----FORM DESTRUCTION-----" << std::endl;
 }
 
 void	inputAndTest()
@@ -97,7 +96,7 @@ void	inputAndTest()
 	std::cout << std::endl;
 	formTests(bureaucrat, *form);
 
-	std::cout << WHITE << "\n---CLASS DESTRUCTION---" << COLORDEF << std::endl;
+	std::cout << WHITE << "----CLASS DESTRUCTION-----" << COLORDEF << std::endl;
 	delete form;
 }
 
