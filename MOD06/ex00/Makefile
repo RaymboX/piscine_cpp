@@ -207,7 +207,7 @@ test:
 			@echo "$Z\n----TEST :$YNEGATIVE FLOAT ----$W"
 			./$(NAME) -433.4f
 			@echo "$Z\n----TEST :$YPLUS SIGN FLOAT ----$W"
-			./$(NAME) +54.32
+			./$(NAME) +54.32f
 			@echo "$Z\n----TEST :$YPRECISION FLOAT ----$W"
 			./$(NAME) 1.12345678901234567901234567890123456789f
 			@echo "$Z\n----TEST :$YBIG FLOAT ----$W"

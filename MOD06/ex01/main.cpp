@@ -16,15 +16,22 @@ int main()
 	srand(time(NULL) * time(NULL));
 	data.age = rand() % 100;
 
+	std::cout << "----Valeurs de depart----" << std::endl;
+	std::cout << "Nom: " << data.nom << std::endl;
+	std::cout << "Age: " << data.age << std::endl;
+	std::cout << "Adresse de -> data                 (Data type)  : " << &data << std::endl;
+
 	ptr = serialize(&data);
 
-	std::cout << "\nAdresse de -> data        (Data type)  : " << &data << std::endl;
-	std::cout << "Adresse de -> ptr         (serialized) : " <<  ptr << std::endl;
+	std::cout << "\n----Serialized action ptr----" << std::endl;
+	std::cout << "Adresse de -> ptr from data        (serialized) : " <<  ptr << std::endl;
+	
+	std::cout << "\n----Deserialized action ptr----" << std::endl;
 	dataFromRaw = deserialize(ptr);
-	std::cout << "Adresse de -> dataFromRaw (deserialize): " << dataFromRaw << std::endl;
+	std::cout << "Adresse de -> dataFromRaw from ptr (deserialize): " << dataFromRaw << std::endl;
 
 
-	std::cout << "----Valeurs de retour----" << std::endl;
+	std::cout << "\n----Valeurs de retour----" << std::endl;
 	std::cout << "Nom: " << dataFromRaw->nom << std::endl;
 	std::cout << "Age: " << dataFromRaw->age << std::endl;
 
