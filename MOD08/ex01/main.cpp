@@ -37,7 +37,7 @@ int main()
 
 	std::cout << GREEN << "Adding data with an array {3, 100, 2, 45, 0}" << std::endl
 					   << "	and using longest and shortest function"	<< COLORDEF << std::endl;
-	int arrint[] = {3, 100, 2, 45, 0};
+	int arrint[] = {100, 100, 100, 100, 101};
 	span2.addContainer(arrint, 5);
 	std::cout << "LONGEST: " << span2.longestSpan() << std::endl;
 	std::cout << "SHORTEST: "<< span2.shortestSpan() << std::endl;
