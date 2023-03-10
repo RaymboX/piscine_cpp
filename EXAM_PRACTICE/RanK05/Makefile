@@ -71,18 +71,18 @@ define MOD00_MAIN_CONTENT
 
 int main()
 {
-  Warlock richard("Richard", "the Titled");
-
-  Dummy bob;
-  Fwoosh* fwoosh = new Fwoosh();
-
-  richard.learnSpell(fwoosh);
-
+  Warlock const richard("Richard", "Mistress of Magma");
   richard.introduce();
-  richard.launchSpell("Fwoosh", bob);
+  std::cout << richard.getName() << " - " << richard.getTitle() << std::endl;
 
-  richard.forgetSpell("Fwoosh");
-  richard.launchSpell("Fwoosh", bob);
+  Warlock* jack = new Warlock("Jack", "the Long");
+  jack->introduce();
+  jack->setTitle("the Mighty");
+  jack->introduce();
+
+  delete jack;
+
+  return (0);
 }
 endef
 export MOD00_MAIN_CONTENT
@@ -329,42 +329,46 @@ export MOD01_FWOOSH_CPP_CONTENT
 
 MOD01_WARLOCK_HPP_FILE = $(MOD01_FOLDER)/Warlock.hpp
 define MOD01_WARLOCK_HPP_CONTENT
-#ifndef WARLOCK_HPP
-# define WARLOCK_HPP
+#include "Warlock.hpp"
 
-# include <iostream>
-# include <map>
-
-# include "ASpell.hpp"
-# include "ATarget.hpp"
-
-class ASpell;
-class ATarget;
-
-class Warlock
+Warlock::Warlock(const std::string& name, const std::string& title): _name(name), _title(title)
 {
-private:
-	std::string			_name;
-	std::string			_title;
-	std::map<std::string, ASpell*>	_spells;
-public:
-						Warlock(const std::string& name, const std::string& title);
-	virtual				~Warlock();
+	std::cout << this->_name << ": This looks like another boring day." << std::endl;
+}
 
-	const std::string&	getName() const;
-	const std::string&	getTitle() const;
+Warlock::~Warlock()
+{
+	std::cout << this->_name << ": My job here is done!" << std::endl;
+}
 
-	void				setTitle(const std::string& title);
-	
-	void				introduce() const;
+const std::string&	Warlock::getName() const {return this->_name;}
+const std::string&	Warlock::getTitle() const {return this->_title;}
 
-	void				learnSpell(ASpell* spell_ptr);
-	void				forgetSpell(std::string spellName);
-	void				launchSpell(std::string spellName, const ATarget& target);
-};
+void	Warlock::setTitle(const std::string& title) {this->_title = title;}
 
+void				Warlock::introduce() const
+{
+	std::cout << this->_name << ": I am "
+			  << this->_name << ", " 
+			  << this->_title << "!"
+			  << std::endl;
+}
 
-#endif
+void	Warlock::learnSpell(ASpell* spell_ptr)
+{
+	this->_spells.insert(std::pair<std::string, ASpell*>(spell_ptr->getName(), spell_ptr));
+}
+
+void	Warlock::forgetSpell(std::string spellName)
+{
+	if (this->_spells.find(spellName) != this->_spells.end())
+		this->_spells.erase(this->_spells.find(spellName));
+}
+void	Warlock::launchSpell(std::string spellName, const ATarget& target)
+{
+	if (this->_spells.find(spellName) != this->_spells.end())
+		this->_spells.find(spellName)->second->launch(target);
+}
 endef
 export MOD01_WARLOCK_HPP_CONTENT
 
