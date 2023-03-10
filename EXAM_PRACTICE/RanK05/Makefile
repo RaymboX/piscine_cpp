@@ -118,7 +118,7 @@ public:
 	const std::string&	getName() const;
 	const std::string&	getEffects() const;
 
-	void				launch(con st ATarget& target) const;
+	void				launch(const ATarget& target) const;
 
 	virtual ASpell*		clone() const = 0;
 };
@@ -329,46 +329,42 @@ export MOD01_FWOOSH_CPP_CONTENT
 
 MOD01_WARLOCK_HPP_FILE = $(MOD01_FOLDER)/Warlock.hpp
 define MOD01_WARLOCK_HPP_CONTENT
-#include "Warlock.hpp"
+#ifndef WARLOCK_HPP
+# define WARLOCK_HPP
 
-Warlock::Warlock(const std::string& name, const std::string& title): _name(name), _title(title)
+# include <iostream>
+# include <map>
+
+# include "ASpell.hpp"
+# include "ATarget.hpp"
+
+class ASpell;
+class ATarget;
+
+class Warlock
 {
-	std::cout << this->_name << ": This looks like another boring day." << std::endl;
-}
+private:
+	std::string			_name;
+	std::string			_title;
+	std::map<std::string, ASpell*>	_spells;
+public:
+						Warlock(const std::string& name, const std::string& title);
+	virtual				~Warlock();
 
-Warlock::~Warlock()
-{
-	std::cout << this->_name << ": My job here is done!" << std::endl;
-}
+	const std::string&	getName() const;
+	const std::string&	getTitle() const;
 
-const std::string&	Warlock::getName() const {return this->_name;}
-const std::string&	Warlock::getTitle() const {return this->_title;}
+	void				setTitle(const std::string& title);
+	
+	void				introduce() const;
 
-void	Warlock::setTitle(const std::string& title) {this->_title = title;}
+	void				learnSpell(ASpell* spell_ptr);
+	void				forgetSpell(std::string spellName);
+	void				launchSpell(std::string spellName, const ATarget& target);
+};
 
-void				Warlock::introduce() const
-{
-	std::cout << this->_name << ": I am "
-			  << this->_name << ", " 
-			  << this->_title << "!"
-			  << std::endl;
-}
 
-void	Warlock::learnSpell(ASpell* spell_ptr)
-{
-	this->_spells.insert(std::pair<std::string, ASpell*>(spell_ptr->getName(), spell_ptr));
-}
-
-void	Warlock::forgetSpell(std::string spellName)
-{
-	if (this->_spells.find(spellName) != this->_spells.end())
-		this->_spells.erase(this->_spells.find(spellName));
-}
-void	Warlock::launchSpell(std::string spellName, const ATarget& target)
-{
-	if (this->_spells.find(spellName) != this->_spells.end())
-		this->_spells.find(spellName)->second->launch(target);
-}
+#endif
 endef
 export MOD01_WARLOCK_HPP_CONTENT
 
