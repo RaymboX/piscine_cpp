@@ -246,14 +246,13 @@ MOD01_DUMMY_CPP_FILE = $(MOD01_FOLDER)/Dummy.cpp
 define MOD01_DUMMY_CPP_CONTENT
 #include "Dummy.hpp"
 
-Dummy::Dummy()
-{
-	this->type = "Target Practice Dummy";
-}
+Dummy::Dummy(): ATarget("Target Practice Dummy"){}
+
 Dummy::Dummy(const std::string& type):
 		ATarget(type){}
 
-Dummy::Dummy(const Dummy& rhs){*this = rhs;}
+Dummy::Dummy(const Dummy& rhs):
+		ATarget(rhs) {}
 
 Dummy&	Dummy::operator=(const Dummy& rhs)
 {
@@ -301,15 +300,13 @@ MOD01_FWOOSH_CPP_FILE = $(MOD01_FOLDER)/Fwoosh.cpp
 define MOD01_FWOOSH_CPP_CONTENT
 #include "Fwoosh.hpp"
 
-Fwoosh::Fwoosh()
-{
-	this->name = "Fwoosh";
-	this->effects = "fwooshed";
-}
+Fwoosh::Fwoosh(): ASpell("Fwoosh", "fwooshed"){}
+
 Fwoosh::Fwoosh(const std::string& name, const std::string& effects):
 		ASpell(name, effects){}
 
-Fwoosh::Fwoosh(const Fwoosh& rhs){*this = rhs;}
+Fwoosh::Fwoosh(const Fwoosh& rhs):
+		ASpell(rhs) {}
 
 Fwoosh&	Fwoosh::operator=(const Fwoosh& rhs)
 {
@@ -439,7 +436,73 @@ int main()
 }
 endef
 export MOD01_MAIN_CONTENT
+
+MOD01_COMPARE_FILE = $(MOD01_FOLDER)/compare
+define MOD01_COMPARE_CONTENT
+Richard: This looks like another boring day.
+Richard: I am Richard, the Titled!
+Target Practice Dummy has been fwooshed!
+Richard: My job here is done!
+endef
+export MOD01_COMPARE_CONTENT
 #------------------------------------------------------------------------------
+
+#MODULE 00---------------------------------------------------------------------
+MOD02_FOLDER = 42_EXAM/rendu/cpp_module02
+
+COMPILE_MOD02 = g++ -Wextra -Werror -Wall ASpell.cpp ATarget.cpp Fwoosh.cpp Dummy.cpp Fireball.cpp BrickWall.cpp Polymorph.cpp SpellBook.cpp TargetGenerator.cpp Warlock.cpp main.cpp
+
+MOD02_MAIN_FILE = $(MOD02_FOLDER)/main.cpp
+define MOD02_MAIN_CONTENT
+#include "Warlock.hpp"
+#include "ASpell.hpp"
+#include "ATarget.hpp"
+#include "Fwoosh.hpp"
+#include "Dummy.hpp"
+#include "Polymorph.hpp"
+#include "BrickWall.hpp"
+#include "Fireball.hpp"
+#include "SpellBook.hpp"
+#include "TargetGenerator.hpp"
+
+int main()
+{
+  Warlock richard("Richard", "foo");
+  richard.setTitle("Hello, I'm Richard the Warlock!");
+  BrickWall model1;
+
+  Polymorph* polymorph = new Polymorph();
+  TargetGenerator tarGen;
+
+  tarGen.learnTargetType(&model1);
+  richard.learnSpell(polymorph);
+
+  Fireball* fireball = new Fireball();
+
+  richard.learnSpell(fireball);
+
+  ATarget* wall = tarGen.createTarget("Inconspicuous Red-brick Wall");
+
+  richard.introduce();
+  richard.launchSpell("Polymorph", *wall);
+  richard.launchSpell("Fireball", *wall);
+}
+endef
+export MOD02_MAIN_CONTENT
+
+MOD02_COMPARE_FILE = $(MOD02_FOLDER)/compare
+define MOD02_COMPARE_CONTENT
+Richard: This looks like another boring day.$
+Richard: I am Richard, Hello, I'm Richard the Warlock!!$
+Inconspicuous Red-brick Wall has been turned into a critter!$
+Inconspicuous Red-brick Wall has been burnt to a crisp!$
+Richard: My job here is done!$
+endef
+export MOD02_COMPARE_CONTENT
+
+
+
+#-------------------------------------------------------------------------------
 
 mod00:
 	@$(MKDIR) $(MOD00_FOLDER)
@@ -464,3 +527,14 @@ main00:
 
 main01:
 	@echo "$$MOD01_MAIN_CONTENT" > $(MOD01_MAIN_FILE)
+
+test01:
+	@make main01
+	@echo "$$MOD01_COMPARE_CONTENT" > $(MOD01_COMPARE_FILE)
+	@cd 42_EXAM/rendu/cpp_module01 && g++ -Wextra -Werror -Wall ASpell.cpp ATarget.cpp Fwoosh.cpp Dummy.cpp Warlock.cpp main.cpp && ./a.out >result && rm a.out && diff compare result && rm main.cpp && rm compare && rm result && echo "TEST PASS"
+
+
+test02:
+	@echo "$$MOD02_MAIN_CONTENT" > $(MOD02_MAIN_FILE)
+	@echo "$$MOD02_COMPARE_CONTENT" > $(MOD02_COMPARE_FILE)
+	@cd 42_EXAM/rendu/cpp_module02 && $(COMPILE_MOD02) && ./a.out >result && rm a.out && diff compare result && rm main.cpp && rm compare && rm result && echo "TEST PASS"
