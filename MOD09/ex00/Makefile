@@ -11,17 +11,19 @@
 
 #PROGRAM NAME-------------------------------------------------------------------
 
-NAME 			=	
+NAME 			=	btc
 #CPP_LIST-----------------------------------------------------------------------
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
+					BitcoinExchange.cpp
 
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
-HEADERS			=	
+HEADERS			=	colors.hpp \
+					BitcoinExchange.hpp
 
 
 
@@ -1715,7 +1717,8 @@ OBJS_DIR		= 	./obj
 
 #SYSTEM VAR---------------------------------------------------------------------
 
-CFLAGS 			= 	-Wall -Werror -Wextra -std=c++98
+CFLAGS 			= 	-Wall -Werror -Wextra
+#CFLAGS			+=	-std=c++98
 CC				= 	g++
 CC_DEBUG		=	g++ -g
 

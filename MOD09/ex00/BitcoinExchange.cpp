@@ -26,7 +26,7 @@ void	BitcoinExchange::routine()
 
 void	BitcoinExchange::importDatacsv()
 {
-	std::ifstream&	ifs_data = openFile(DATACSVFILE);
+	std::ifstream	ifs_data = openFile(DATACSVFILE);
 	std::string				ifs_line;
 	std::getline(ifs_data, ifs_line);
 	while (std::getline(ifs_data, ifs_line))
@@ -44,7 +44,7 @@ float	BitcoinExchange::extractDataValue(const std::string& data_line) const
 
 void	BitcoinExchange::iterInput() const
 {
-	std::ifstream&	ifs_data = openFile(_inputFile);
+	std::ifstream	ifs_data = openFile(_inputFile);
 	std::string				ifs_line;
 	std::getline(ifs_data, ifs_line);
 	while (std::getline(ifs_data, ifs_line))
@@ -84,7 +84,7 @@ float	BitcoinExchange::dataDateValue(const std::string& input_line) const
 
 //FILE OPENING##################################################################
 
-std::ifstream&	BitcoinExchange::openFile(const std::string& fileToOpen) const
+std::ifstream	BitcoinExchange::openFile(const std::string& fileToOpen) const
 {
 	std::ifstream	ifs(fileToOpen);
 	if (!ifs.is_open())
@@ -145,7 +145,7 @@ void	BitcoinExchange::goodDay(const int& year, const int& month, const int& day)
 
 bool	BitcoinExchange::isYearBissextile(const int& year) const
 {
-	if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0)
+	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 		return true;
 	return false;
 }
@@ -172,7 +172,7 @@ void	BitcoinExchange::validFloat(const std::string& value_str) const
 
 void	BitcoinExchange::validDotDigit(const std::string& value_str) const
 {
-	for (int i = 0; i < value_str.length(); i++)
+	for (size_t i = 0; i < value_str.length(); i++)
 	{
 		if (!isdigit(value_str.at(i)) && value_str.at(i) != '.')
 			throw BitcoinExchange::FloatNotValid();
@@ -189,7 +189,7 @@ void	BitcoinExchange::validFloatLength(const std::string& value_str) const
 void	BitcoinExchange::validNbDot(const std::string& value_str) const
 {
 	int	nbDot = 0;
-	for (int i = 0; i < value_str.length(); i++)
+	for (size_t i = 0; i < value_str.length(); i++)
 	{
 		if (value_str.at(i) != '.')
 			nbDot++;
@@ -207,7 +207,7 @@ void	BitcoinExchange::validStartEndFloat(const std::string& value_str) const
 void	BitcoinExchange::validFloatSize(const std::string& value_str) const
 {
 	float value = std::stof(value_str);
-	if (value <= 0 || value > 1000)
+	if (value < 0 || value > 1000)
 		throw BitcoinExchange::FloatNotValid();
 }
 

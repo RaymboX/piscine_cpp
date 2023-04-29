@@ -4,7 +4,7 @@
 # include <iostream>
 # include <map>
 # include <cctype>
-# include <except.h>
+# include <stdexcept>
 # include <fstream>
 # include <string>
 
@@ -34,7 +34,7 @@ private:
 
 //FILE OPENING##################################################################
 
-	std::ifstream&			openFile(const std::string& fileToOpen) const;
+	std::ifstream			openFile(const std::string& fileToOpen) const;
 
 //DATE PARSING##################################################################
 	
