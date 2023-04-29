@@ -8,6 +8,8 @@
 # include <fstream>
 # include <string>
 
+# include "colors.hpp"
+
 #define	DATACSVFILE "data.csv"
 
 class	BitcoinExchange
@@ -21,39 +23,37 @@ private:
 //DATACSVIMPORT#################################################################
 
 	void					importDatacsv();
-	void					addDataMap(const std::string& line);
+	float					extractDataValue(const std::string& data_line) const;
+
+//INPUT#########################################################################
+
+	void					iterInput() const;
+	void					coutAnswer(const std::string& input_line) const;
+	float					extractInputValue(const std::string& input_line) const;
+	float					dataDateValue(const std::string& input_line) const;
 
 //FILE OPENING##################################################################
 
-	std::ifstream&	openFile(const std::string& fileToOpen) const;
-
+	std::ifstream&			openFile(const std::string& fileToOpen) const;
 
 //DATE PARSING##################################################################
 	
-	int						extractDateFromStr(const std::string& date_str) const;
+	int						convertedDate(const std::string& date_str) const;
 	void					goodDateFormat(const std::string& date_str) const;
-	int						convertDate(const std::string& date_str) const;
 	void					goodMonth(const int& month) const;
 	void					goodDay(const int& year, const int& month, const int& day) const;
 	bool					isYearBissextile(const int& year) const;
 
-//FLOAT PARSING#################################################################
+//POSITIVE FLOAT PARSING########################################################
 
-	float					extractDataValue(const std::string& data_line) const;
-	
-	float					extractValue(const std::string& value_str, const size_t pos) const;
+	float					extractValue(const std::string& line, const size_t pos) const;
+	void					validFloat(const std::string& value_str) const;
+	void					validDotDigit(const std::string& value_str) const;
+	void					validNbDot(const std::string& value_str) const;
+	void					validFloatLength(const std::string& value_str) const;
+	void					validStartEndFloat(const std::string& value_str) const;
 
-
-
-							BitcoinExchange();
-							BitcoinExchange(const BitcoinExchange& rhs);
-	BitcoinExchange&		operator=(const BitcoinExchange& rhs);
-public:
-							BitcoinExchange(const char* inputFile);
-	virtual					~BitcoinExchange();
-
-
-
+//EXCEPTIONS####################################################################
 
 	class	DateFormatNotValid: public std::exception
 	{
@@ -65,12 +65,7 @@ public:
 	public:	
 		virtual const char*	what() const throw();
 	};
-	class	FormatNoDelimiter: public std::exception
-	{
-	public:	
-		virtual const char*	what() const throw();
-	};
-	class	FloatNotValid: public std::exception
+		class	FloatNotValid: public std::exception
 	{
 	public:	
 		virtual const char*	what() const throw();
@@ -85,6 +80,20 @@ public:
 	public:	
 		virtual const char*	what() const throw();
 	};
+
+
+//CONSTRUCTOR###################################################################
+
+							BitcoinExchange();
+							BitcoinExchange(const BitcoinExchange& rhs);
+	BitcoinExchange&		operator=(const BitcoinExchange& rhs);
+public:
+							BitcoinExchange(const char* inputFile);
+	virtual					~BitcoinExchange();
+
+	const std::string&		getInputFile() const;
+
+
 
 };
 

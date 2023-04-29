@@ -15,15 +15,10 @@ void	BitcoinExchange::routine()
 {
 	try
 	{
-		//importData
-		//inputvalidation
-		//iterInput
+		importDatacsv();
+		iterInput();
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-	
+	catch(const std::exception& e) {std::cerr << RED << e.what() << COLORDEF << '\n';}
 }
 
 
@@ -35,7 +30,55 @@ void	BitcoinExchange::importDatacsv()
 	std::string				ifs_line;
 	std::getline(ifs_data, ifs_line);
 	while (std::getline(ifs_data, ifs_line))
-		_datacsv.insert(std::pair<int, float>(convertDate(ifs_line), ))
+		_datacsv.insert(std::pair<int, float>(convertedDate(ifs_line), extractDataValue(ifs_line)));
+}
+
+float	BitcoinExchange::extractDataValue(const std::string& data_line) const
+{
+	if (data_line.at(10) != ',')
+		throw BitcoinExchange::FileFormatNotValid();
+	return extractValue(data_line, 11);
+}
+
+//INPUT#########################################################################
+
+void	BitcoinExchange::iterInput() const
+{
+	std::ifstream&	ifs_data = openFile(_inputFile);
+	std::string				ifs_line;
+	std::getline(ifs_data, ifs_line);
+	while (std::getline(ifs_data, ifs_line))
+	{
+		try
+		{
+			coutAnswer(ifs_line);
+		}
+		catch(const std::exception& e){std::cerr << RED << e.what() << COLORDEF << '\n';}
+	}
+}
+
+void	BitcoinExchange::coutAnswer(const std::string& input_line) const
+{
+	float	inputValue = extractInputValue(input_line);
+	float	dataValue = dataDateValue(input_line);
+	std::cout 	<< input_line.substr(0, 10) 
+				<< " => " << inputValue 
+				<< " = " << dataValue
+				<< std::endl;
+}
+
+float	BitcoinExchange::extractInputValue(const std::string& input_line) const
+{
+	if (input_line.substr(10) != " | ")
+		throw BitcoinExchange::FileFormatNotValid();
+	return extractValue(input_line, 13);
+}
+
+float	BitcoinExchange::dataDateValue(const std::string& input_line) const
+{
+	if (_datacsv.upper_bound(convertedDate(input_line)) != _datacsv.begin())
+		return	_datacsv.upper_bound(convertedDate(input_line))->second;
+	return 0;
 }
 
 
@@ -57,7 +100,7 @@ std::ifstream&	BitcoinExchange::openFile(const std::string& fileToOpen) const
 
 //DATE PARSING##################################################################
 
-int	BitcoinExchange::convertDate(const std::string& date_str) const
+int	BitcoinExchange::convertedDate(const std::string& date_str) const
 {
 	goodDateFormat(date_str);
 	int year = std::stoi(date_str.substr(0, 4));
@@ -107,13 +150,57 @@ bool	BitcoinExchange::isYearBissextile(const int& year) const
 	return false;
 }
 
-//FLOAT PARSING#################################################################
+//POSITIVE FLOAT PARSING########################################################
 
-float	BitcoinExchange::extractDataValue(const std::string& data_line) const
+
+
+float	BitcoinExchange::extractValue(const std::string& line, const size_t pos) const
 {
-	if (data_line.at(10) != ',')
-		throw BitcoinExchange::FileFormatNotValid();
-	return extractValue(data_line, 11);
+	std::string	value_str = line.substr(pos);
+	validFloat(value_str);
+	return	std::stof(value_str);
+}
+
+void	BitcoinExchange::validFloat(const std::string& value_str) const
+{
+	validFloatLength(value_str);
+	validDotDigit(value_str);
+	validNbDot(value_str);
+	validStartEndFloat(value_str);
+}
+
+void	BitcoinExchange::validDotDigit(const std::string& value_str) const
+{
+	for (int i = 0; i < value_str.length(); i++)
+	{
+		if (!isdigit(value_str.at(i)) && value_str.at(i) != '.')
+			throw BitcoinExchange::FloatNotValid();
+	}
+}
+
+void	BitcoinExchange::validFloatLength(const std::string& value_str) const
+{
+	if(value_str.length() == 0)
+		throw BitcoinExchange::FloatNotValid();
+}
+
+
+void	BitcoinExchange::validNbDot(const std::string& value_str) const
+{
+	int	nbDot = 0;
+	for (int i = 0; i < value_str.length(); i++)
+	{
+		if (value_str.at(i) != '.')
+			nbDot++;
+	}
+	if (nbDot > 1)
+		throw BitcoinExchange::FloatNotValid();
+}
+
+void	BitcoinExchange::validStartEndFloat(const std::string& value_str) const
+{
+	if (!isdigit(value_str.at(0)) && !isdigit(value_str.at(value_str.length() - 1)))
+		throw BitcoinExchange::FloatNotValid();
 }
 
 
@@ -127,13 +214,9 @@ const char*	BitcoinExchange::DateValueNotValid::what() const throw()
 {
 	return ("date value not valid");
 }
-const char*	BitcoinExchange::FormatNoDelimiter::what() const throw()
-{
-	return ("format delimiter not valid");
-}
 const char*	BitcoinExchange::FloatNotValid::what() const throw()
 {
-	return ("float not valid");
+	return ("format not valid for positive float");
 }
 const char*	BitcoinExchange::FileNotValid::what() const throw()
 {
