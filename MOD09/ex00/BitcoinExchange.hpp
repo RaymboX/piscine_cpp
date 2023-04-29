@@ -52,6 +52,7 @@ private:
 	void					validNbDot(const std::string& value_str) const;
 	void					validFloatLength(const std::string& value_str) const;
 	void					validStartEndFloat(const std::string& value_str) const;
+	void					validFloatSize(const std::string& value_str) const;
 
 //EXCEPTIONS####################################################################
 

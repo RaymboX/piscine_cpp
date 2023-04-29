@@ -158,7 +158,7 @@ float	BitcoinExchange::extractValue(const std::string& line, const size_t pos) c
 {
 	std::string	value_str = line.substr(pos);
 	validFloat(value_str);
-	return	std::stof(value_str);
+	return std::stof(value_str);
 }
 
 void	BitcoinExchange::validFloat(const std::string& value_str) const
@@ -167,6 +167,7 @@ void	BitcoinExchange::validFloat(const std::string& value_str) const
 	validDotDigit(value_str);
 	validNbDot(value_str);
 	validStartEndFloat(value_str);
+	validFloatSize(value_str);
 }
 
 void	BitcoinExchange::validDotDigit(const std::string& value_str) const
@@ -180,7 +181,7 @@ void	BitcoinExchange::validDotDigit(const std::string& value_str) const
 
 void	BitcoinExchange::validFloatLength(const std::string& value_str) const
 {
-	if(value_str.length() == 0)
+	if(value_str.length() == 0 && value_str.length() > 4)
 		throw BitcoinExchange::FloatNotValid();
 }
 
@@ -203,6 +204,12 @@ void	BitcoinExchange::validStartEndFloat(const std::string& value_str) const
 		throw BitcoinExchange::FloatNotValid();
 }
 
+void	BitcoinExchange::validFloatSize(const std::string& value_str) const
+{
+	float value = std::stof(value_str);
+	if (value <= 0 || value > 1000)
+		throw BitcoinExchange::FloatNotValid();
+}
 
 
 
