@@ -1704,12 +1704,55 @@ TEST_NAME		=
 #TEST_CPP_LIST
 TEST_SRCS		=	
 
-TEST_FILES		=	
+TEST_FILE		=	input_fail_test.txt
+TEST_FILE2		=	subject_input_test.txt
 
 #MAINTEST-----------------------------------------------------------------------
+define SUBJECTINPUT_CONTENT
+date | value
+2011-01-03 | 3
+2011-01-03 | 2
+2011-01-03 | 1
+2011-01-03 | 1.2
+2011-01-09 | 1
+2012-01-11 | -1
+2001-42-42
+2012-01-11 | 1
+2012-01-11 | 2147483648
+endef
+export SUBJECTINPUT_CONTENT
 
+define INPUTFAIL_CONTENT
+wrong first line
+date format error
+2020-01-01 | 3
+2020 -01-01 | 3
+ 2020-01-01 | 3
+20200101 | 3
+2020/01/01 | 3
+2020-1-1 | 3
+date value error
+2020-13-01 | 2
+2020-01-32 | 2
+2020-04-31 | 1
+2023-02-29 | 1
+2024-02-29 | 1
+delimiter error
+2020-01-01|1
+2020-01-01 |1
+2020-01-01| 1
+value error
+2020-01-01 | 
+2020-01-01 | .2
+2020-01-01 | 2.
+2020-01-01 | 2.2.
+2020-01-01 | 2.2.2
+2020-01-01 | -2
+2020-01-01 | 1001
+2020-01-01 | 2f2
 
-
+endef
+export INPUTFAIL_CONTENT
 #DIRECTORY----------------------------------------------------------------------
 
 OBJS_DIR		= 	./obj
@@ -1771,7 +1814,8 @@ fclean: clean
 			@$(RM) $(FILE)
 			@$(RM) $(NAME)_debug
 			@$(RM) $(NAME)_debug.dSYM
-			@$(RM) $(TEST_FILES)
+			@$(RM) $(TEST_FILE)
+			@$(RM) $(TEST_FILE2)
 			@$(RM) $(COLORS_FILE)
 			@$(RM) $(DATACSV_FILE)
 			@echo "$RExecutable $(NAME) deleted$W"
@@ -1785,8 +1829,23 @@ goal:
 leak:
 			$(LEAK_CMD) ./$(NAME)
 
-test:
-			
+test: $(TEST_FILE) $(TEST_FILE2)
+			cat $(TEST_FILE2)
+			@echo "$Y\n#########TEST DU SUJET#############\n$W"
+			./btc $(TEST_FILE2)			
+			@read _
+			@echo "$Y\n#########FAIL CASES TESTS#############\n$W"
+			cat $(TEST_FILE)
+			./btc $(TEST_FILE)
+
+
+$(TEST_FILE):
+			@echo "$$INPUTFAIL_CONTENT" > $(TEST_FILE)
+			@echo "$G$(TEST_FILE) created!$W"
+
+$(TEST_FILE2):
+			@echo "$$SUBJECTINPUT_CONTENT" > $(TEST_FILE2)
+			@echo "$G$(TEST_FILE2) created!$W"
 
 valgrind:
 			$(VALGRIND_CMD) ./$(NAME)

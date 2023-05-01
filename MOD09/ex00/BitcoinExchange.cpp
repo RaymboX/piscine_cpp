@@ -34,7 +34,7 @@ void	BitcoinExchange::importDatacsv()
 
 float	BitcoinExchange::extractDataValue(const std::string& data_line) const
 {
-	if (data_line.length() > 10 && data_line.at(10) != ',')
+	if (data_line.length() < 11 || data_line.at(10) != ',')
 		throw BitcoinExchange::LineFormatNotValid(data_line.c_str());
 	return stofValidRangeStrict(data_line.substr(11), 0, 999999999);
 }
@@ -47,12 +47,12 @@ void	BitcoinExchange::iterInput() const
 	ss_input << openFile(_inputFile);
 	std::string	input_line;
 	std::getline(ss_input, input_line);
+	if (input_line != "date | value")
+		std::cout << RED << "Error: First line format not valid: " << input_line << COLORDEF << std::endl;
 	while (std::getline(ss_input, input_line))
 	{
 		try
-		{
-			coutAnswer(input_line);
-		}
+		{coutAnswer(input_line);}
 		catch(const std::exception& e){std::cerr << RED << e.what() << COLORDEF << '\n';}
 	}
 }
@@ -63,13 +63,13 @@ void	BitcoinExchange::coutAnswer(const std::string& input_line) const
 	float	dataValue = dataDateValue(input_line);
 	std::cout 	<< input_line.substr(0, 10) 
 				<< " => " << inputValue 
-				<< " = " << dataValue
+				<< " = " << dataValue * inputValue
 				<< std::endl;
 }
 
 float	BitcoinExchange::extractInputValue(const std::string& input_line) const
 {
-	if (input_line.length() > 10 && input_line.substr(10) != " | ")
+	if (input_line.length() < 13 || input_line.substr(10, 3) != " | ")
 		throw BitcoinExchange::LineFormatNotValid(input_line.c_str());
 	return stofValidRangeStrict(input_line.substr(13), 0, 1000);
 }
@@ -77,7 +77,7 @@ float	BitcoinExchange::extractInputValue(const std::string& input_line) const
 float	BitcoinExchange::dataDateValue(const std::string& input_line) const
 {
 	if (_datacsv.upper_bound(convertedDate(input_line)) != _datacsv.begin())
-		return	_datacsv.upper_bound(convertedDate(input_line))->second;
+		return	std::prev(_datacsv.upper_bound(convertedDate(input_line)))->second;
 	return 0;
 }
 
@@ -204,13 +204,13 @@ void	BitcoinExchange::validNbDot(const std::string& value_str) const
 			nbDot++;
 	}
 	if (nbDot > 1)
-		throw BitcoinExchange::FloatNotValid("Too many dot => " + value_str + "nb dot: " + std::to_string(nbDot));
+		throw BitcoinExchange::FloatNotValid("Too many dots => " + value_str);
 }
 
 void	BitcoinExchange::validStartEndFloat(const std::string& value_str) const
 {
-	if (!isdigit(value_str.at(firstNegative(value_str))) && !isdigit(value_str.at(value_str.length() - 1)))
-		throw BitcoinExchange::FloatNotValid("must start and finisht with digit => " + value_str);
+	if (!isdigit(value_str.at(firstNegative(value_str))) || !isdigit(value_str.at(value_str.length() - 1)))
+		throw BitcoinExchange::FloatNotValid("must start and finish with digit => " + value_str);
 }
 
 void	BitcoinExchange::validRange(const std::string& value_str, const float& min, const float& max) const
@@ -245,11 +245,11 @@ const char*	BitcoinExchange::LineFormatNotValid::what() const throw() {return _m
 
 
 BitcoinExchange::FloatNotValid::FloatNotValid(const std::string& value):
-	_message("Error: float not valid: " + value) {}
+	_message("Error: value not valid: " + value) {}
 BitcoinExchange::FloatNotValid::~FloatNotValid() throw() {}
 const char*	BitcoinExchange::FloatNotValid::what() const throw() {return _message.c_str();}
 
 BitcoinExchange::FloatNotInRange::FloatNotInRange(const std::string& value):
-	_message("Error: float not in range: " + value) {}
+	_message("Error: value not in range: " + value) {}
 BitcoinExchange::FloatNotInRange::~FloatNotInRange() throw() {}
 const char*	BitcoinExchange::FloatNotInRange::what() const throw() {return _message.c_str();}
