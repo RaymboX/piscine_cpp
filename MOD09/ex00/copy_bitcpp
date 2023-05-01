@@ -85,7 +85,7 @@ float	BitcoinExchange::dataDateValue(const std::string& input_line) const
 //FILE OPENING##################################################################
 
 std::ifstream	BitcoinExchange::openFile(const std::string& fileToOpen) const
-{
+{FloatNotValid
 	std::ifstream	ifs(fileToOpen);
 	if (!ifs.is_open())
 		throw BitcoinExchange::FileNotValid("unable to open => " + fileToOpen);

@@ -46,41 +46,72 @@ private:
 
 //POSITIVE FLOAT PARSING########################################################
 
-	float					extractValue(const std::string& line, const size_t pos) const;
+	float					stofValidRangeStrict(const std::string& value_str, const float& min, const float& max) const;
+	void					validRange(const std::string& value_str, const float& min, const float& max) const;
+	int						firstNegative(const std::string& value_str) const;
 	void					validFloat(const std::string& value_str) const;
 	void					validDotDigit(const std::string& value_str) const;
 	void					validNbDot(const std::string& value_str) const;
 	void					validFloatLength(const std::string& value_str) const;
 	void					validStartEndFloat(const std::string& value_str) const;
-	void					validFloatSize(const std::string& value_str) const;
 
 //EXCEPTIONS####################################################################
 
 	class	DateFormatNotValid: public std::exception
 	{
 	public:	
+		DateFormatNotValid(const std::string& value);
 		virtual const char*	what() const throw();
+	private:
+		std::string	_message;
 	};
+
 	class	DateValueNotValid: public std::exception
 	{
 	public:	
+		DateValueNotValid(const std::string& value);
 		virtual const char*	what() const throw();
+	private:
+		std::string	_message;
 	};
-		class	FloatNotValid: public std::exception
-	{
-	public:	
-		virtual const char*	what() const throw();
-	};
+
 	class	FileNotValid: public std::exception
 	{
 	public:	
+		FileNotValid(const std::string& value);
 		virtual const char*	what() const throw();
+	private:
+		std::string	_message;
 	};
-	class	FileFormatNotValid: public std::exception
+
+	class	LineFormatNotValid: public std::exception
 	{
 	public:	
+		LineFormatNotValid(const std::string& value);
 		virtual const char*	what() const throw();
+	private:
+		std::string	_message;
 	};
+
+ 	class	FloatNotValid: public std::exception
+	{
+	public:	
+		FloatNotValid(const std::string& value);
+		virtual const char*	what() const throw();
+	private:
+		std::string	_message;
+	};
+
+	class	FloatNotInRange: public std::exception
+	{
+	public:	
+		FloatNotInRange(const std::string& value);
+		virtual const char*	what() const throw();
+	private:
+		std::string	_message;
+	};
+
+
 
 
 //CONSTRUCTOR###################################################################
