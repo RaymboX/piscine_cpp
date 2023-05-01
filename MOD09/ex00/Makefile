@@ -30,7 +30,8 @@ HEADERS			=	colors.hpp \
 #PROJECT EXPLANATION------------------------------------------------------------
 define EXPLANATION
 --------------------------------------------------------------------------------
-MODULE 09 _ EX00 _ 
+MODULE 09 _ EX00 _ BITCOIN EXCHANGE
+Utiliser un conteneur pour conserver les informations sur les valeurs des 
 
 
 --------------------------------------------------------------------------------
@@ -45,6 +46,7 @@ OUTILS INCLUS DISPONIBLES
 make goal		-> Vulgarisation du but de l'exercice
 make pdf 		-> Ouvre le PDF sujet
 make video42		-> Ouvre la page des vidéos CPP sur l'intra
+make test		-> Execute des tests
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
 make valgrind		-> Execute le programme avec "valgrind --leak-check=full " en premice
 make tools		-> Affiche les outils disponibles (ceci)
