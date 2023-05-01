@@ -6,6 +6,7 @@
 # include <cctype>
 # include <stdexcept>
 # include <fstream>
+# include <sstream>
 # include <string>
 
 # include "colors.hpp"
@@ -17,6 +18,7 @@ class	BitcoinExchange
 private:
 	std::map<int, float>	_datacsv;
 	std::string				_inputFile;
+	std::ifstream			_ifs;
 
 	void					routine();
 
@@ -34,7 +36,7 @@ private:
 
 //FILE OPENING##################################################################
 
-	std::ifstream			openFile(const std::string& fileToOpen) const;
+	std::string		openFile(const std::string& fileToOpen) const;
 
 //DATE PARSING##################################################################
 	
@@ -60,7 +62,8 @@ private:
 	class	DateFormatNotValid: public std::exception
 	{
 	public:	
-		DateFormatNotValid(const std::string& value);
+				DateFormatNotValid(const std::string& value);
+		virtual	~DateFormatNotValid() throw();
 		virtual const char*	what() const throw();
 	private:
 		std::string	_message;
@@ -69,7 +72,8 @@ private:
 	class	DateValueNotValid: public std::exception
 	{
 	public:	
-		DateValueNotValid(const std::string& value);
+				DateValueNotValid(const std::string& value);
+		virtual	~DateValueNotValid() throw();
 		virtual const char*	what() const throw();
 	private:
 		std::string	_message;
@@ -79,6 +83,7 @@ private:
 	{
 	public:	
 		FileNotValid(const std::string& value);
+		virtual	~FileNotValid() throw();
 		virtual const char*	what() const throw();
 	private:
 		std::string	_message;
@@ -88,6 +93,7 @@ private:
 	{
 	public:	
 		LineFormatNotValid(const std::string& value);
+		virtual	~LineFormatNotValid() throw();
 		virtual const char*	what() const throw();
 	private:
 		std::string	_message;
@@ -97,6 +103,7 @@ private:
 	{
 	public:	
 		FloatNotValid(const std::string& value);
+		virtual	~FloatNotValid() throw();
 		virtual const char*	what() const throw();
 	private:
 		std::string	_message;
@@ -106,6 +113,7 @@ private:
 	{
 	public:	
 		FloatNotInRange(const std::string& value);
+		virtual	~FloatNotInRange() throw();
 		virtual const char*	what() const throw();
 	private:
 		std::string	_message;

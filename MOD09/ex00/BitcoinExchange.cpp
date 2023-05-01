@@ -24,12 +24,12 @@ void	BitcoinExchange::routine()
 
 void	BitcoinExchange::importDatacsv()
 {
-	std::ifstream	ifs_data = openFile(DATACSVFILE);
-	std::string	ifs_line;
-	std::getline(ifs_data, ifs_line);
-	while (std::getline(ifs_data, ifs_line))
-		_datacsv.insert(std::pair<int, float>(convertedDate(ifs_line), extractDataValue(ifs_line)));
-	ifs_data.close();
+	std::stringstream	ss_data;
+	ss_data << openFile(DATACSVFILE);
+	std::string	ss_line;
+	std::getline(ss_data, ss_line);
+	while (std::getline(ss_data, ss_line))
+		_datacsv.insert(std::pair<int, float>(convertedDate(ss_line), extractDataValue(ss_line)));
 }
 
 float	BitcoinExchange::extractDataValue(const std::string& data_line) const
@@ -43,18 +43,18 @@ float	BitcoinExchange::extractDataValue(const std::string& data_line) const
 
 void	BitcoinExchange::iterInput() const
 {
-	std::ifstream	ifs_data = openFile(_inputFile);
-	std::string				ifs_line;
-	std::getline(ifs_data, ifs_line);
-	while (std::getline(ifs_data, ifs_line))
+	std::stringstream	ss_input;
+	ss_input << openFile(_inputFile);
+	std::string	input_line;
+	std::getline(ss_input, input_line);
+	while (std::getline(ss_input, input_line))
 	{
 		try
 		{
-			coutAnswer(ifs_line);
+			coutAnswer(input_line);
 		}
 		catch(const std::exception& e){std::cerr << RED << e.what() << COLORDEF << '\n';}
 	}
-	ifs_data.close();
 }
 
 void	BitcoinExchange::coutAnswer(const std::string& input_line) const
@@ -84,7 +84,7 @@ float	BitcoinExchange::dataDateValue(const std::string& input_line) const
 
 //FILE OPENING##################################################################
 
-std::ifstream	BitcoinExchange::openFile(const std::string& fileToOpen) const
+std::string	BitcoinExchange::openFile(const std::string& fileToOpen) const
 {
 	std::ifstream	ifs(fileToOpen);
 	if (!ifs.is_open())
@@ -94,7 +94,10 @@ std::ifstream	BitcoinExchange::openFile(const std::string& fileToOpen) const
 		ifs.close();
 		throw BitcoinExchange::FileNotValid("not good file => " + fileToOpen);
 	}
-	return ifs;
+	std::stringstream	ss;
+	ss << ifs.rdbuf();
+	ifs.close();
+	return ss.str();
 }
 
 
@@ -221,26 +224,32 @@ void	BitcoinExchange::validRange(const std::string& value_str, const float& min,
 
 BitcoinExchange::DateFormatNotValid::DateFormatNotValid(const std::string& value):
 	_message("Error: date format not valid: " + value) {}
+BitcoinExchange::DateFormatNotValid::~DateFormatNotValid() throw() {}
 const char*	BitcoinExchange::DateFormatNotValid::what() const throw() {return _message.c_str();}
 
 BitcoinExchange::DateValueNotValid::DateValueNotValid(const std::string& value):
 	_message("Error: date value not valid: " + value) {}
+BitcoinExchange::DateValueNotValid::~DateValueNotValid() throw() {}
 const char*	BitcoinExchange::DateValueNotValid::what() const throw() {return _message.c_str();}
 
 
 BitcoinExchange::FileNotValid::FileNotValid(const std::string& value):
 	_message("Error: unable to open file: " + value) {}
+BitcoinExchange::FileNotValid::~FileNotValid() throw() {}
 const char*	BitcoinExchange::FileNotValid::what() const throw() {return _message.c_str();}
 
 BitcoinExchange::LineFormatNotValid::LineFormatNotValid(const std::string& value):
 	_message("Error: line format not valid: " + value) {}
+BitcoinExchange::LineFormatNotValid::~LineFormatNotValid() throw() {}
 const char*	BitcoinExchange::LineFormatNotValid::what() const throw() {return _message.c_str();}
 
 
 BitcoinExchange::FloatNotValid::FloatNotValid(const std::string& value):
 	_message("Error: float not valid: " + value) {}
+BitcoinExchange::FloatNotValid::~FloatNotValid() throw() {}
 const char*	BitcoinExchange::FloatNotValid::what() const throw() {return _message.c_str();}
 
 BitcoinExchange::FloatNotInRange::FloatNotInRange(const std::string& value):
 	_message("Error: float not in range: " + value) {}
+BitcoinExchange::FloatNotInRange::~FloatNotInRange() throw() {}
 const char*	BitcoinExchange::FloatNotInRange::what() const throw() {return _message.c_str();}
