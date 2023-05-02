@@ -61,3 +61,4 @@ fclean:
 		$(MAKE) -s fclean -C MOD08/ex01
 		$(MAKE) -s fclean -C MOD08/ex02
 		$(MAKE) -s fclean -C MOD09/ex00
+		$(MAKE) -s fclean -C MOD09/ex01

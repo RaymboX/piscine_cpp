@@ -16,13 +16,13 @@ NAME 			=	RPN
 #  find ./*.cpp -type f | cut -c3- | sed 's/$/ \\/'
 
 SRCS			=	main.cpp \
-
-
+					RPN.cpp
 
 #HPP_LIST-----------------------------------------------------------------------
 #  find ./*.hpp -type f | cut -c3- | sed 's/$/ \\/'
 
 HEADERS			=	colors.hpp \
+					RPN.hpp
 
 
 #PROJECT EXPLANATION------------------------------------------------------------
@@ -41,6 +41,8 @@ define TOOLS
 --------------------------------------------------------------------------------
 OUTILS INCLUS DISPONIBLES
 make goal		-> Vulgarisation du but de l'exercice
+make test		-> Lance des series de test
+make online		-> Ouvre une page de calculatrice en ligne
 make pdf 		-> Ouvre le PDF sujet
 make video42		-> Ouvre la page des vidéos CPP sur l'intra
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
@@ -146,6 +148,7 @@ fclean: clean
 			@$(RM) $(FILE)
 			@$(RM) $(NAME)_debug
 			@$(RM) $(NAME)_debug.dSYM
+			@$(RM) $(NAME)_demarche
 			@$(RM) $(TEST_FILE)
 			@$(RM) $(COLORS_FILE)
 			@$(RM) $(DATACSV_FILE)
@@ -160,7 +163,97 @@ goal:
 leak:
 			$(LEAK_CMD) ./$(NAME)
 
-test: 
+online:
+			@open https://wisdomsky.github.io/reverse-polish-notation-js-parser/
+
+demarche: all
+			@$(CC) -DDEMARCHE=1 $(CFLAGS) $(SRCS) -o $(NAME)_demarche
+
+test: demarche
+			@clear
+			@echo "$Y####TEST SERIES 1: Basic fonctionnal + demarche tests####$W"
+			./$(NAME) "1 1 +"
+			./$(NAME)_demarche "1 1 +"
+			@echo "$W"
+			./$(NAME) "1 1 + "
+			./$(NAME)_demarche "1 1 + "
+			@echo "$W"
+			./$(NAME) "2 4 -"
+			./$(NAME)_demarche "2 4 -"
+			@echo "$W"
+			./$(NAME) "4 2 *"
+			./$(NAME)_demarche "4 2 *"
+			@echo "$W"
+			./$(NAME) "4 2 /"
+			./$(NAME)_demarche "4 2 /"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 2: Pdf examples + demarche tests####$W"
+			./$(NAME) "8 9 * 9 - 9 - 9 - 4 - 1 +"
+			./$(NAME)_demarche "8 9 * 9 - 9 - 9 - 4 - 1 +"
+			@echo "$W"
+			./$(NAME) "7 7 * 7 -"
+			./$(NAME)_demarche "7 7 * 7 -"
+			@echo "$W"
+			./$(NAME) "1 2 * 2 / 2 * 2 4 - +"
+			./$(NAME)_demarche "1 2 * 2 / 2 * 2 4 - +"
+			@echo "$W"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 2: Argument quantity tests####$W"
+			./$(NAME)
+			@echo "$W"
+			./$(NAME) "1 1 +" "1 1 +"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 3: Command format tests####$W"
+			./$(NAME) " 1 1 +"
+			@echo "$W"
+			./$(NAME) "1 1 +  "
+			@echo "$W"
+			./$(NAME) "11 1 +"
+			@echo "$W"
+			./$(NAME) "1 1 ++"
+			@echo "$W"
+			./$(NAME) "1 1 %"
+			@echo "$W"
+			./$(NAME) "shjkdfjkhsd"
+			@echo "$W"
+			./$(NAME) "1 e +"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 4: Numbers & operators order tests####$W"
+			./$(NAME) "+ 1 1"
+			@echo "$W"
+			./$(NAME) "1 + 1"
+			@echo "$W"
+			./$(NAME) "1 1 * * 1"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 5: Division by 0 tests####$W"
+			./$(NAME) "1 0 /"
+			@echo "$W"
+			./$(NAME) "3 1 1 - /"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 6: Finish with remaining numbers####$W"
+			./$(NAME) "1 1 1 +"
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 7: Empty command####$W"
+			./$(NAME) ""
+			@read _
+			@clear
+			@echo "$Y####END OF TESTS####$W"
+			
+
 
 valgrind:
 			$(VALGRIND_CMD) ./$(NAME)

@@ -1834,7 +1834,8 @@ leak:
 test: $(TEST_FILE) $(TEST_FILE2)
 			cat $(TEST_FILE2)
 			@echo "$Y\n#########TEST DU SUJET#############\n$W"
-			./btc $(TEST_FILE2)			
+			./btc $(TEST_FILE2)
+			@echo "\n$Y        press enter to continue....\n$W"
 			@read _
 			@echo "$Y\n#########FAIL CASES TESTS#############\n$W"
 			cat $(TEST_FILE)
