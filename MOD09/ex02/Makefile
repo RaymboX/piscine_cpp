@@ -29,8 +29,12 @@ HEADERS			=	colors.hpp \
 define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 09 _ EX02 _  PMERGEME
-
-
+Faire un programme qui comparera la rapidité d'utilisation de deux conteneurs
+	différents en triant une liste de chiffre d'une longueur maximale à 3000
+	nombres compris entre 0 et INT_MAX passer en paramètre du programme.
+Ces deux conteneurs doivent être différents de ceux utiliser dans les deux
+	exercices précédents.
+Pour plus d'information, consultez le pdf. (make pdf)
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
@@ -42,6 +46,8 @@ define TOOLS
 OUTILS INCLUS DISPONIBLES
 make goal		-> Vulgarisation du but de l'exercice
 make test		-> Lance des series de test
+make shuf10 / shuf1000 / shuf3000
+			-> Lance le programme avec des nombres aleatoires de longueur x
 make pdf 		-> Ouvre le PDF sujet
 make video42		-> Ouvre la page des vidéos CPP sur l'intra
 make leak		-> Execute le programme avec "leaks -- atExit -- " en premice
@@ -159,12 +165,54 @@ goal:
 			@echo "$C$$EXPLANATION$W"
 
 leak:
-			$(LEAK_CMD) ./$(NAME)
+			$(LEAK_CMD) ./$(NAME) `shuf -i 1-100000 -n 10 | tr "\n" " "`
+
+shuf10:
+			./$(NAME) `shuf -i 1-10 -n 10 | tr "\n" " "`
+
+shuf1000:
+			./$(NAME) `shuf -i 1-100000 -n 1000 | tr "\n" " "`
+
+shuf3000:
+			./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
 
 test:
+			@clear
+			@echo "$Y####TEST SERIES 1: Basic fonctionnal####$W"
+			./$(NAME) `shuf -i 1-10 -n 10 | tr "\n" " "`
+			@echo "$W"
+			./$(NAME) `shuf -i 1-100000 -n 1000 | tr "\n" " "`
+			@echo "$W"
+			./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+			@echo "$W"
+			./$(NAME) 3 2 2147483647
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 2: Argument quantity tests####$W"
+			./$(NAME)
+			@echo "$W"
+			./$(NAME) `shuf -i 1-100000 -n 3001 | tr "\n" " "`
+			@echo "\n$Y        press enter to continue....\n$W"
+			@read _
+			@clear
+			@echo "$Y####TEST SERIES 3: Command format tests####$W"
+			./$(NAME) 3 2 s
+			@echo "$W"
+			./$(NAME) 3 2 -5
+			@echo "$W"
+			./$(NAME) 3 2 2147483648
+			@echo "$W"
+			./$(NAME) 3 2 83458758943759834759834759083475908
+			@echo "$W"
+			./$(NAME) 3 2 ""
+			@echo "$Y\n        ####END OF TESTS####$W"
+			@echo "\n$Y        press enter to clear....\n$W"
+			@read _
+			@clear
 
 valgrind:
-			$(VALGRIND_CMD) ./$(NAME)
+			$(VALGRIND_CMD) ./$(NAME) `shuf -i 1-100000 -n 10 | tr "\n" " "`
 
 pdf:
 			@open https://cdn.intra.42.fr/pdf/pdf/79936/en.subject.pdf

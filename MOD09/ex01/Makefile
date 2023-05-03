@@ -29,8 +29,13 @@ HEADERS			=	colors.hpp \
 define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 09 _ EX01 _  Reverse Polish Notation
-
-
+Faire un programme qui prendra en paramêtre un calcul sous forme de Reverse
+	polish notation et donner le resultat.
+Les nombres sont compris entre 0 et 9 et les opérateurs acceptés sont + - * /.
+Un conteneur doit être utiliser différent de celui du dernier exercice.
+Calcul normal:           1 + 2
+Reverse polish notation: 1 2 +
+Pour plus d'information, consutez le pdf. (make pdf)
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION
@@ -250,9 +255,10 @@ test: demarche
 			@clear
 			@echo "$Y####TEST SERIES 7: Empty command####$W"
 			./$(NAME) ""
+			@echo "$Y\n       ####END OF TESTS####$W"
+			@echo "\n$Y        press enter to clear....\n$W"
 			@read _
 			@clear
-			@echo "$Y####END OF TESTS####$W"
 			
 
 

@@ -31,9 +31,11 @@ HEADERS			=	colors.hpp \
 define EXPLANATION
 --------------------------------------------------------------------------------
 MODULE 09 _ EX00 _ BITCOIN EXCHANGE
-Utiliser un conteneur pour conserver les informations sur les valeurs des 
-
-
+Comparer une liste de date et quantité de bitcoin avec une liste de valeur par
+	date et donner le résultat.
+Un conteneur doit être utiliser afin de conserver et rechercher les valeurs par
+	date.
+Pour plus d'info, voir le pdf. (make pdf)
 --------------------------------------------------------------------------------
 endef
 export EXPLANATION

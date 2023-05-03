@@ -7,6 +7,7 @@
 # include <chrono>
 # include <limits>
 # include <iomanip>
+# include <typeinfo>
 
 # include "colors.hpp"
 
@@ -21,15 +22,19 @@ typedef typename std::chrono::nanoseconds duration_t;
 class PmergeMe
 {
 private:
-	std::string			_numberList;
+	char**				_numberList;
+	int					_nbElem;
 	std::vector<int>	_vector0;
 	std::list<int>		_list1;
 	duration_t			_duration[2];
 
-
 	void				clearContainer();
 	void				routine();
 	void				coutAnswer();
+	std::string			beforeList();
+	TEMPLATE
+	std::string			afterList(Container container);
+	std::string			timeToProcess();
 
 //STOIVALIDRANGELIMIT###########################################################
 
@@ -46,8 +51,6 @@ private:
 	duration_t			testContainer(Container& container);
 	TEMPLATE
 	void				recordDataToContainer(Container& container);
-	void				skipSpace(size_t& i);
-	size_t				intLength(const std::string& value_str) const;
 
 
 //MERGESORT#####################################################################
@@ -70,7 +73,7 @@ private:
 	PmergeMe&			operator=(const PmergeMe& rhs);
 
 public:
-						PmergeMe(const char* numberList);
+						PmergeMe(char** numberList);
 						~PmergeMe();
 
 //EXCEPTION#####################################################################

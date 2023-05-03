@@ -1,6 +1,10 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe(const char* numberList): _numberList(numberList) {routine();}
+PmergeMe::PmergeMe(char** numberList): 
+	_numberList(numberList)
+{
+	routine();
+}
 
 PmergeMe::~PmergeMe() {clearContainer();}
 
@@ -24,23 +28,55 @@ void	PmergeMe::routine()
 
 void	PmergeMe::coutAnswer()
 {
-	std::cout << _numberList << std::endl;
-	std::cout << _vector0.size() << " " << _list1.size() << std::endl;
-	std::cout << _vector0.front() << " " << _vector0.back() << std::endl;
-	std::cout << "Durée d'exécution : " << std::fixed << std::setprecision(3)
-				<< static_cast<double>(_duration[0].count()) * 1e-9 
-				<< " secondes" << std::endl;
-	std::cout << "Durée d'exécution : " << std::fixed << std::setprecision(3)
-				<< static_cast<double>(_duration[1].count()) * 1e-9 
-				<< " secondes" << std::endl;
-	std::cout << "vector->";
-	for (std::vector<int>::iterator it = _vector0.begin(); it != _vector0.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
-	std::cout << "list->";
-	for (std::list<int>::iterator it = _list1.begin(); it != _list1.end(); it++)
-		std::cout << *it << " ";
-	std::cout << std::endl;
+	std::cout << BLUE << beforeList() << afterList(_vector0)
+				<< timeToProcess() << COLORDEF;
+}
+
+std::string	PmergeMe::beforeList()
+{
+	int	i = 0;
+	std::stringstream	before;
+	before << "Before:  ";
+	while (_numberList[++i] && (_nbElem <= 10 || i < 5))
+		before << _numberList[i] << " ";
+	if (_nbElem > 10)
+		before << "[...]";
+	before << std::endl;
+	return before.str();
+}
+
+TEMPLATE
+std::string	PmergeMe::afterList(Container container)
+{
+	typename Container::iterator it = container.begin();
+	std::stringstream	after;
+	int	nbRecord = 0;
+	after << "After:   ";
+	while (it != container.end() && (_nbElem <= 10 || ++nbRecord < 5))
+	{
+		after << *it << " ";
+		it++;
+	}
+	if (_nbElem > 10)
+		after << "[...]";
+	after << std::endl;
+	return after.str();
+}
+
+std::string PmergeMe::timeToProcess()
+{
+	std::stringstream	processTime;
+	std::string	part1 = "Time to process a range of ";
+	std::string part2 = " elements with std::";
+	std::string part3 = " : ";
+	std::string part4 = " us";
+	processTime << part1 << _nbElem << part2 << "vector" << part3
+			<< std::fixed << std::setprecision(3) << static_cast<double>(_duration[0].count()) * 1e-6
+			<< part4 << std::endl;
+	processTime << part1 << _nbElem << part2 << "list  " << part3
+			<< std::fixed << std::setprecision(3) << static_cast<double>(_duration[1].count()) * 1e-6
+			<< part4 << std::endl;
+	return processTime.str();
 }
 
 //CONTAINER TEST################################################################
@@ -59,30 +95,13 @@ TEMPLATE
 void	PmergeMe::recordDataToContainer(Container& container)
 {
 	size_t	i = 0;
-	size_t	len;
-	skipSpace(i);
-	while (i < _numberList.length())
-	{
-		std::cout << i << " ";
-		len = intLength(_numberList.substr(i));
-		container.push_back(stoiValidRange(_numberList.substr(i, len), 0, std::numeric_limits<int>::max()));
-		i += len;
-		skipSpace(i);
+	std::string	value_str;
+	while (_numberList[++i])
+	{		
+		value_str.assign(_numberList[i]);
+		container.push_back(stoiValidRange(value_str, 0, std::numeric_limits<int>::max()));
 	}
-	std::cout << std::endl;
-}
-
-void	PmergeMe::skipSpace(size_t& i)
-{
-	while (i < _numberList.length() && _numberList.at(i) == ' ')
-		i++;
-}
-
-size_t	PmergeMe::intLength(const std::string& value_str) const
-{
-	size_t len = -1;
-	while (++len < value_str.length() && value_str.at(len) != ' ');
-	return len;
+	_nbElem = i - 1;
 }
 
 //MERGESORT#####################################################################
@@ -128,24 +147,15 @@ Container	PmergeMe::splitReturnRight(Container& container)
 TEMPLATE
 void	PmergeMe::mergeLoop(Container& containerLeft, Container& containerRight)
 {
-	typename Container::iterator itLeft = containerLeft.begin();
-	int	itLeftPos = 0;
-	int	nbSkip = 0;
-	int	limitLeft = containerLeft.size();
+	typename Container::iterator itLeft;
+	int	itPos = -1;
 	while (containerRight.size() > 0)
 	{
-		if (*itLeft <= containerRight.front() && nbSkip < limitLeft)
-		{
-			itLeft++;
-			itLeftPos++;
-			nbSkip++;
-		}
-		else
+		itLeft = itPosition(containerLeft, ++itPos);
+		if (itLeft == containerLeft.end() || containerRight.front() <= *itLeft)
 		{
 			containerLeft.insert(itLeft, containerRight.front());
-			itLeftPos++;
 			containerRight.erase(containerRight.begin());
-			itLeft = itPosition(containerLeft, itLeftPos);
 		}
 	}
 }
@@ -154,7 +164,7 @@ TEMPLATE
 typename Container::iterator	PmergeMe::itPosition(Container& containerLeft, int itLeftPos) const
 {
 	typename Container::iterator itLeft = containerLeft.begin();
-	while (itLeftPos-- != 0)
+	while (itLeftPos-- > 0)
 		itLeft++;
 	return itLeft;
 }
@@ -177,7 +187,7 @@ void	PmergeMe::validInt(const std::string& value_str) const
 
 int		PmergeMe::firstNegative(const std::string& value_str) const
 {
-	if (value_str.at(0) == '-')
+	if (value_str.length() > 0 && value_str.at(0) == '-')
 		return 1;
 	return 0;
 }
@@ -185,7 +195,7 @@ int		PmergeMe::firstNegative(const std::string& value_str) const
 void	PmergeMe::validIntLength(const std::string& value_str) const
 {
 	if (value_str.length() == 0 || value_str.length() > 10)
-		throw genericException("bad int lenght");
+		throw genericException("bad int length");
 }
 
 void	PmergeMe::validDigit(const std::string& value_str) const
