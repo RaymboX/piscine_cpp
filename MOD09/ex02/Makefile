@@ -34,6 +34,7 @@ Faire un programme qui comparera la rapidité d'utilisation de deux conteneurs
 	nombres compris entre 0 et INT_MAX passer en paramètre du programme.
 Ces deux conteneurs doivent être différents de ceux utiliser dans les deux
 	exercices précédents.
+L'algorithme de tri doit être de type merge_insert.
 Pour plus d'information, consultez le pdf. (make pdf)
 --------------------------------------------------------------------------------
 endef

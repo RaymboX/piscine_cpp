@@ -71,24 +71,22 @@ std::string PmergeMe::timeToProcess()
 	std::string part3 = " : ";
 	std::string part4 = " us";
 	processTime << part1 << _nbElem << part2 << "vector" << part3
-			<< std::fixed << std::setprecision(3) << static_cast<double>(_duration[0].count()) * 1e-6
-			<< part4 << std::endl;
+			<< _duration[0] * 1000000 << part4 << std::endl;
 	processTime << part1 << _nbElem << part2 << "list  " << part3
-			<< std::fixed << std::setprecision(3) << static_cast<double>(_duration[1].count()) * 1e-6
-			<< part4 << std::endl;
+			<< _duration[1] * 1000000 << part4 << std::endl;
 	return processTime.str();
 }
 
 //CONTAINER TEST################################################################
 
 TEMPLATE
-duration_t	PmergeMe::testContainer(Container& container)
+double	PmergeMe::testContainer(Container& container)
 {
-	timeP_t	startTime = std::chrono::high_resolution_clock::now();
+	clock_t	startTime = clock();
 	recordDataToContainer(container);
 	Container	containerEmpty;
 	mergeSort(container, containerEmpty);
-	return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - startTime);
+	return static_cast<double>(clock() - startTime) / CLOCKS_PER_SEC;
 }
 
 TEMPLATE

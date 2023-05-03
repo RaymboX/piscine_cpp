@@ -4,20 +4,14 @@
 # include <iostream>
 # include <vector>
 # include <list>
-# include <chrono>
 # include <limits>
 # include <iomanip>
 # include <typeinfo>
+# include <ctime>
 
 # include "colors.hpp"
 
-typedef typename std::chrono::high_resolution_clock::time_point timeP_t;
-typedef typename std::chrono::nanoseconds duration_t;
-
 # define TEMPLATE template<typename Container>
-//# define CLASST PmergeMe<Container>
-
-
 
 class PmergeMe
 {
@@ -26,7 +20,7 @@ private:
 	int					_nbElem;
 	std::vector<int>	_vector0;
 	std::list<int>		_list1;
-	duration_t			_duration[2];
+	double				_duration[2];
 
 	void				clearContainer();
 	void				routine();
@@ -48,7 +42,7 @@ private:
 //CONTAINER TEST################################################################
 	
 	TEMPLATE
-	duration_t			testContainer(Container& container);
+	double				testContainer(Container& container);
 	TEMPLATE
 	void				recordDataToContainer(Container& container);
 

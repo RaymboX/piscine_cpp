@@ -1834,14 +1834,22 @@ leak:
 			$(LEAK_CMD) ./$(NAME)
 
 test: $(TEST_FILE) $(TEST_FILE2)
-			cat $(TEST_FILE2)
+			@clear
 			@echo "$Y\n#########TEST DU SUJET#############\n$W"
+			cat $(TEST_FILE2)
+			@echo "$W"
 			./btc $(TEST_FILE2)
 			@echo "\n$Y        press enter to continue....\n$W"
 			@read _
+			@clear
 			@echo "$Y\n#########FAIL CASES TESTS#############\n$W"
 			cat $(TEST_FILE)
+			@echo "$W"
 			./btc $(TEST_FILE)
+			@echo "$Y\n       ####END OF TESTS####$W"
+			@echo "\n$Y        press enter to clear....\n$W"
+			@read _
+			@clear
 
 
 $(TEST_FILE):
