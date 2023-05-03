@@ -36,7 +36,7 @@ private:
 
 //FILE OPENING##################################################################
 
-	std::string		openFile(const std::string& fileToOpen) const;
+	std::string				openFile(const std::string& fileToOpen) const;
 
 //DATE PARSING##################################################################
 	

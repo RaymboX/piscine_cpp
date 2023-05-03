@@ -55,6 +55,7 @@ public:
 						RPN(const char* command);
 	virtual				~RPN();
 
+//EXCEPTION#####################################################################
 	class	genericException: public std::exception
 	{
 		public:

@@ -156,6 +156,7 @@ void	RPN::coutDemarcheResult() const
 		std::cout << " = " << _numbers.top() << std::endl;
 }
 
+//EXCEPTION#####################################################################
 RPN::genericException::genericException(const std::string& exception_str):
 		_errorMessage("ERROR: " + exception_str){}
 RPN::genericException::~genericException() throw() {}
