@@ -6,13 +6,17 @@
 # include <list>
 # include <chrono>
 # include <limits>
+# include <iomanip>
 
 # include "colors.hpp"
 
 typedef typename std::chrono::high_resolution_clock::time_point timeP_t;
+typedef typename std::chrono::nanoseconds duration_t;
 
 # define TEMPLATE template<typename Container>
-# define CLASST PmergeMe<Container>
+//# define CLASST PmergeMe<Container>
+
+
 
 class PmergeMe
 {
@@ -20,16 +24,16 @@ private:
 	std::string			_numberList;
 	std::vector<int>	_vector0;
 	std::list<int>		_list1;
-	timeP_t				_timing[2];
+	duration_t			_duration[2];
 
 
 	void				clearContainer();
 	void				routine();
-	void				coutAnswer() const;
+	void				coutAnswer();
 
 //STOIVALIDRANGELIMIT###########################################################
 
-	int					stoiValidRangeStrict(const std::string& value_str, const int& min, const int& max) const;
+	int					stoiValidRange(const std::string& value_str, const int& min, const int& max) const;
 	void				validInt(const std::string& value_str) const;
 	void				validIntLength(const std::string& value_str) const;
 	void				validDigit(const std::string& value_str) const;
@@ -39,9 +43,9 @@ private:
 //CONTAINER TEST################################################################
 	
 	TEMPLATE
-	timeP_t				testContainer(Container container);
+	duration_t			testContainer(Container& container);
 	TEMPLATE
-	void				recordDataToContainer(Container container);
+	void				recordDataToContainer(Container& container);
 	void				skipSpace(size_t& i);
 	size_t				intLength(const std::string& value_str) const;
 
@@ -49,8 +53,17 @@ private:
 //MERGESORT#####################################################################
 	
 	TEMPLATE
-	void				mergeSort(Container container);
-
+	void				mergeSort(Container& containerLeft, Container& containerRight);
+	TEMPLATE
+	void				divider(Container& containerLeft, Container& containerRight);
+	TEMPLATE
+	void				divideSizeCheck(Container& container);
+	TEMPLATE
+	Container			splitReturnRight(Container& container);
+	TEMPLATE
+	void				mergeLoop(Container& containerLeft, Container& containerRight);
+	TEMPLATE
+	typename Container::iterator	itPosition(Container& containerLeft, int itLeftPos) const;
 
 						PmergeMe();
 						PmergeMe(const PmergeMe& rhs);
