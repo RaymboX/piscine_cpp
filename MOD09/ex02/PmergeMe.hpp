@@ -8,6 +8,7 @@
 # include <iomanip>
 # include <typeinfo>
 # include <ctime>
+# include <sstream>
 
 # include "colors.hpp"
 

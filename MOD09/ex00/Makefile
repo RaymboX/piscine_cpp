@@ -1764,7 +1764,7 @@ OBJS_DIR		= 	./obj
 #SYSTEM VAR---------------------------------------------------------------------
 
 CFLAGS 			= 	-Wall -Werror -Wextra
-#CFLAGS			+=	-std=c++98
+CFLAGS			+=	-std=c++98
 CC				= 	g++
 CC_DEBUG		=	g++ -g
 
